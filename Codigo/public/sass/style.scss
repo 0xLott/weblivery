@@ -1,9 +1,13 @@
-.hello-world {
-    h1 {
-        background-color: blue;
+@mixin borderRadius($radius: 100px) {
+    border-radius: $radius;
+}
+
+.form {
+    input {
+        @include borderRadius($radius: 50px);
     }
 }
 
-h1 {
-    background-color: red;
+input, label, button {
+    display: block;
 }

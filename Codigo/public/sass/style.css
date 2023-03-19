@@ -1,9 +1,9 @@
-.hello-world h1 {
-  background-color: blue;
+.form input {
+  border-radius: 50px;
 }
 
-h1 {
-  background-color: red;
+input, label, button {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

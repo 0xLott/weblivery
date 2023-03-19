@@ -1,11 +1,16 @@
 <%- include('partials/header') %>
 
-<div class="hello-world">
-    <h1>Hello 1</h1>
+<div class="form">
+    <form class="test-form" action="/" method="post">
+        <label for="emailInput">Email</label>
+        <input type="text" name="email" id="emailInput">
 
-    <h1>Hello 2</h1>
+        <label for="passwordInput">Password</label>
+        <input type="text" name="password" id="passwordInput">
+
+
+        <button type="submit">Create Account</button>
+    </form>
 </div>
-
-<h1>Hello 3</h1>
 
 <%- include('partials/footer') %>

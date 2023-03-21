@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/sass/style.css">
-    <title>Document</title>
+    <title>Login</title>
 </head>
+
 <body>
-    <h1></h1>
+    <div class="row" style="margin-top: 100px;">
+        <div class="col-lg-4 mx-auto" style="background-color: gainsboro;" id="login-modal">
+
+            <div class="col-12">
+                <h2>Login</h2>
+            </div>
+
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <div class="row">
+                    <p class="col-lg-auto mx-auto"><a href="#">Cadastrar-se</a></p>                    
+                    <button type="submit" class="btn btn-primary col-lg-3 col-sm-12 mx-auto">Entrar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

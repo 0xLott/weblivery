@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<section id="dashboard">
+
+    <div class="container-fluid">
+
+        <h1>Dashboard</h1>
+
+        <nav class="navbar">
+
+        </nav>
+
+        <h1>Ola, <%= user.name %></h1>
+        
+        <%if (user.email === 'admin') {%>
+            <form action="/admin/register" method="get"><button type="submit">Gerenciar</button></form>
+            <form action="/admin/requests" method="get"><button type="submit">Solicitações</button></form>
+        <%}%>
+
+        <form action="/logout" method="get">
+            <button type="submit">Logout</button>
+        </form>
+
+    </div>
+
+</section>
+
+<%- include('partials/footer') %>

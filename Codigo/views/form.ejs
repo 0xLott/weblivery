@@ -1,16 +1,39 @@
 <%- include('partials/header') %>
 
-<div class="form">
-    <form class="test-form" action="/" method="post">
-        <label for="emailInput">Email</label>
-        <input type="text" name="email" id="emailInput">
+<section id="service-request-form">
 
-        <label for="passwordInput">Password</label>
-        <input type="text" name="password" id="passwordInput">
+    <div class="box">
 
+        <!-- Weblivery Logo -->
 
-        <button type="submit">Create Account</button>
-    </form>
-</div>
+        <h1>Solicitação de Serviço</h1>
+
+        <form action="/" method="post">
+
+            <label for="fullnamenameInput">Nome Completo</label>
+            <input type="text" name="fullname" id="fullnameInput">
+
+            <label for="emailInput">Email</label>
+            <input type="email" name="email" id="emailInput">
+
+            <label for="phoneInput">Telefone</label>
+            <input type="number" name="phone" id="phoneInput">
+
+            <label for="whatsappCheck">Possui Whatsapp?</label>
+            <input type="checkbox" name="whatsapp" id="whatsappCheck">
+
+            <label for="titleInput">Titulo da Solicitação</label>
+            <input type="text" name="title" id="titleInput">
+
+            <label for="descriptionInput">Descrição</label>
+            <textarea name="description" id="descriptionInput" cols="30" rows="10">Descreva o seu projeto...</textarea>
+
+            <button type="submit">Enviar</button>
+
+        </form>
+
+    </div>
+
+</section>
 
 <%- include('partials/footer') %>

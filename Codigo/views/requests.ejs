@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<section id="dashboard">
+
+    <div class="container-fluid">
+
+        <h1>Solicitações de Serviço</h1>
+
+        <% requests.forEach((request) => { %>
+            <div class="request-box">
+                <p><%= request.requesterFullname %></p>
+                <p><%= request.requestTitle %></p>
+                <p><%= request.requestDescription %></p>
+                <p><%= request.email %></p>
+                <p><%= request.phone %></p>
+                <p><%= request.whatsapp %></p>
+            </div>
+        <% }) %>
+
+    </div>
+
+</section>
+
+<%- include('partials/footer') %>

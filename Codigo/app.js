@@ -19,12 +19,15 @@ um menu novo que só ele consegue ver.
 require('dotenv').config()
 
 const express = require("express")
+const session = require('express-session')
+
 const mongoose = require('mongoose').set('strictQuery', true)
 const bodyParser = require("body-parser")
 const ejs = require('ejs');
-const session = require('express-session')
+
 const passport = require('passport')
 const passportLocalMongoose = require('passport-local-mongoose')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -48,13 +51,15 @@ const serviceRequestSchema = new mongoose.Schema({
 })
 
 const todoItemSchema = new mongoose.Schema({
+    title: String,
     content: String
 })
 
 const projectSchema = new mongoose.Schema({
+    clientName: String,
+    projectOwner: String,
     projectName: String,
     description: String,
-    clientName: String,
     status: String,
     todolist: [todoItemSchema]
 })
@@ -103,6 +108,25 @@ User.register({
 
 /* Routers (Temporario, vamos usar MVC, será mudado de arquivo posteriormente) */
 
+app.get('/login', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.render('login')
+    }
+    res.render('dashboard')
+})
+
+app.post('/login', (req, res) => {
+    let user = new User({
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    passport.authenticate('local')(req, res, () => {
+        req.login(user, (err) => {})
+        res.redirect('/dashboard')
+    })
+})
+
 app.get('/', (req, res) => {
     res.render('form')
 })
@@ -122,26 +146,6 @@ app.post('/', (req, res) => {
     console.log(sr);
 
     res.render('login')
-})
-
-app.get('/login', (req, res) => {
-    if (!req.isAuthenticated()) {
-        res.render('login')
-        return;
-    }
-    res.render('dashboard')
-})
-
-app.post('/login', (req, res) => {
-    let user = new User({
-        email: req.body.email,
-        password: req.body.password
-    })
-
-    passport.authenticate('local')(req, res, () => {
-        req.login(user, (err) => {})
-        res.redirect('/dashboard')
-    })
 })
 
 app.get('/dashboard', (req, res) => {
@@ -211,13 +215,10 @@ app.post('/admin/register', (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
-    if (!req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
+        req.logout((err) => {})
         res.redirect('/login')
-        return
     }
-
-    req.logout((err) => {})
-    res.redirect('/login')
 })
 
 app.listen(3000, () => {

@@ -52,11 +52,14 @@ const todoItemSchema = new mongoose.Schema({
 
 const projectSchema = new mongoose.Schema({
     clientName: String,
-    projectOwner: String,
+    clientEmail: String,
+    clientPhone: Number,
     projectName: String,
-    description: String,
-    status: String,
+    projectDescription: String,
+    projectOwner: String,
+    projectStatus: String,
     todolist: [todoItemSchema]
+    // developers: [userSchema]
 })
 
 const userSchema = new mongoose.Schema({
@@ -105,8 +108,8 @@ User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', r
     if (err) {
         console.log('Admin ja criado');
         return
-    } 
-        
+    }
+       
     console.log('Admin gerado');
 })
 
@@ -133,10 +136,6 @@ Recomendo muito dar uma lida rapida em cada uma pelo menos.
 /* Login Page */
 
 app.get('/login', (req, res) => {
-    if (req.isAuthenticated()) {
-        res.render('dashboard')
-        return
-    }
 
     res.render('login')
 })
@@ -173,13 +172,15 @@ app.post('/', (req, res) => {
 
 /* Dashboard */
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
         return
     }
-        
-    res.render('dashboard', {user: req.user})
+
+    const allProjects = await Project.find()
+
+    res.render('dashboard', {user: req.user, projects: allProjects})
 })
 
 /* Pagina do Admin - Solicitação de Serviços */
@@ -228,6 +229,33 @@ app.post('/admin/register', (req, res) => {
         }, req.body.password, (err, newUser) => { if (err) { console.log(err) }})
         res.redirect('/dashboard')
     }
+})
+
+app.post('/admin/requests/accept', async (req, res) => {
+    const requestId = req.body.id
+
+    await ServiceRequest.findByIdAndRemove(requestId)
+
+    const newProject = new Project({
+        clientName: req.body.clientName,
+        clientEmail: req.body.clientEmail,
+        clientPhone: req.body.clientPhone,
+        projectName: req.body.projectName,
+        projectDescription: req.body.projectDescription,
+        projectOwner: req.user.name,
+        projectStatus: 'Em Planejamento'
+    })
+
+    newProject.save()
+
+    res.redirect('/dashboard')
+})
+
+app.post('/admin/requests/decline', async (req, res) => {
+    const requestId = req.body.decline
+
+    await ServiceRequest.findByIdAndRemove(requestId)
+    res.redirect('/admin/requests')
 })
 
 /* Rota para Logout */

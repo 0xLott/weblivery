@@ -21,6 +21,30 @@
             <button type="submit">Logout</button>
         </form>
 
+        <h1>Projetos</h1>
+
+        <% projects.forEach((project) => { %>
+
+            <div class="project-box">
+                <hr>
+
+                <p>Cliente: <%= project.clientName %></p>
+                <p>Email: <%= project.clientEmail %></p>
+                <p>Phone: <%= project.clientPhone %></p>
+                <p>Projeto: <%= project.projectName %></p>
+                <p>Descrição: <%= project.projectDescription %></p>
+                <p>Project Owner: <%= project.projectOwner %></p>
+                <p>Status: <%= project.projectStatus %></p>
+                <p>Todolist: <%= project.todolist %></p>
+
+                <button>Add Todo Item</button>
+
+                <button>Add Developer</button>
+
+            </div>
+
+        <% }) %>
+
     </div>
 
 </section>

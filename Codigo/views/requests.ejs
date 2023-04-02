@@ -7,16 +7,82 @@
         <h1>Solicitações de Serviço</h1>
 
         <% requests.forEach((request) => { %>
-            <hr>
-            <div class="request-box">
-                <p><%= request.requesterFullname %></p>
-                <p><%= request.requestTitle %></p>
-                <p><%= request.requestDescription %></p>
-                <p><%= request.email %></p>
-                <p><%= request.phone %></p>
-                <p><%= request.whatsapp %></p>
-            </div>
-            <hr>
+                <hr>
+                <div class="request-box">
+                    <p><%= request.requesterFullname %></p>
+                    <p><%= request.requestTitle %></p>
+                    <p><%= request.requestDescription %></p>
+                    <p><%= request.email %></p>
+                    <p><%= request.phone %></p>
+                    <p><%= request.whatsapp %></p>
+                </div>
+
+                <form class="request-btn" action="/admin/requests/decline" method="post">
+                    <button class="request-btn" type="submit" name="decline" value="<%= request._id %>">Recusar</button>
+                </form>
+
+                <button class="request-btn" type="button" data-bs-toggle="modal" data-bs-target="#a<%= request._id %>">Aceitar</button>
+                  
+                <!-- Modal -->
+                <div class="modal fade" id="a<%= request._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    
+                    <div class="modal-dialog">
+
+                        <form action="/admin/requests/accept" method="post">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastro do Projeto</h1>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="mb-3">
+                                        <label for="project-name" class="col-form-label">Projeto:</label>
+                                        <input type="text" class="form-control" id="project-name" name="projectName" value="<%= request.requestTitle %>">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="project-desc" class="col-form-label">Descrição do Projeto:</label>
+                                        <textarea class="form-control" id="project-desc" name="projectDescription"><%= request.requestDescription %></textarea>
+                                    </div>
+
+                                    <!-- Dados do Cliente -->
+
+                                    <div class="mb-3">
+                                        <label for="client-name" class="col-form-label">Cliente:</label>
+                                        <input type="text" class="form-control" id="client-name" name="clientName" value="<%= request.requesterFullname %>">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="client-email" class="col-form-label">Email:</label>
+                                        <input type="text" class="form-control" id="client-email" name="clientEmail" value="<%= request.email %>">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="client-phone" class="col-form-label">Contato:</label>
+                                        <input type="text" class="form-control" id="client-phone" name="clientPhone" value="<%= request.phone %>">
+                                    </div>
+
+                                </div>
+
+                                <input type="hidden" name="id" value="<%= request._id %>">
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                                    <button class="btn btn-light" type="submit">Registrar</button>
+                                    
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
         <% }) %>
 
     </div>

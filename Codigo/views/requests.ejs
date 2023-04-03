@@ -39,13 +39,30 @@
                                 <div class="modal-body">
 
                                     <div class="mb-3">
-                                        <label for="project-name" class="col-form-label">Projeto:</label>
+                                        <label for="project-name" class="col-form-label">Título:</label>
                                         <input type="text" class="form-control" id="project-name" name="projectName" value="<%= request.requestTitle %>">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="project-desc" class="col-form-label">Descrição do Projeto:</label>
+                                        <label for="project-desc" class="col-form-label">Descrição:</label>
                                         <textarea class="form-control" id="project-desc" name="projectDescription"><%= request.requestDescription %></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="client-phone" class="col-form-label">Data limite:</label>
+                                        <input type="date" class="form-control" id="project-deadline" name="projectDeadline">
+                                    </div>
+
+                                    <!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->
+                                    <div class="mb-3">
+                                        <label for="client-phone" class="col-form-label">Equipe responsável:</label>
+                                        <label for="cars">Selecionar desenvolvedores</label>
+                                            <select id="project-team" name="projectTeam" multiple>
+                                                <option value="volvo">Dev 1</option>
+                                                <option value="saab">Dev 2</option>
+                                                <option value="opel">Dev 3</option>
+                                                <option value="audi">Dev 4</option>
+                                            </select> 
                                     </div>
 
                                     <!-- Dados do Cliente -->
@@ -56,14 +73,16 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="client-email" class="col-form-label">Email:</label>
+                                        <label for="client-email" class="col-form-label">E-mail:</label>
                                         <input type="text" class="form-control" id="client-email" name="clientEmail" value="<%= request.email %>">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="client-phone" class="col-form-label">Contato:</label>
-                                        <input type="text" class="form-control" id="client-phone" name="clientPhone" value="<%= request.phone %>">
+                                        <label for="client-phone" class="col-form-label">Telefone de contato:</label>
+                                        <input type="text" class="form-control" id="client-phone" name="clientPhone">
                                     </div>
+
+                                    
 
                                 </div>
 

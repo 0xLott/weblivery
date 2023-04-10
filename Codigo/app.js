@@ -1,26 +1,23 @@
-/* O codigo está todo comentado, mas se quiserem que eu tire depois por causa de "Code Smell"
-eu tiro de boa */
-
-require('dotenv').config() // Requere o dotenv para ocultar variaveis no deploy
+require('dotenv').config()
 
 const express = require("express") 
-const session = require('express-session') // Comunicação entre o express e o passport
+const session = require('express-session')
 
 const mongoose = require('mongoose').set('strictQuery', true)
 const bodyParser = require("body-parser") 
 const ejs = require('ejs') 
 
 const passport = require('passport')
-const passportLocalMongoose = require('passport-local-mongoose') // Comunicação entre o passport e o mongoose
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const app = express()
 
-app.set('view engine', 'ejs') // Seta a view engine como EJS
-app.use(express.static(__dirname + '/public')) // Seta a pasta "public" como publica para o express
-app.use(bodyParser.urlencoded({ extended: true })) // Seta o bodyParser como encoder
-app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: true })) // Seta o "segredo" de toda sessão do passport
-app.use(passport.initialize()) // Inicia comunicação express passport
-app.use(passport.session()) // Inicia criador de sessão
+app.set('view engine', 'ejs') 
+app.use(express.static(__dirname + '/public')) 
+app.use(bodyParser.urlencoded({ extended: true })) 
+app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: true })) 
+app.use(passport.initialize()) 
+app.use(passport.session()) 
 
 // Conexão MongoDB
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@db-cluster.cjjdosp.mongodb.net/weblivery')
@@ -50,6 +47,14 @@ const todoItemSchema = new mongoose.Schema({
     content: String
 })
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    nickname: String,
+    name: String,
+    role: String
+})
+
 const projectSchema = new mongoose.Schema({
     clientName: String,
     clientEmail: String,
@@ -58,18 +63,11 @@ const projectSchema = new mongoose.Schema({
     projectDescription: String,
     projectOwner: String,
     projectStatus: String,
-    todolist: [todoItemSchema]
-    // developers: [userSchema]
+    todolist: [todoItemSchema],
+    developers: [userSchema]
 })
 
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    nickname: String,
-    name: String,
-    role: String,
-    projects: [projectSchema]
-})
+
 
 // Seta o "userSchema" para ser o objeto usuário
 userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})
@@ -183,6 +181,17 @@ app.get('/dashboard', async (req, res) => {
     res.render('dashboard', {user: req.user, projects: allProjects})
 })
 
+app.get('/dashboard/:projectId', async (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/login')
+        return
+    }
+
+    let project = await Project.findById(req.params.projectId)
+
+    res.render('project', {project: project})
+})
+
 /* Pagina do Admin - Solicitação de Serviços */
 
 app.get('/admin/requests', async (req, res) => {
@@ -194,6 +203,10 @@ app.get('/admin/requests', async (req, res) => {
     if (req.user.email === 'admin') {
     
         // Não sei por que do async e await, mas funciona. Depois eu procuro saber o porquê de funcionar
+
+        // Resposta: Após a versão 7.0.0 do Mongoose lançada em Fevereiro de 2023, callbacks em funções "Find" não
+        // são mais aceitos. Ao invés disso, usar async/await e try catch se quiser pegar a exception
+
         const allRequests = await ServiceRequest.find()
 
         res.render('requests', {requests: allRequests})

@@ -47,6 +47,14 @@ const todoItemSchema = new mongoose.Schema({
     content: String
 })
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    nickname: String,
+    name: String,
+    role: String
+})
+
 const projectSchema = new mongoose.Schema({
     clientName: String,
     clientEmail: String,
@@ -59,14 +67,7 @@ const projectSchema = new mongoose.Schema({
     developers: [userSchema]
 })
 
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    nickname: String,
-    name: String,
-    role: String,
-    projects: [projectSchema]
-})
+
 
 // Seta o "userSchema" para ser o objeto usuário
 userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})

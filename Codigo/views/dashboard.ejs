@@ -6,45 +6,41 @@
 
         <h1>Dashboard</h1>
 
-        <nav class="navbar">
-
-        </nav>
+        <nav class="navbar"></nav>
 
         <h1>Ola, <%= user.name %></h1>
         
-        <%if (user.email === 'admin') {%>
-            <form action="/admin/register" method="get"><button type="submit">Gerenciar</button></form>
-            <form action="/admin/requests" method="get"><button type="submit">Solicitações</button></form>
-        <%}%>
+        <% if (user.email==='admin' ) { %>
+
+            <form action="/admin/register" method="get">
+                <button type="submit">Gerenciar</button>
+            </form>
+                
+            <form action="/admin/requests" method="get">
+                <button type="submit">Solicitações</button>
+            </form>
+
+        <% } %>
 
         <form action="/logout" method="get">
             <button type="submit">Logout</button>
         </form>
-
+                
         <h1>Projetos</h1>
 
-        <% projects.forEach((project) => { %>
+        <% projects.forEach((project)=> { %>
 
             <div class="project-box">
-                <hr>
-
-                <p>Cliente: <%= project.clientName %></p>
-                <p>Email: <%= project.clientEmail %></p>
-                <p>Phone: <%= project.clientPhone %></p>
                 <p>Projeto: <%= project.projectName %></p>
-                <p>Descrição: <%= project.projectDescription %></p>
                 <p>Project Owner: <%= project.projectOwner %></p>
                 <p>Status: <%= project.projectStatus %></p>
-                <p>Todolist: <%= project.todolist %></p>
 
-                <button>Add Todo Item</button>
-
-                <button>Add Developer</button>
-
+                <form action="/dashboard/<%= project.id %>" method="get">
+                    <button type="submit">Detalhes</button>
+                </form>
+                
             </div>
-
         <% }) %>
-
     </div>
 
 </section>

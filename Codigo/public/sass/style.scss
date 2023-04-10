@@ -18,3 +18,13 @@ input, label, button {
 .request-btn {
     display: inline;
 }
+
+.project-box{
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow:  31px 31px 62px #bebebe,
+             -31px -31px 62px #ffffff;
+    padding: 1%;
+
+    margin-bottom: 35px;
+}

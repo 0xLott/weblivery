@@ -63,6 +63,7 @@ const projectSchema = new mongoose.Schema({
     projectDescription: String,
     projectOwner: String,
     projectStatus: String,
+    projectDeadline: String,
     todolist: [todoItemSchema],
     developers: [userSchema]
 })
@@ -209,7 +210,9 @@ app.get('/admin/requests', async (req, res) => {
 
         const allRequests = await ServiceRequest.find()
 
-        res.render('requests', {requests: allRequests})
+        const allDevelopers = await User.find()
+
+        res.render('requests', {requests: allRequests, developers: allDevelopers})
     }
 })
 
@@ -256,6 +259,7 @@ app.post('/admin/requests/accept', async (req, res) => {
         projectName: req.body.projectName,
         projectDescription: req.body.projectDescription,
         projectOwner: req.user.name,
+        projectDeadline: req.body.projectDeadline,
         projectStatus: 'Em Planejamento'
     })
 

@@ -2,17 +2,44 @@
 
 <section id="project">
 
-    <h1><%= project.projectName %></h1>
+    <div class="container-fluid">
 
-    <p>Descrição: <%= project.projectDescription %></p>
+        <div class="project-header">
+            <h1><%= project.projectName %></h1>
+        </div>
 
-    <p>Cliente: <%= project.clientName %></p>
-    <p>Email: <%= project.clientEmail %></p>
-    <p>Phone: <%= project.clientPhone %></p> 
+        <div class="project-body">
 
-    <button>ToDoList</button>
+            <div class="row">
 
-    <button>Developers</button>
+                <div class="col">
+
+                    <p>Status: <%= project.projectStatus %></p>
+
+                    <p>Cliente: <%= project.clientName %></p>
+
+                    <p>Desenvolvedores Responsaveis: <%= project.developers %></p>
+
+                </div>
+
+                <div class="col">
+
+                    <p>Data Limite: <%= project.projectDeadline %></p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="project-footer">
+
+            <h1>ToDoList</h1>
+
+        </div>
+
+    </div>
 
 </section>
     

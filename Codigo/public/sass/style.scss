@@ -28,3 +28,26 @@ input, label, button {
 
     margin-bottom: 35px;
 }
+
+#project {
+    background-color: #ECECEC;
+    max-width: 110vh;
+    margin: 0 auto 0 auto;
+
+    .project-header {
+        margin-top: 1.6rem;
+        text-align: center;
+    }
+
+    .project-body {
+        margin-top: 3rem;
+    }
+
+    .project-footer {
+        height: 300px;
+        width: 50%;
+        text-align: center;
+        margin: 0 auto 0 auto;
+        background-color: white;
+    }
+}

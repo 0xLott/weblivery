@@ -49,22 +49,19 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="client-phone" class="col-form-label">Data limite:</label>
+                                        <label for="project-deadline" class="col-form-label">Data Limite:</label>
                                         <input type="date" class="form-control" id="project-deadline" name="projectDeadline">
                                     </div>
 
-                                    <!-- Futuramente !!! -->
                                     <!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->
-                                    <!-- <div class="mb-3">
-                                        <label for="client-phone" class="col-form-label">Equipe responsável:</label>
-                                        <label for="cars">Selecionar desenvolvedores</label>
-                                            <select id="project-team" name="projectTeam" multiple>
-                                                <option value="volvo">Dev 1</option>
-                                                <option value="saab">Dev 2</option>
-                                                <option value="opel">Dev 3</option>
-                                                <option value="audi">Dev 4</option>
-                                            </select> 
-                                    </div> -->
+                                    <div class="mb-3">
+                                        <label for="project-team">Selecionar Desenvolvedores:</label>
+                                        <select id="project-team" name="projectTeam" multiple>
+                                            <% developers.forEach((developer) => { %>
+                                                <option value="<%= developer.id %>"><%= developer.name %></option>
+                                            <% }) %>
+                                        </select> 
+                                    </div>
 
                                     <!-- Dados do Cliente -->
 

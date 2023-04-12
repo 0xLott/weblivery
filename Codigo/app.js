@@ -38,8 +38,8 @@ const serviceRequestSchema = new mongoose.Schema({
     requestTitle: String,
     requestDescription: String,
     email: String,
-    phone: Number,
-    whatsapp: String
+    whatsapp: String,
+    phone: Number
 })
 
 const todoItemSchema = new mongoose.Schema({

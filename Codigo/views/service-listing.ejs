@@ -57,7 +57,7 @@
                                     <div class="mb-3">
                                         <label for="project-team">Selecionar Desenvolvedores:</label>
                                         
-                                        <select class="selectpicker" multiple name="assignedDevelopers[]">
+                                        <select class="mt-1 selectpicker" title="Nenhum selecionado" data-live-search="true" name="assignedDevelopers[]" multiple>
                                             <% developers.forEach((developer) => { %>
                                                 <option value="<%= developer.id %>"><%= developer.name %></option>
                                             <% }) %>

@@ -19,19 +19,7 @@ app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: t
 app.use(passport.initialize()) 
 app.use(passport.session()) 
 
-// Conexão MongoDB
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@db-cluster.cjjdosp.mongodb.net/weblivery')
-
-
-/*
-
-Schemas - São os "moldes" que nós vamos utilizar para salvar objetos
-no banco de dados. Cada objeto tem o seu molde especifico e eles podem interagir entre si
-para criar relações. Um exemplo é o todolist: [projectSchema] em userSchema, onde nós
-estamos dizendo que todo user tem um vetor do tipo "projetos" e cada objeto desse vetor
-respeita suas regras correspondentes. (Igual ao java ao criar uma List<Objeto> )
-
-*/
 
 const serviceRequestSchema = new mongoose.Schema({
     requesterFullname: String,
@@ -68,16 +56,7 @@ const projectSchema = new mongoose.Schema({
     developers: [userSchema]
 })
 
-
-
-// Seta o "userSchema" para ser o objeto usuário
 userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})
-
-/* 
-
-Models - Transformação dos "moldes"/"schemas" em objetos usaveis ao longo do codigo. 
- 
-*/
 
 const User = new mongoose.model("User", userSchema)
 
@@ -87,21 +66,9 @@ const ToDoItem = new mongoose.model("ToDoItem", todoItemSchema)
 
 const ServiceRequest = new mongoose.model("ServiceRequest", serviceRequestSchema)
 
-// Inicialização do passport, aqui não precisa mexer nunca
 passport.use(User.createStrategy()) 
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
-
-/*
-
-Admin Persistente - As linhas de codigo abaixo tentam criar um "usuario master" caso ele não exista
-toda vez que o servidor inicia. Sendo assim, o administrador nunca ficará sem um login/os privilegios
-dele.
-
-User.register(<Obj User>, <Password>, <CallBack Fn>)
-
-*/
-
 
 User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', role: 'Administrador'}, 'admin', (err, newUser) => {
     if (err) {
@@ -112,25 +79,14 @@ User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', r
     console.log('Admin gerado');
 })
 
-/* 
+/* Logout */
 
-Routers - Rotas do Express
-Todas as rotas seguem a ordem GET e POST respectivamente
-Não vou comentar o que cada codigo de cada rota faz o que pois é um pouco autoexplicativo.
-
-Se quiserem saber mais de como funcionam as rotas e as funções que eu usei, recomendo dar uma olhada em:
-
-https://expressjs.com/en/guide/routing.html
-https://mongoosejs.com/
-https://www.npmjs.com/package/passport-local-mongoose
-https://www.passportjs.org/
-https://www.npmjs.com/package/body-parser
-https://ejs.co/
-
-São documentações bem resumidas e so lendo o "starting guide" de cada da pra ter uma noção do que eu fiz.
-Recomendo muito dar uma lida rapida em cada uma pelo menos.
-
-*/
+app.get('/logout', (req, res) => {
+    if (req.isAuthenticated()) {
+        req.logout((err) => {})
+        res.redirect('/login')
+    }
+})
 
 /* Login Page */
 
@@ -148,14 +104,15 @@ app.post('/login', (req, res) => {
     })
 })
 
-/* Formulario de Serviço */
+/* Service Request Form */
 
 app.get('/', (req, res) => {
-    res.render('form')
+    res.render('service-form')
 })
 
 app.post('/', (req, res) => {
-    const serviceRequest = new ServiceRequest({
+
+    const newServiceRequest = new ServiceRequest({
         requesterFullname: req.body.fullname,
         requestTitle: req.body.title,
         requestDescription: req.body.description,
@@ -164,7 +121,7 @@ app.post('/', (req, res) => {
         whatsapp: req.body.whatsapp
     })
 
-    serviceRequest.save()
+    newServiceRequest.save()
 
     // TODO: Renderizar uma tela de sucesso
 })
@@ -200,10 +157,10 @@ app.get('/dashboard/:projectId', async (req, res) => {
 
     let project = await Project.findById(req.params.projectId)
 
-    res.render('project', {project: project})
+    res.render('project-viewer', {project: project})
 })
 
-/* Pagina do Admin - Solicitação de Serviços */
+/* Admin Routes */
 
 app.get('/admin/requests', async (req, res) => {
     if (!req.isAuthenticated()) {
@@ -213,20 +170,13 @@ app.get('/admin/requests', async (req, res) => {
 
     if (req.user.email === 'admin') {
     
-        // Não sei por que do async e await, mas funciona. Depois eu procuro saber o porquê de funcionar
-
-        // Resposta: Após a versão 7.0.0 do Mongoose lançada em Fevereiro de 2023, callbacks em funções "Find" não
-        // são mais aceitos. Ao invés disso, usar async/await e try catch se quiser pegar a exception
-
-        const allRequests = await ServiceRequest.find()
+        const allServiceRequests = await ServiceRequest.find()
 
         const allDevelopers = await User.find()
 
-        res.render('requests', {requests: allRequests, developers: allDevelopers})
+        res.render('service-listing', {requests: allServiceRequests, developers: allDevelopers})
     }
 })
-
-/* Pagina do Admin - Cadastro de Funcionario */
 
 app.get('/admin/register', (req, res) => {
     if (!req.isAuthenticated()) {
@@ -235,7 +185,7 @@ app.get('/admin/register', (req, res) => {
     }
 
     if (req.user.email === 'admin') {
-        res.render('register')
+        res.render('user-register')
     }
 })
 
@@ -261,9 +211,9 @@ app.post('/admin/requests/accept', async (req, res) => {
 
     await ServiceRequest.findByIdAndRemove(req.body.id)
 
-    let assignedDevelopers = req.body.assignedDevelopers
+    const assignedDevelopers = req.body.assignedDevelopers
 
-    let newProject = new Project({
+    const newProject = new Project({
         clientName: req.body.clientName,
         clientEmail: req.body.clientEmail,
         clientPhone: req.body.clientPhone,
@@ -289,16 +239,8 @@ app.post('/admin/requests/decline', async (req, res) => {
     const requestId = req.body.decline
 
     await ServiceRequest.findByIdAndRemove(requestId)
+
     res.redirect('/admin/requests')
-})
-
-/* Rota para Logout */
-
-app.get('/logout', (req, res) => {
-    if (req.isAuthenticated()) {
-        req.logout((err) => {})
-        res.redirect('/login')
-    }
 })
 
 /* Server Start */

@@ -252,6 +252,9 @@ app.post('/admin/requests/accept', async (req, res) => {
 
     await ServiceRequest.findByIdAndRemove(requestId)
 
+    // Tratar isso aqui
+    console.log(req.body.assignedDevelopers);
+
     const newProject = new Project({
         clientName: req.body.clientName,
         clientEmail: req.body.clientEmail,

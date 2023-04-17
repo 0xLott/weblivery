@@ -56,11 +56,12 @@
                                     <!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->
                                     <div class="mb-3">
                                         <label for="project-team">Selecionar Desenvolvedores:</label>
-                                        <select id="project-team" name="projectTeam" multiple>
+                                        
+                                        <select class="selectpicker" multiple name="assignedDevelopers[]">
                                             <% developers.forEach((developer) => { %>
                                                 <option value="<%= developer.id %>"><%= developer.name %></option>
                                             <% }) %>
-                                        </select> 
+                                        </select>
                                     </div>
 
                                     <!-- Dados do Cliente -->
@@ -77,11 +78,8 @@
 
                                     <div class="mb-3">
                                         <label for="client-phone" class="col-form-label">Telefone de contato:</label>
-                                        <input type="text" class="form-control" id="client-phone" name="clientPhone" value="<% request.phone %>">
+                                        <input type="text" class="form-control" id="client-phone" name="clientPhone" value="<%= request.phone %>">
                                     </div>
-
-                                    
-
                                 </div>
 
                                 <input type="hidden" name="id" value="<%= request._id %>">
@@ -97,7 +95,9 @@
                             </div>
 
                         </form>
+
                     </div>
+
                 </div>
 
         <% }) %>

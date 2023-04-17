@@ -18,7 +18,11 @@
 
                     <p>Cliente: <%= project.clientName %></p>
 
-                    <p>Desenvolvedores Responsaveis: <%= project.developers %></p>
+                    <p>Desenvolvedores Responsaveis:</p>
+
+                    <% project.developers.forEach(dev => { %>
+                        <p><%= dev.name %></p>
+                    <% }) %>
 
                 </div>
 

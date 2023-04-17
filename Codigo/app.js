@@ -179,7 +179,17 @@ app.get('/dashboard', async (req, res) => {
 
     const allProjects = await Project.find()
 
-    res.render('dashboard', {user: req.user, projects: allProjects})
+    let restrictProjects = allProjects.filter(project => {
+        return project.developers.some((dev) => {
+            return dev.email === req.user.email
+        })
+    })
+
+    if (req.user.email === 'admin') {
+        res.render('dashboard', {user: req.user, projects: allProjects})
+    } else {
+        res.render('dashboard', {user: req.user, projects: restrictProjects})
+    }
 })
 
 app.get('/dashboard/:projectId', async (req, res) => {
@@ -248,14 +258,12 @@ app.post('/admin/register', (req, res) => {
 })
 
 app.post('/admin/requests/accept', async (req, res) => {
-    const requestId = req.body.id
 
-    await ServiceRequest.findByIdAndRemove(requestId)
+    await ServiceRequest.findByIdAndRemove(req.body.id)
 
-    // Tratar isso aqui
-    console.log(req.body.assignedDevelopers);
+    let assignedDevelopers = req.body.assignedDevelopers
 
-    const newProject = new Project({
+    let newProject = new Project({
         clientName: req.body.clientName,
         clientEmail: req.body.clientEmail,
         clientPhone: req.body.clientPhone,
@@ -263,10 +271,16 @@ app.post('/admin/requests/accept', async (req, res) => {
         projectDescription: req.body.projectDescription,
         projectOwner: req.user.name,
         projectDeadline: req.body.projectDeadline,
-        projectStatus: 'Em Planejamento'
+        projectStatus: 'Em Planejamento',
     })
 
-    newProject.save()
+    Promise.all(assignedDevelopers.map(async (developerId) => {
+        let foundDeveloper = await User.findById(developerId)
+
+        newProject.developers.push(foundDeveloper)
+    })).then(() => {
+        newProject.save()
+    })
 
     res.redirect('/dashboard')
 })

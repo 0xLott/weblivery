@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .form input {
   border-radius: 50px;
 }
@@ -36,6 +37,26 @@ input, label, button {
   text-align: center;
   margin: 0 auto 0 auto;
   background-color: white;
+}
+
+/* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
+.form-check-input.is-valid, .was-validated .form-check-input:valid {
+  border-color: #dee2e6 !important;
+}
+
+.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+  color: #212529 !important;
+}
+
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+  background-color: rgb(2, 80, 196) !important;
+  border-color: rgb(1, 71, 174) !important;
+}
+
+.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
+  border-color: #86b7fe !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
 }
 
 /*# sourceMappingURL=style.css.map */

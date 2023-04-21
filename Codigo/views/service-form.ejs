@@ -4,33 +4,67 @@
 
     <div class="box">
 
+        <div class="container-fluid">
         <!-- Weblivery Logo -->
 
-        <h1>Solicitação de Serviço</h1>
+            <h1>Solicitação de Serviço</h1>
 
-        <form action="/" method="post">
+            <div class="col-2">
+            
+            <form class="needs-validation" action="/" method="post" novalidate>
 
-            <label for="fullnamenameInput">Nome Completo</label>
-            <input type="text" name="fullname" id="fullnameInput">
+                <label class="mt-3 form-label" for="fullnamenameInput">Nome Completo</label>
+                <div class="input-group has-validation">
+                    <input class="form-control" type="text" name="fullname" id="fullnameInput" required>
+                    <div class="invalid-feedback">
+                        Forneça um nome completo.
+                    </div>
+                </div>
 
-            <label for="emailInput">Email</label>
-            <input type="email" name="email" id="emailInput">
+                <label class="mt-3 form-label" for="emailInput">Email</label>
+                <div class="input-group has-validation">
+                    <input class="form-control" type="email" name="email" id="emailInput" required>
+                    <div class="invalid-feedback">
+                        Forneça um email válido.
+                    </div>
+                </div>
 
-            <label for="phoneInput">Telefone</label>
-            <input type="text" name="phone" id="phoneInput">
+                <label class="mt-3 form-label" for="phoneInput">Telefone</label>
+                <div class="input-group has-validation">
+                    <input class="form-control" type="text" name="phone" id="phoneInput" required>
+                    <div class="invalid-feedback">
+                        Forneça um número de telefone válido.
+                    </div>
+                </div>
 
-            <label for="whatsappCheck">Possui Whatsapp?</label>
-            <input type="checkbox" name="whatsapp" id="whatsappCheck">
+                <div class="mb-4 mt-4 form-check">
+                    <input class="form-check-input" type="checkbox" name="whatsapp" id="whatsappCheck">
+                    <label class="form-check-label" for="whatsappCheck">Possui Whatsapp?</label>
+                </div>
 
-            <label for="titleInput">Titulo da Solicitação</label>
-            <input type="text" name="title" id="titleInput">
+                <label class="mt-3 form-label" for="titleInput">Titulo da Solicitação</label>
+                <div class="input-group has-validation">
+                    <input class="form-control" type="text" name="title" id="titleInput" required>
+                    <div class="invalid-feedback">
+                        Forneça um titulo para a solicitação.
+                    </div>
+                </div>
 
-            <label for="descriptionInput">Descrição</label>
-            <textarea name="description" id="descriptionInput" cols="30" rows="10">Descreva o seu projeto...</textarea>
+                <label class="mt-3 form-label" for="descriptionInput">Descrição</label>
+                <div class="input-group has-validation">
+                    <textarea clas="form-control" name="description" id="descriptionInput" cols="30" rows="10" required>Descreva o seu projeto...</textarea>
+                    <div class="invalid-feedback">
+                        Forneça uma descrição.
+                    </div>
+                </div>
 
-            <button type="submit">Enviar</button>
+                <button class="mt-3 btn btn-primary" type="submit">Enviar</button>
 
-        </form>
+            </form>
+
+            </div>
+
+        </div>
 
     </div>
 

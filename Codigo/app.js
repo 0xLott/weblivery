@@ -70,6 +70,8 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
+/* Admin User */
+
 User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', role: 'Administrador'}, 'admin', (err, newUser) => {
     if (err) {
         console.log('Admin ja criado');
@@ -79,18 +81,13 @@ User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', r
     console.log('Admin gerado');
 })
 
-/* Logout */
-
-app.get('/logout', (req, res) => {
-    if (req.isAuthenticated()) {
-        req.logout((err) => {})
-        res.redirect('/login')
-    }
-})
-
 /* Login Page */
 
 app.get('/login', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('dashboard')
+        return
+    }
 
     res.render('login')
 })
@@ -102,6 +99,15 @@ app.post('/login', (req, res) => {
         req.login(user, (err) => {})
         res.redirect('/dashboard')
     })
+})
+
+/* Logout */
+
+app.get('/logout', (req, res) => {
+    if (req.isAuthenticated()) {
+        req.logout((err) => {})
+        res.redirect('/login')
+    }
 })
 
 /* Service Request Form */
@@ -131,7 +137,7 @@ app.post('/', (req, res) => {
 app.get('/dashboard', async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
-        return
+        return;
     }
 
     const allProjects = await Project.find()
@@ -152,7 +158,7 @@ app.get('/dashboard', async (req, res) => {
 app.get('/dashboard/:projectId', async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
-        return
+        return;
     }
 
     let project = await Project.findById(req.params.projectId)
@@ -165,7 +171,7 @@ app.get('/dashboard/:projectId', async (req, res) => {
 app.get('/admin/requests', async (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
-        return
+        return;
     }
 
     if (req.user.email === 'admin') {
@@ -174,14 +180,14 @@ app.get('/admin/requests', async (req, res) => {
 
         const allDevelopers = await User.find()
 
-        res.render('service-listing', {requests: allServiceRequests, developers: allDevelopers})
+        res.render('service-viewer', {requests: allServiceRequests, developers: allDevelopers})
     }
 })
 
 app.get('/admin/register', (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
-        return
+        return;
     }
 
     if (req.user.email === 'admin') {
@@ -192,7 +198,7 @@ app.get('/admin/register', (req, res) => {
 app.post('/admin/register', (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
-        return
+        return;
     }
 
     if (req.user.email === 'admin') {
@@ -208,10 +214,12 @@ app.post('/admin/register', (req, res) => {
 })
 
 app.post('/admin/requests/accept', async (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/login')
+        return;
+    }
 
     await ServiceRequest.findByIdAndRemove(req.body.id)
-
-    const assignedDevelopers = req.body.assignedDevelopers
 
     const newProject = new Project({
         clientName: req.body.clientName,
@@ -223,6 +231,8 @@ app.post('/admin/requests/accept', async (req, res) => {
         projectDeadline: req.body.projectDeadline,
         projectStatus: 'Em Planejamento',
     })
+
+    const assignedDevelopers = req.body.assignedDevelopers
 
     Promise.all(assignedDevelopers.map(async (developerId) => {
         let foundDeveloper = await User.findById(developerId)

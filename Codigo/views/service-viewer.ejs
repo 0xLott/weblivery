@@ -9,12 +9,18 @@
         <% requests.forEach((request) => { %>
                 <hr>
                 <div class="request-box">
-                    <p><%= request.requesterFullname %></p>
-                    <p><%= request.requestTitle %></p>
-                    <p><%= request.requestDescription %></p>
-                    <p><%= request.email %></p>
-                    <p><%= request.phone %></p>
-                    <p><%= request.whatsapp %></p>
+                    <p><b>Solicitante</b>: <%= request.requesterFullname %></p>
+                    <p><b>Titulo</b>: <%= request.requestTitle %></p>
+                    <p><b>Descrição</b>: <%= request.requestDescription %></p>
+                    <p><b>Email</b>: <%= request.email %></p>
+                    <p><b>Telefone</b>: <%= request.phone %></p>
+                    <p><b>Whatsapp</b>: 
+                        <% if (request.whatsapp == null) { %>
+                            Não
+                        <% } else { %>
+                            Sim
+                        <% } %>
+                    </p>
                 </div>
 
                 <form class="request-btn" action="/admin/requests/decline" method="post">
@@ -50,7 +56,7 @@
 
                                     <div class="mb-3">
                                         <label for="project-deadline" class="col-form-label">Data Limite:</label>
-                                        <input type="date" class="form-control" id="project-deadline" name="projectDeadline">
+                                        <input type="date" placeholder="dd-mm-yyyy" class="form-control" id="project-deadline" name="projectDeadline">
                                     </div>
 
                                     <!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->

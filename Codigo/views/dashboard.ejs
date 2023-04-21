@@ -9,22 +9,26 @@
         <nav class="navbar"></nav>
 
         <h1>Ola, <%= user.name %></h1>
+
+        <div class="menus">
         
-        <% if (user.email==='admin' ) { %>
+            <% if (user.email==='admin' ) { %>
 
-            <form action="/admin/register" method="get">
-                <button type="submit">Gerenciar Desenvolvedores</button>
+                <form class="btn-dash" action="/admin/register" method="get">
+                    <button class="btn btn-primary" type="submit">Gerenciar Desenvolvedores</button>
+                </form>
+                    
+                <form class="btn-dash" action="/admin/requests" method="get">
+                    <button class="btn btn-primary" type="submit">Solicitações</button>
+                </form>
+
+            <% } %>
+
+            <form class="btn-dash" action="/logout" method="get">
+                <button class="btn btn-primary" type="submit">Logout</button>
             </form>
-                
-            <form action="/admin/requests" method="get">
-                <button type="submit">Solicitações</button>
-            </form>
 
-        <% } %>
-
-        <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-        </form>
+        </div>
                 
         <h1>Projetos</h1>
 
@@ -36,7 +40,7 @@
                 <p>Status: <%= project.projectStatus %></p>
 
                 <form action="/dashboard/<%= project.id %>" method="get">
-                    <button type="submit">Detalhes</button>
+                    <button class="btn btn-secondary" type="submit">Detalhes</button>
                 </form>
                 
             </div>

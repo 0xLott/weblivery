@@ -44,12 +44,16 @@ input, label, button {
     }
 
     .project-footer {
-        height: 300px;
-        width: 50%;
-        text-align: center;
-        margin: 0 auto 0 auto;
-        background-color: white;
     }
+}
+
+.btn-dash {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.menus {
+    margin: 1.6rem auto;
 }
 
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */

@@ -14,11 +14,11 @@
 
                 <div class="col">
 
-                    <p><strong>Cliente:</strong> <%= project.clientName %></p>
+                    <p><b>Cliente:</b> <%= project.clientName %></p>
 
-                    <p><strong>Status:</strong> <%= project.projectStatus %></p>
+                    <p><b>Status:</b> <%= project.projectStatus %></p>
 
-                    <p><strong>Desenvolvedores:</strong> 
+                    <p><b>Desenvolvedores:</b> 
                     <% project.developers.forEach(dev => { %>
                         <%= dev.name %>,
                     <% }) %>
@@ -28,7 +28,7 @@
 
                 <div class="col">
 
-                    <p>Data Limite: <%= project.projectDeadline %></p>
+                    <p><b>Data Limite:</b> <%= project.projectDeadline %></p>
 
                 </div>
 

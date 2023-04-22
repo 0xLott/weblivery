@@ -40,6 +40,10 @@ input, label, button {
   margin: 1.6rem auto;
 }
 
+.product-backlog {
+  background-color: rebeccapurple;
+}
+
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
 .form-check-input.is-valid, .was-validated .form-check-input:valid {
   border-color: #dee2e6 !important;

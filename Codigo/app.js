@@ -30,17 +30,18 @@ const serviceRequestSchema = new mongoose.Schema({
     phone: Number
 })
 
-const todoItemSchema = new mongoose.Schema({
-    title: String,
-    content: String
-})
-
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     nickname: String,
     name: String,
     role: String
+})
+
+const todoItemSchema = new mongoose.Schema({
+    title: String,
+    status: Number,
+    developer: userSchema
 })
 
 const projectSchema = new mongoose.Schema({
@@ -164,6 +165,31 @@ app.get('/dashboard/:projectId', async (req, res) => {
     let project = await Project.findById(req.params.projectId)
 
     res.render('project-viewer', {project: project})
+})
+
+/* TodoList */
+
+app.post('/dashboard/:projectId/todolist/new', async (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/login')
+        return;
+    }
+
+    let assignedDeveloper = await User.findById(req.body.assignedDeveloper)
+
+    let project = await Project.findById(req.params.projectId)
+
+    const newTodoItem = new ToDoItem({
+        title: req.body.taskInput,
+        developer: assignedDeveloper,
+        status: 0
+    })
+
+    project.todolist.push(newTodoItem)
+
+    project.save()
+
+    res.redirect('/dashboard/' + project.id)
 })
 
 /* Admin Routes */

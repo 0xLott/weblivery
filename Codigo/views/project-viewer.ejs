@@ -39,7 +39,87 @@
 
         <div class="project-footer">
 
-            <h1>ToDoList</h1>
+            <h1>To Do List</h1>
+
+            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#new-item-modal">Nova tarefa</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="new-item-modal" tabindex="-1" aria-hidden="true">
+
+                <div class="modal-dialog">
+
+                    <form action="/dashboard/<%= project.id %>/todolist/new" method="post">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h1 class="modal-tit le fs-5" id="exampleModalLabel">Nova Tarefa</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="taskInput" name="taskInput" placeholder="Titulo" required>
+                                    <label for="taskInput">Titulo</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="mt-1 selectpicker" data-width="100%" id="floatingSelect" title="Designar desevolvedor" data-live-search="true" name="assignedDeveloper" required>
+                                        <% project.developers.forEach((developer) => { %>
+                                            <option value="<%= developer.id %>"><%= developer.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Criar</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <% project.todolist.forEach((item) => { %>
+
+                <form action="/dashboard/<%= project.id %>/todolist/<%= item.id %>" method="post">
+
+                    <div class="todolist-item">
+
+                        <p><b><%= item.title %></b></p>
+
+                        <div class="status-tag">
+                            <% switch (item.status) {
+                                case 0 : %>
+                                    <p class="product-backlog">Product Backlog</p>
+                                <% break
+                                case 1 : %>
+                                    <p class="sprint-backlog">Sprint Backlog</p>
+                                <% break
+                                case 2 : %>
+                                    <p class="development">In Development</p>
+                                <% break
+                                case 3 : %>
+                                    <p class="finished">Finished</p>
+                                <% break
+                            } %>
+                        </div>
+
+                        <p><b>Dev:</b> <%= item.developer.name %></p>
+
+                        <hr>
+
+                    </div>
+
+                </form>
+                
+            <% }) %>
 
         </div>
 

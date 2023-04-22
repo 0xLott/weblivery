@@ -35,9 +35,9 @@
         <% projects.forEach((project)=> { %>
 
             <div class="project-box">
-                <p>Projeto: <%= project.projectName %></p>
-                <p>Project Owner: <%= project.projectOwner %></p>
-                <p>Status: <%= project.projectStatus %></p>
+                <p><b>Projeto:</b> <%= project.projectName %></p>
+                <p><b>Project Owner:</b> <%= project.projectOwner %></p>
+                <p><b>Status:</b> <%= project.projectStatus %></p>
 
                 <form action="/dashboard/<%= project.id %>" method="get">
                     <button class="btn btn-secondary" type="submit">Detalhes</button>

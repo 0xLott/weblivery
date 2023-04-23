@@ -175,9 +175,11 @@ app.post('/dashboard/:projectId/todolist/new', async (req, res) => {
         return;
     }
 
+    const projectId = req.params.projectId
+
     let assignedDeveloper = await User.findById(req.body.assignedDeveloper)
 
-    let project = await Project.findById(req.params.projectId)
+    let project = await Project.findById(projectId)
 
     const newTodoItem = new ToDoItem({
         title: req.body.taskInput,
@@ -190,6 +192,44 @@ app.post('/dashboard/:projectId/todolist/new', async (req, res) => {
     project.save()
 
     res.redirect('/dashboard/' + project.id)
+})
+
+app.post('/dashboard/:projectId/todolist/:taskId/edit', async (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/login')
+        return;
+    }
+
+    const projectId = req.params.projectId
+    const taskId = req.params.taskId
+
+    const taskName = req.body.taskName
+    const actualDeveloper = await User.findById(req.body.actualDeveloper)
+
+    let taskDeveloper = req.body.taskDeveloper
+
+    if (req.body.button == 'update') {
+
+        if (taskDeveloper != "") {
+            taskDeveloper = await User.findById(req.body.taskDeveloper)
+        }
+
+        await Project.findOneAndUpdate({'todolist._id': taskId}, {$set:
+        {
+            'todolist.$.title': taskName,
+            'todolist.$.status': req.body.taskStatus == "" ? req.body.actualStatus : req.body.taskStatus,
+            'todolist.$.developer': taskDeveloper == "" ? actualDeveloper : taskDeveloper
+        }})
+
+    } else {
+        await Project.updateOne({id: projectId}, {
+            $pull: {
+                todolist: {_id: taskId}
+            }
+        }, {safe: true})
+    }
+
+    res.redirect('/dashboard/' + projectId)
 })
 
 /* Admin Routes */

@@ -64,6 +64,18 @@ input, label, button {
     background-color: rebeccapurple;
 }
 
+.sprint-backlog {
+    background-color: teal;
+}
+
+.in-development {
+    background-color: magenta;
+}
+
+.finished {
+    background-color: green;
+}
+
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
 
 .form-check-input.is-valid, .was-validated .form-check-input:valid {

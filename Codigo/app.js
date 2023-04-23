@@ -222,7 +222,7 @@ app.post('/dashboard/:projectId/todolist/:taskId/edit', async (req, res) => {
         }})
 
     } else {
-        await Project.updateOne({id: projectId}, {
+        await Project.updateOne({_id: projectId}, {
             $pull: {
                 todolist: {_id: taskId}
             }

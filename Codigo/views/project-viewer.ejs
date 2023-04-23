@@ -39,9 +39,11 @@
 
         <div class="project-footer">
 
-            <h1>To Do List</h1> 
+            <hr>
 
-            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#new-item-modal">Nova tarefa</button>
+            <h1 class="mt-3">To Do List</h1> 
+
+            <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#new-item-modal">Nova tarefa</button>
 
             <!-- Modal -->
             <div class="modal fade" id="new-item-modal" tabindex="-1" aria-hidden="true">
@@ -86,101 +88,117 @@
 
             </div>
 
-            <% project.todolist.forEach((item) => { %>
+            <div class="row">
 
-                <div class="todolist-item">
+                <% for(let i = 0; i < 4; i++) { %>
 
-                    <p><b><%= item.title %></b></p>
+                    <div class="col-3">
 
-                    <div class="status-tag">
+                        <% project.todolist.forEach((item) => { %>
 
-                        <% let itemStatus = "Product Backlog" %>
+                            <% if (item.status == i) { %>
+
+                                <div class="todolist-item">
+
+                                    <p><b><%= item.title %></b></p>
+
+                                    <div class="status-tag">
+
+                                        <% let itemStatus = "Product Backlog" %>
+                                        
+                                        <% switch (item.status) {
+                                            case 0 : %>
+                                                <p class="product-backlog">Product Backlog</p>
+                                            <% break
+                                            case 1 : %>
+                                                <p class="sprint-backlog">Sprint Backlog</p>
+                                                <% itemStatus = "Sprint Backlog" %>
+                                            <% break
+                                            case 2 : %>
+                                                <p class="in-development">In Development</p>
+                                                <% itemStatus = "In Development" %>
+                                            <% break
+                                            case 3 : %>
+                                                <p class="finished">Finished</p>
+                                                <% itemStatus = "Finished" %>
+                                            <% break
+                                        } %>
+
+                                    </div>
+
+                                    <p><b>Dev:</b> <%= item.developer.name %></p>
+
+                                    <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#a<%= item.id %>">Editar</button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="a<%= item.id %>" tabindex="-1" aria-hidden="true">
                         
-                        <% switch (item.status) {
-                            case 0 : %>
-                                <p class="product-backlog">Product Backlog</p>
-                            <% break
-                            case 1 : %>
-                                <p class="sprint-backlog">Sprint Backlog</p>
-                                <% itemStatus = "Sprint Backlog" %>
-                            <% break
-                            case 2 : %>
-                                <p class="in-development">In Development</p>
-                                <% itemStatus = "In Development" %>
-                            <% break
-                            case 3 : %>
-                                <p class="finished">Finished</p>
-                                <% itemStatus = "Finished" %>
-                            <% break
-                        } %>
+                                        <div class="modal-dialog">
+                        
+                                            <form action="/dashboard/<%= project.id %>/todolist/<%= item.id %>/edit" method="post">
+                        
+                                                <div class="modal-content">
+                        
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-tit le fs-5" id="exampleModalLabel">Editar Tarefa</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                        
+                                                    <div class="modal-body">
+                        
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Titulo" value="<%= item.title %>">
+                                                            <label for="taskName">Titulo</label>
+                                                        </div>
+                        
+                                                        <div class="form-floating mb-3">
+                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskDeveloper" title="<%= item.developer.name %>" data-live-search="true" name="taskDeveloper">
+                                                                <% project.developers.forEach((developer) => { %>
+                                                                    <option value="<%= developer.id %>"><%= developer.name %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                        </div>
 
-                    </div>
+                                                        <div class="form-floating mb-3">
+                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskStatus" title="<%= itemStatus %>" name="taskStatus">
+                                                                <option value="0">Product Backlog</option>
+                                                                <option value="1">Sprint Backlog</option>
+                                                                <option value="2">In Development</option>
+                                                                <option value="3">Finished</option>
+                                                            </select>
+                                                        </div>
 
-                    <p><b>Dev:</b> <%= item.developer.name %></p>
+                                                        <input type="hidden" value="<%= item.developer.id %>" name="actualDeveloper">
+                                                        <input type="hidden" value="<%= item.status %>" name="actualStatus">
 
-                    <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#a<%= item.id %>">Editar</button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="a<%= item.id %>" tabindex="-1" aria-hidden="true">
-        
-                        <div class="modal-dialog">
-        
-                            <form action="/dashboard/<%= project.id %>/todolist/<%= item.id %>/edit" method="post">
-        
-                                <div class="modal-content">
-        
-                                    <div class="modal-header">
-                                        <h1 class="modal-tit le fs-5" id="exampleModalLabel">Editar Tarefa</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-        
-                                    <div class="modal-body">
-        
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Titulo" value="<%= item.title %>">
-                                            <label for="taskName">Titulo</label>
+                                                    </div>
+                        
+                                                    <div class="modal-footer">
+                                                        <button type="submit" name="button" value="remove" class="btn btn-danger">Excluir</button>
+                                                        <button type="submit" name="button" value="update" class="btn btn-primary">Salvar</button>
+                                                    </div>
+                        
+                                                </div>
+                        
+                                            </form>
+                        
                                         </div>
-        
-                                        <div class="form-floating mb-3">
-                                            <select class="mt-1 selectpicker" data-width="100%" id="taskDeveloper" title="<%= item.developer.name %>" data-live-search="true" name="taskDeveloper">
-                                                <% project.developers.forEach((developer) => { %>
-                                                    <option value="<%= developer.id %>"><%= developer.name %></option>
-                                                <% }) %>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <select class="mt-1 selectpicker" data-width="100%" id="taskStatus" title="<%= itemStatus %>" name="taskStatus">
-                                                <option value="0">Product Backlog</option>
-                                                <option value="1">Sprint Backlog</option>
-                                                <option value="2">In Development</option>
-                                                <option value="3">Finished</option>
-                                            </select>
-                                        </div>
-
-                                        <input type="hidden" value="<%= item.developer.id %>" name="actualDeveloper">
-                                        <input type="hidden" value="<%= item.status %>" name="actualStatus">
-
+                        
                                     </div>
-        
-                                    <div class="modal-footer">
-                                        <button type="submit" name="button" value="remove" class="btn btn-danger">Excluir</button>
-                                        <button type="submit" name="button" value="update" class="btn btn-primary">Salvar</button>
-                                    </div>
-        
+
+                                    <hr>
+
                                 </div>
-        
-                            </form>
-        
-                        </div>
-        
+
+                            <% } %>
+
+                        <% }) %>
+
                     </div>
 
-                    <hr>
+                <% } %>
 
-                </div>
-
-            <% }) %>
+            </div>
 
         </div>
 

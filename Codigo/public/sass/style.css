@@ -40,6 +40,10 @@ input, label, button {
   margin: 1.6rem auto;
 }
 
+.todolist-head {
+  text-align: right;
+}
+
 .product-backlog {
   background-color: rebeccapurple;
 }

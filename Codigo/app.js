@@ -71,15 +71,13 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-/* Admin User */
-
 User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', role: 'Administrador'}, 'admin', (err, newUser) => {
     if (err) {
-        console.log('Admin ja criado');
+        console.log('Admin user already exists');
         return
     }
        
-    console.log('Admin gerado');
+    console.log('Admin user created');
 })
 
 /* Login Page */

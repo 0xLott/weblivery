@@ -60,6 +60,10 @@ input, label, button {
   background-color: green;
 }
 
+.status-row {
+  background-color: #d4d4d4;
+}
+
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
 .form-check-input.is-valid, .was-validated .form-check-input:valid {
   border-color: #dee2e6 !important;
@@ -78,4 +82,6 @@ input, label, button {
   border-color: #86b7fe !important;
   outline: 0 !important;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

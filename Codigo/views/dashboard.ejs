@@ -14,17 +14,17 @@
         
             <% if (user.email==='admin' ) { %>
 
-                <form class="btn-dash" action="/admin/register" method="get">
+                <form class="btn-dash" action="/user/register" method="get">
                     <button class="btn btn-primary" type="submit">Gerenciar Desenvolvedores</button>
                 </form>
                     
-                <form class="btn-dash" action="/admin/requests" method="get">
+                <form class="btn-dash" action="/request/view" method="get">
                     <button class="btn btn-primary" type="submit">Solicitações</button>
                 </form>
 
             <% } %>
 
-            <form class="btn-dash" action="/logout" method="get">
+            <form class="btn-dash" action="/user/quit" method="post">
                 <button class="btn btn-primary" type="submit">Logout</button>
             </form>
 
@@ -39,7 +39,7 @@
                 <p><b>Project Owner:</b> <%= project.projectOwner %></p>
                 <p><b>Status:</b> <%= project.projectStatus %></p>
 
-                <form action="/dashboard/<%= project.id %>" method="get">
+                <form action="/project/<%= project.id %>" method="get">
                     <button class="btn btn-secondary" type="submit">Detalhes</button>
                 </form>
                 

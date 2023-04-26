@@ -50,7 +50,7 @@
 
                 <div class="modal-dialog">
 
-                    <form action="/dashboard/<%= project.id %>/todolist/new" method="post">
+                    <form action="/project/<%= project.id %>/todolist/create" method="post">
 
                         <div class="modal-content">
 
@@ -142,7 +142,7 @@
                         
                                         <div class="modal-dialog">
                         
-                                            <form action="/dashboard/<%= project.id %>/todolist/<%= item.id %>/edit" method="post">
+                                            <form action="/project/<%= project.id %>/todolist/edit/<%= item.id %>" method="post">
                         
                                                 <div class="modal-content">
                         

@@ -2,21 +2,31 @@
 
 <section id="developer-login">
 
-    <div class="box">
+    <div class="main-login">
 
-        <form action="/user/login" method="post">
+        <div class="left-login">
+            <h1>Weblivery</h1>
+            <img src="/img/login.svg" class="left-login-image" alt="login-animation">
+        </div>
 
-            <h1>Login</h1>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Login</h1>
+                <div class="textfield">
+                    <form action="/user/login" method="post">            
+                        <label for="emailInput" class="label-login">Email</label>
+                        <input type="text" name="email" id="emailInput">
 
-            <label for="emailInput">Email</label>
-            <input type="text" name="email" id="emailInput">
-            
-            <label for="passwordInput">Senha</label>
-            <input type="password" name="password" id="passwordInput">
+                        <label for="passwordInput">Senha</label>
+                        <input type="password" name="password" id="passwordInput"> 
+                        <button type="submit" class="btn-login">Login</button> 
+                    </form>
+                </div>                       
 
-            <button type="submit">Login</button>
+            </div>
+        </div>
 
-        </form>
+        
 
     </div>
 

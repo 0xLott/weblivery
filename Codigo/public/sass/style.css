@@ -60,7 +60,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin: 10px 0px;
 }
@@ -112,7 +112,7 @@ body {
 .btn-login {
   width: 100%;
   padding: 16px 0px;
-  margin: 25px;
+  margin: 25px 0px;
   border: none;
   border-radius: 8px;
   outline: none;
@@ -130,6 +130,27 @@ body {
     width: 85%;
   }
 }
+
+@media (max-width: 799px) {  
+  .right-login {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 810px) {
+  .main-login {
+    flex-direction: column;
+  }
+
+  .left-login > h1 {
+    font-size: 8vw;
+  }
+
+  .left-login-image {
+    width: 60vw;
+  }
+}
+
 input, label, button {
   display: block;
 }

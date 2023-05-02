@@ -8,6 +8,8 @@ const controller = require('../controllers/projectController')
 
 router.get('/:projectId', controller.renderProject)
 
+router.get('/:projectId/metrics', controller.renderMetrics)
+
 // Posts
 
 router.post('/:projectId/todolist/create', controller.createTodolistItem)

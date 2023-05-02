@@ -11,7 +11,18 @@ module.exports = {
     
         let project = await Project.findById(req.params.projectId)
     
-        res.render('project-viewer', {project: project})
+        res.render('project-viewer', {user: req.user, project: project})
+    },
+
+    async renderMetrics(req, res) {
+        if (!req.isAuthenticated()) {
+            res.redirect('/user/login')
+            return
+        }
+
+        let project = await Project.findById(req.params.projectId)
+
+        res.render('metrics', {project: project})
     },
 
     async createTodolistItem(req, res) {
@@ -48,22 +59,27 @@ module.exports = {
         const projectId = req.params.projectId
         const taskId = req.params.taskId
     
-        const taskName = req.body.taskName
-        const actualDeveloper = await User.findById(req.body.actualDeveloper)
-    
+        let taskName = req.body.taskName
         let taskDeveloper = req.body.taskDeveloper
+        let taskStatus = req.body.taskStatus
+
+        let actualDeveloper = await User.findById(req.body.actualDeveloper)
+        let actualStatus = req.body.actualStatus
+        let actualName = req.body.actualName
     
         if (req.body.button == 'update') {
-    
-            if (taskDeveloper != "") {
-                taskDeveloper = await User.findById(req.body.taskDeveloper)
+
+            if (taskDeveloper == null || taskDeveloper == "") {
+                taskDeveloper = actualDeveloper
+            } else {
+                taskDeveloper = await User.findById(taskDeveloper)
             }
     
             await Project.findOneAndUpdate({'todolist._id': taskId}, {$set:
             {
-                'todolist.$.title': taskName,
-                'todolist.$.status': req.body.taskStatus == "" ? req.body.actualStatus : req.body.taskStatus,
-                'todolist.$.developer': taskDeveloper == "" ? actualDeveloper : taskDeveloper
+                'todolist.$.title': taskName == null ? actualName : taskName,
+                'todolist.$.status': taskStatus == "" ? actualStatus : taskStatus,
+                'todolist.$.developer': taskDeveloper
             }})
     
         } else {

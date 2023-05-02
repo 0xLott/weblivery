@@ -6,7 +6,7 @@ const serviceRequestSchema = new mongoose.Schema({
     requestDescription: String,
     email: String,
     whatsapp: String,
-    phone: Number
+    phone: String
 })
 
 module.exports = mongoose.model("ServiceRequest", serviceRequestSchema)

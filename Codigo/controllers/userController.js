@@ -1,4 +1,5 @@
 const { User } = require('../models/User')
+const ServiceRequest = require('../models/ServiceRequest')
 const Project = require('../models/Project')
 const passport = require('passport')
 
@@ -19,6 +20,7 @@ module.exports = {
         }
     
         const allProjects = await Project.find()
+        const allServiceRequests = await ServiceRequest.find()
     
         let restrictProjects = allProjects.filter(project => {
             return project.developers.some((dev) => {
@@ -27,7 +29,7 @@ module.exports = {
         })
     
         if (req.user.email === 'admin') {
-            res.render('dashboard', {user: req.user, projects: allProjects})
+            res.render('dashboard', {user: req.user, projects: allProjects, requestAlert: allServiceRequests.length == 0 ? false : true})
         } else {
             res.render('dashboard', {user: req.user, projects: restrictProjects})
         }

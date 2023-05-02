@@ -12,14 +12,18 @@
 
         <div class="menus">
         
-            <% if (user.email==='admin' ) { %>
+            <% if (user.email === 'admin') { %>
 
                 <form class="btn-dash" action="/user/register" method="get">
                     <button class="btn btn-primary" type="submit">Gerenciar Desenvolvedores</button>
                 </form>
                     
                 <form class="btn-dash" action="/request/view" method="get">
+                    <% if (requestAlert) { %>
+                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
+                    <% } else { %>
                     <button class="btn btn-primary" type="submit">Solicitações</button>
+                    <% } %>
                 </form>
 
             <% } %>

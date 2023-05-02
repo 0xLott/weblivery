@@ -1,0 +1,63 @@
+<%- include('partials/header') %>
+
+<section id="metrics">
+
+    <h1>Metricas do Projeto</h1>
+
+    <h2>Gerais</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Numero de Desenvolvedores no Projeto</th>
+                <th scope="col">Numero de Itens na TodoList</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= project.developers.length %></td>
+                <td><%= project.todolist.length %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Devs</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Desenvolvedor</th>
+                <th scope="col">Numero de Tarefas Atribuidas</th>
+                <th scope="col">Numero de Tarefas Completas</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% project.developers.forEach((developer) => { %>
+                <tr>
+                    <td><%= developer.name %></td>
+
+                    <% let tarefasAtribuidas = 0 %>
+                    <% project.todolist.forEach((todolistitem) => { %>
+                        <% if (todolistitem.developer.email === developer.email) { %>
+                           <% tarefasAtribuidas++ %>
+                        <% } %>
+                    <% }) %>
+                    <td><%= tarefasAtribuidas %></td>
+
+                    <% let tarefasFinalizadas = 0 %>
+                    <% project.todolist.forEach((todolistitem) => { %>
+                        <% if (todolistitem.developer.email === developer.email) { %>
+                            <% if (todolistitem.status === 3) { %>
+                                <% tarefasFinalizadas++ %>
+                            <% } %>
+                        <% } %>
+                    <% }) %>
+                    <td><%= tarefasFinalizadas %></td>
+
+                </tr>
+                <% }) %>
+
+        </tbody>
+    </table>
+
+</section>
+
+<%- include('partials/footer') %>

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const passport = require('passport')
+const { notificationSchema } = require('./Notification')
 const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
@@ -7,7 +8,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     nickname: String,
     name: String,
-    role: String
+    role: String,
+    notifications: [notificationSchema]
 })
 
 userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})

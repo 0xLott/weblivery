@@ -1,42 +1,37 @@
 <%- include('partials/header') %>
 
 <section id="dashboard">
+        <header>
+            <h1>Ola, <%= user.name %></h1>
 
-    <div class="container-fluid">
+            <nav class="menus">
+            
+                <% if (user.email === 'admin') { %>
 
-        <h1>Dashboard</h1>
+                    <form class="btn-dash" action="/user/register" method="get">
+                        <button class="btn" type="submit">Gerenciar Desenvolvedores</button>
+                    </form>
+                        
+                    <form class="btn-dash" action="/request/view" method="get">
+                        <% if (requestAlert) { %>
+                        <button class="btn " type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
+                        <% } else { %>
+                        <button class="btn " type="submit">Solicitações</button>
+                        <% } %>
+                    </form>
 
-        <nav class="navbar"></nav>
+                <% } %>
 
-        <h1>Ola, <%= user.name %></h1>
-
-        <div class="menus">
-        
-            <% if (user.email === 'admin') { %>
-
-                <form class="btn-dash" action="/user/register" method="get">
-                    <button class="btn btn-primary" type="submit">Gerenciar Desenvolvedores</button>
+                <form class="btn-dash" action="/user/notifications" method="post">
+                    <button class="btn " type="submit">Notificações</button>
                 </form>
-                    
-                <form class="btn-dash" action="/request/view" method="get">
-                    <% if (requestAlert) { %>
-                    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
-                    <% } else { %>
-                    <button class="btn btn-primary" type="submit">Solicitações</button>
-                    <% } %>
+
+                <form class="btn-dash" action="/user/quit" method="post">
+                    <button class="btn " type="submit">Logout</button>
                 </form>
 
-            <% } %>
-
-            <form class="btn-dash" action="/user/notifications" method="post">
-                <button class="btn btn-primary" type="submit">Notificações</button>
-            </form>
-
-            <form class="btn-dash" action="/user/quit" method="post">
-                <button class="btn btn-primary" type="submit">Logout</button>
-            </form>
-
-        </div>
+            </nav>
+        </header>
                 
         <h1>Projetos</h1>
 
@@ -53,7 +48,6 @@
                 
             </div>
         <% }) %>
-    </div>
 
 </section>
 

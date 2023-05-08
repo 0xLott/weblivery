@@ -61,7 +61,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin: 10px 0px;
 }
@@ -113,7 +113,7 @@ body {
 .btn-login {
   width: 100%;
   padding: 16px 0px;
-  margin: 25px;
+  margin: 25px 0px;
   border: none;
   border-radius: 8px;
   outline: none;
@@ -159,13 +159,28 @@ header > h1 {
     width: 85%;
   }
 }
-<<<<<<< Updated upstream
+
+@media (max-width: 799px) {  
+  .right-login {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 810px) {
+  .main-login {
+    flex-direction: column;
+  }
+
+  .left-login > h1 {
+    font-size: 8vw;
+  }
+
+  .left-login-image {
+    width: 60vw;
+  }
+}
+
 input, label, button {
-=======
-input,
-label,
-button {
->>>>>>> Stashed changes
   display: block;
 }
 
@@ -198,10 +213,6 @@ button {
   margin-right: 0.5rem;
 }
 
-.space-between {
-  justify-content: space-between;
-}
-
 .menus {
   margin: 1.6rem auto;
 }
@@ -230,41 +241,21 @@ button {
   background-color: #d4d4d4;
 }
 
-@media (max-width: 799px) {
-  .right-login {
-    width: 80vw;
-  }
-}
-@media (max-width: 810px) {
-  .main-login {
-    flex-direction: column;
-  }
-  .left-login > h1 {
-    font-size: 8vw;
-  }
-  .left-login-image {
-    width: 60vw;
-  }
-}
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
-.form-check-input.is-valid,
-.was-validated .form-check-input:valid {
+.form-check-input.is-valid, .was-validated .form-check-input:valid {
   border-color: #dee2e6 !important;
 }
 
-.form-check-input.is-valid ~ .form-check-label,
-.was-validated .form-check-input:valid ~ .form-check-label {
+.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
   color: #212529 !important;
 }
 
-.form-check-input.is-valid:checked,
-.was-validated .form-check-input:valid:checked {
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
   background-color: rgb(2, 80, 196) !important;
   border-color: rgb(1, 71, 174) !important;
 }
 
-.form-check-input.is-valid:focus,
-.was-validated .form-check-input:valid:focus {
+.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
   border-color: #86b7fe !important;
   outline: 0 !important;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;

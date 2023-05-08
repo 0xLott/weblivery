@@ -36,7 +36,7 @@ module.exports = {
             projectDescription: req.body.projectDescription,
             projectOwner: req.user.name,
             projectDeadline: req.body.projectDeadline,
-            projectStatus: 'Em Planejamento',
+            projectStatus: 0,
         })
     
         const assignedDevelopers = req.body.assignedDevelopers

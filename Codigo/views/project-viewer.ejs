@@ -4,6 +4,17 @@
 
     <div class="container-fluid">
 
+        <% let projectStatus = "Em planejamento" %>
+                                        
+        <% switch (project.projectStatus) {
+            case 1 : %>
+                <% projectStatus = "Em andamento" %>
+            <% break
+            case 2 : %>
+                <% projectStatus = "Concluido" %>
+            <% break
+        } %>
+
         <div class="project-header">
             <h1><%= project.projectName %></h1>
         </div>
@@ -16,21 +27,95 @@
 
                     <p><b>Cliente:</b> <%= project.clientName %></p>
 
-                    <p><b>Status:</b> <%= project.projectStatus %></p>
+                    <p><b>Status:</b> <%= projectStatus %></p>
 
                     <p><b>Desenvolvedores:</b> 
-                    <% project.developers.forEach(dev => { %>
-                        <%= dev.name %>,
-                    <% }) %>
+                        <% project.developers.forEach(dev => { %>
+                            <%= dev.name %>,
+                        <% }) %>
                     </p>
-                    
-
 
                     <% if (user.email === 'admin') { %>
                         
                         <!-- Modal Opener (ISSUE 36) -->
 
-                        <button class="btn btn-dash btn-primary">Editar</button>
+                        <button type="button" class="btn btn-dash btn-primary" data-bs-toggle="modal" data-bs-target="#a<%= project.id %>">Editar</button>
+
+                        <div class="modal fade" id="a<%= project.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            
+                            <div class="modal-dialog">
+
+                                <form action="/project/<%= project.id %>/update" method="post">
+                               
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciar Projeto</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            
+                                            <div class="container-fluid">
+
+                                                <div class="row">
+
+                                                    <div class="col-12">
+                                                        <label class="mb-2" for="projectName">Nome do Projeto</label>
+                                                        <input type="text" class="form-control" value="<%= project.projectName %>" id="projectName" name="projectName" required>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label class="mb-2 mt-2" for="clientName">Cliente</label>
+                                                        <input type="text" class="form-control" value="<%= project.clientName %>" id="clientName" name="clientName" required>
+                                                    </div>
+                                                    
+                                                    <div class="col-6">
+                                                        <label class="mt-4" for="project-team">Status:</label>
+                                                        <select class="mt-2 selectpicker" data-width="100%" id="projectStatus" title="<%= projectStatus %>" name="projectStatus">
+                                                            <option value="0">Em planejamento</option>
+                                                            <option value="1">Em andamento</option>
+                                                            <option value="2">Concluido</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <label class="mt-4 mb-2" for="project-deadline">Data Limite:</label>
+                                                        <input type="date" value="<%= project.projectDeadline %>" class="form-control" id="project-deadline" name="projectDeadline" required>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <label class="mt-3" for="developerPicker">Desenvolvedores:</label>
+                                            
+                                                        <select class="mt-1 selectpicker developerPicker" title="Alterar desenvolvedores" data-live-search="true" name="assignedDevelopers[]" multiple required>
+                                                            
+                                                            <% developers.forEach((developer) => { %>
+
+                                                                <% if (project.developers.some(dev => dev.email === developer.email)) { %>
+                                                                    <option selected value="<%= developer.id %>"><%= developer.name %></option>
+                                                                <% } else { %>
+                                                                    <option value="<%= developer.id %>"><%= developer.name %></option>
+                                                                <% } %>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer space-between">
+
+                                            <button class="btn btn-danger" name="button" value="delete" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                                            
+                                            <button class="btn btn-primary" name="button" value="update" type="submit">Confirmar</button>
+
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="actualStatus" value="<%= project.projectStatus %>">
+                                </form>
+                            </div>
+                        </div>
 
                         <form class="btn-dash" action="/project/<%= project.id %>/metrics" method="get">
                             <button type="submit" class="btn btn-primary">Relatorio</button>
@@ -203,9 +288,9 @@
 
                                                     </div>
                         
-                                                    <div class="modal-footer">
+                                                    <div class="modal-footer space-between">
                                                         <% if (user.email === 'admin') { %>
-                                                        <button type="submit" name="button" value="remove" class="btn btn-danger">Excluir</button>
+                                                        <button type="submit" name="button" value="remove" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                                         <% } %>  
                                                         <button type="submit" name="button" value="update" class="btn btn-primary">Salvar</button>
                                                     </div>

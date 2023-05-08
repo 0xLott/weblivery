@@ -37,10 +37,21 @@
 
         <% projects.forEach((project)=> { %>
 
+            <% let projectStatus = "Em planejamento" %>
+                                        
+            <% switch (project.projectStatus) {
+                case 1 : %>
+                    <% projectStatus = "Em andamento" %>
+                <% break
+                case 2 : %>
+                    <% projectStatus = "Concluido" %>
+                <% break
+            } %>
+
             <div class="project-box">
                 <p><b>Projeto:</b> <%= project.projectName %></p>
                 <p><b>Project Owner:</b> <%= project.projectOwner %></p>
-                <p><b>Status:</b> <%= project.projectStatus %></p>
+                <p><b>Status:</b> <%= projectStatus %></p>
 
                 <form action="/project/<%= project.id %>" method="get">
                     <button class="btn btn-secondary" type="submit">Detalhes</button>

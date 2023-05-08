@@ -1,10 +1,12 @@
 // @import '../.././node_modules/bootstrap/scss/bootstrap.scss';
 // @import '../.././node_modules/bootstrap-icons/font/bootstrap-icons.scss';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
 @mixin borderRadius($radius: 100px) {
     border-radius: $radius;
 }
-body{
+
+body {
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -14,7 +16,7 @@ body{
     }
 }
 
-.main-login{
+.main-login {
     width: 100vw;
     height: 100vh;
     background-color: #201b2c;
@@ -23,7 +25,7 @@ body{
     align-items: center;
 }
 
-.left-login{
+.left-login {
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -32,11 +34,11 @@ body{
     flex-direction: column;
 }
 
-.left-login > h1{
-    color:#77ffc0;
+.left-login>h1 {
+    color: #77ffc0;
 }
 
-.right-login{
+.right-login {
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -44,8 +46,8 @@ body{
     align-items: center;
 }
 
-.card-login{
-    width:60%;
+.card-login {
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,13 +58,13 @@ body{
     box-shadow: 0px 10px 40px #00000056;
 }
 
-.card-login > h1 {
-    color:#77ffc0;
+.card-login>h1 {
+    color: #77ffc0;
     font-weight: 800;
     margin: 0;
 }
 
-.textfield{
+.textfield {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -71,7 +73,7 @@ body{
     margin: 10px 0px;
 }
 
-.textfield > input{
+.textfield>input {
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -84,7 +86,7 @@ body{
     box-sizing: border-box;
 }
 
-.textfield > form > input{
+.textfield>form>input {
     width: 100%;
     border: none;
     border-radius: 10px;
@@ -97,26 +99,26 @@ body{
     box-sizing: border-box;
 }
 
-.left-login > h1{
+.left-login>h1 {
     font-size: 3vw;
 
 }
 
-.left-login-image{
+.left-login-image {
     width: 35vw;
 }
 
-.textfield > label{
+.textfield>label {
     color: #f0ffffde;
     margin-bottom: 10px;
 }
 
-.textfield > form > label {
+.textfield>form>label {
     color: #f0ffffde;
     margin-bottom: 10px;
 }
 
-.btn-login{
+.btn-login {
     width: 100%;
     padding: 16px 0px;
     margin: 25px;
@@ -132,13 +134,15 @@ body{
     box-shadow: 0px 10px 40px -12px #00ff8052;
 }
 
-@media only screen and (max-width:950px){
-    .card-login{
+@media only screen and (max-width:950px) {
+    .card-login {
         width: 85%;
     }
 }
 
-input, label, button {
+input,
+label,
+button {
     display: block;
 }
 
@@ -146,11 +150,11 @@ input, label, button {
     display: inline;
 }
 
-.project-box{
+.project-box {
     border-radius: 50px;
     background: #e0e0e0;
-    box-shadow:  31px 31px 62px #bebebe,
-             -31px -31px 62px #ffffff;
+    box-shadow: 31px 31px 62px #bebebe,
+        -31px -31px 62px #ffffff;
     padding: 1%;
 
     margin-bottom: 35px;
@@ -170,13 +174,16 @@ input, label, button {
         margin-top: 3rem;
     }
 
-    .project-footer {
-    }
+    .project-footer {}
 }
 
 .btn-dash {
     display: inline-block;
     margin-right: 0.5rem;
+}
+
+.space-between {
+    justify-content: space-between;
 }
 
 .menus {
@@ -207,23 +214,47 @@ input, label, button {
     background-color: #d4d4d4;
 }
 
+@media (max-width: 799px) {
+    .right-login {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 810px) {
+    .main-login {
+        flex-direction: column;
+    }
+
+    .left-login>h1 {
+        font-size: 8vw;
+    }
+
+    .left-login-image {
+        width: 60vw;
+    }
+}
+
 /* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
 
-.form-check-input.is-valid, .was-validated .form-check-input:valid {
+.form-check-input.is-valid,
+.was-validated .form-check-input:valid {
     border-color: #dee2e6 !important;
 }
 
-.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+.form-check-input.is-valid~.form-check-label,
+.was-validated .form-check-input:valid~.form-check-label {
     color: #212529 !important;
 }
 
-.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+.form-check-input.is-valid:checked,
+.was-validated .form-check-input:valid:checked {
     background-color: rgb(2, 80, 196) !important;
     border-color: rgb(1, 71, 174) !important;
 }
 
-.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
+.form-check-input.is-valid:focus,
+.was-validated .form-check-input:valid:focus {
     border-color: #86b7fe !important;
     outline: 0 !important;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25) !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25) !important;
 }

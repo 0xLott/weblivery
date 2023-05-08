@@ -12,6 +12,8 @@ router.get('/:projectId/metrics', controller.renderMetrics)
 
 // Posts
 
+router.post('/:projectId/update', controller.editProjectDetails)
+
 router.post('/:projectId/todolist/create', controller.createTodolistItem)
 
 router.post('/:projectId/todolist/edit/:taskId', controller.editTodolistItem)

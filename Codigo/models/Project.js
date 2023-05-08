@@ -9,7 +9,7 @@ const projectSchema = new mongoose.Schema({
     projectName: String,
     projectDescription: String,
     projectOwner: String,
-    projectStatus: String,
+    projectStatus: Number,
     projectDeadline: String,
     todolist: [todoItemSchema],
     developers: [userSchema]

@@ -10,8 +10,10 @@ module.exports = {
         }
     
         let project = await Project.findById(req.params.projectId)
+
+        const allDevelopers = await User.find()
     
-        res.render('project-viewer', {user: req.user, project: project})
+        res.render('project-viewer', {user: req.user, project: project, developers: allDevelopers})
     },
 
     async renderMetrics(req, res) {
@@ -48,6 +50,55 @@ module.exports = {
         project.save()
     
         res.redirect('/project/' + projectId)
+    },
+
+    async editProjectDetails(req, res) {
+        if (!req.isAuthenticated()) {
+            res.redirect('/user/login')
+            return
+        }
+
+        const projectId = req.params.projectId
+        const projectName = req.body.projectName
+        const clientName = req.body.clientName
+        var projectStatus = req.body.projectStatus
+        const projectDeadline = req.body.projectDeadline
+        const assignedDevelopers = req.body.assignedDevelopers
+
+        const project = await Project.findById(projectId)
+
+        if (req.body.button == 'update') {
+
+            let developers = []
+
+            if (projectStatus == null || projectStatus == "") {
+                projectStatus = req.body.actualStatus
+            }
+
+            Promise.all(assignedDevelopers.map(async (developerId) => {
+
+                let foundDeveloper = await User.findById(developerId)
+        
+                developers.push(foundDeveloper)
+
+            })).then(() => {
+
+                project.projectName = projectName
+                project.clientName = clientName
+                project.projectStatus = projectStatus
+                project.projectDeadline = projectDeadline
+                project.developers = developers
+
+                project.save()
+
+                res.redirect('/project/' + projectId)
+            })
+
+        } else { 
+            await Project.findByIdAndRemove(projectId)
+
+            res.redirect('/user/dashboard')
+        }
     },
 
     async editTodolistItem(req, res) {

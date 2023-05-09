@@ -4,6 +4,8 @@
 
     <h1>Relatório do Projeto</h1>
 
+    <button onclick="window.print()">Imprimir</button>
+
     <h2>Cliente</h2>
         <p><b>Nome do cliente:</b> <%= project.clientName %></p>
         <p><b>E-mail:</b> <%= project.clientEmail %></p>
@@ -46,7 +48,6 @@
         </tbody>
     </table>
 
-    <h2>Andamento do projeto</h2>
 
     <h2>Desenvolvedores</h2>
     <table class="table">
@@ -84,6 +85,21 @@
                 <% }) %>
         </tbody>
     </table>
+
+    <h2>Andamento do projeto</h2>
+
+    <% let tasks = project.todolist.length %>
+    <% let finishedTasks = 0%>
+
+    <% project.todolist.forEach((todolistitem) => { %>
+        <% if (todolistitem.status === 3) { %>
+            <% finishedTasks++ %>
+        <% } %>
+    <% }) %>
+
+
+    <progress id="progress" value="<%= finishedTasks / tasks * 100%>" max= "100"> <%= finishedTasks / tasks * 100%> </progress>
+    <label for="progress"><%= finishedTasks %>/<%= tasks %> tarefas concluídas</label>
 
     <h2>Tarefas</h2>
     <table class="table">

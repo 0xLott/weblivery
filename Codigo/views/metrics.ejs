@@ -2,14 +2,40 @@
 
 <section id="metrics">
 
-    <h1>Metricas do Projeto</h1>
+    <h1>Relatório do Projeto</h1>
 
-    <h2>Gerais</h2>
+    <h2>Cliente</h2>
+        <p><b>Nome do cliente:</b> <%= project.clientName %></p>
+        <p><b>E-mail:</b> <%= project.clientEmail %></p>
+        <p><b>Telefone:</b> <%= project.clientPhone%></p>
+
+    <h2>Projeto</h2>
+        <p><b>Nome do projeto:</b> <%= project.projectName %></p>
+        <p><b>Descrição:</b> <%= project.projectDescription %></p>
+        <p><b>Product Owner:</b> <%= project.projectOwner %></p>
+        <p><b>Desenvolvedores responsáveis:</b><% project.developers.forEach((developer) => { %>
+                                                    <%= developer.name %>, 
+                                                <% }) %><p>
+        <p><b>Data limite:</b> <%= project.projectDeadline %></p>
+        <p><b>Status:</b> <% switch (project.projectStatus) {
+                            case 1 : %>
+                                Em planejamento
+                            <% break
+                            case 2 : %>
+                                Em andamento
+                            <% break
+                            case 3 : %>
+                                Concluido
+                            <% break
+                        } %> </p>
+
+
+    <h2>Status</h2>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Numero de Desenvolvedores no Projeto</th>
-                <th scope="col">Numero de Itens na TodoList</th>
+                <th scope="col">Desenvolvedores trabalhando no projeto</th>
+                <th scope="col">Itens na To-do List</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +46,9 @@
         </tbody>
     </table>
 
-    <h2>Devs</h2>
+    <h2>Andamento do projeto</h2>
+
+    <h2>Desenvolvedores</h2>
     <table class="table">
         <thead>
             <tr>

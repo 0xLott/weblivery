@@ -189,7 +189,7 @@ input, label, button {
 }
 
 .project-box {
-  border-radius: 50px;
+  border-radius: 15px;
   background: #e0e0e0;
   box-shadow: 31px 31px 62px #bebebe, -31px -31px 62px #ffffff;
   padding: 1%;

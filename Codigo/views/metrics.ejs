@@ -82,7 +82,41 @@
 
                 </tr>
                 <% }) %>
+        </tbody>
+    </table>
 
+    <h2>Tarefas</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Desenvolvedor responsável</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+            
+        <tbody>
+            <% project.todolist.forEach((todolistitem) => { %>
+                <tr>
+                    <td><%= todolistitem.title %></td>
+                    <td><%= todolistitem.developer.name %></td>
+                    <td><% switch (todolistitem.status) {
+                        case 0 : %>
+                            Backlog do produto
+                        <% break
+                        case 1 : %>
+                            Backlog da sprint
+                        <% break
+                        case 2 : %>
+                            Em desenvolvimento
+                        <% break
+                        case 3 : %>
+                            Finalizado
+                        <% break
+                    } %></td>
+                </tr>
+
+            <% }) %>    
         </tbody>
     </table>
 

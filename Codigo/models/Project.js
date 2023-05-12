@@ -5,12 +5,12 @@ const { userSchema } = require('./User')
 const projectSchema = new mongoose.Schema({
     clientName: String,
     clientEmail: String,
-    clientPhone: Number,
+    clientPhone: String,
     projectName: String,
-    projectDescription: String,
-    projectOwner: String,
-    projectStatus: Number,
-    projectDeadline: String,
+    description: String,
+    owner: String,
+    deadline: String,
+    status: Number,
     todolist: [todoItemSchema],
     developers: [userSchema]
 })

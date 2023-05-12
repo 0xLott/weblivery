@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const serviceRequestSchema = new mongoose.Schema({
-    requesterFullname: String,
-    requestTitle: String,
-    requestDescription: String,
+    requester: String,
+    title: String,
+    description: String,
     email: String,
     whatsapp: String,
     phone: String

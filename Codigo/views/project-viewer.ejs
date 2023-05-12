@@ -6,7 +6,7 @@
 
         <% let projectStatus = "Em planejamento" %>
                                         
-        <% switch (project.projectStatus) {
+        <% switch (project.status) {
             case 1 : %>
                 <% projectStatus = "Em andamento" %>
             <% break
@@ -72,7 +72,7 @@
                                                     
                                                     <div class="col-6">
                                                         <label class="mt-4" for="project-team">Status:</label>
-                                                        <select class="mt-2 selectpicker" data-width="100%" id="projectStatus" title="<%= projectStatus %>" name="projectStatus">
+                                                        <select class="mt-2 selectpicker" data-width="100%" id="projectStatus" title="<%= projectStatus %>" name="status">
                                                             <option value="0">Em planejamento</option>
                                                             <option value="1">Em andamento</option>
                                                             <option value="2">Concluido</option>
@@ -81,7 +81,7 @@
 
                                                     <div class="col-6">
                                                         <label class="mt-4 mb-2" for="project-deadline">Data Limite:</label>
-                                                        <input type="date" value="<%= project.projectDeadline %>" class="form-control" id="project-deadline" name="projectDeadline" required>
+                                                        <input type="date" value="<%= project.deadline %>" class="form-control" id="project-deadline" name="deadline" required>
                                                     </div>
 
                                                     <div class="col-6">
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name="actualStatus" value="<%= project.projectStatus %>">
+                                    <input type="hidden" name="actualStatus" value="<%= project.status %>">
                                 </form>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
 
                 <div class="col">
 
-                    <p><b>Data Limite:</b> <%= project.projectDeadline %></p>
+                    <p><b>Data Limite:</b> <%= project.deadline %></p>
 
                 </div>
 
@@ -163,7 +163,7 @@
                             <div class="modal-body">
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="taskInput" name="taskInput" placeholder="Titulo" required>
+                                    <input type="text" class="form-control" id="taskInput" name="title" placeholder="Titulo" required>
                                     <label for="taskInput">Titulo</label>
                                 </div>
 
@@ -257,12 +257,12 @@
                                                         <% if (user.email === 'admin') { %>
                         
                                                         <div class="form-floating mb-3">
-                                                                <input type="text" class="form-control" id="taskName" name="taskName" placeholder="Titulo" value="<%= item.title %>">
+                                                                <input type="text" class="form-control" id="taskName" name="title" placeholder="Titulo" value="<%= item.title %>">
                                                                 <label for="taskName">Titulo</label>
                                                         </div>
                         
                                                         <div class="form-floating mb-3">
-                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskDeveloper" title="<%= item.developer.name %>" data-live-search="true" name="taskDeveloper">
+                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskDeveloper" title="<%= item.developer.name %>" data-live-search="true" name="developerId">
                                                                 <% project.developers.forEach((developer) => { %>
                                                                     <option value="<%= developer.id %>"><%= developer.name %></option>
                                                                 <% }) %>
@@ -271,10 +271,8 @@
 
                                                         <% } %>
 
-  
-
                                                         <div class="form-floating mb-3">
-                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskStatus" title="<%= itemStatus %>" name="taskStatus">
+                                                            <select class="mt-1 selectpicker" data-width="100%" id="taskStatus" title="<%= itemStatus %>" name="status">
                                                                 <option value="0">Product Backlog</option>
                                                                 <option value="1">Sprint Backlog</option>
                                                                 <option value="2">In Development</option>
@@ -282,17 +280,19 @@
                                                             </select>
                                                         </div>
 
-                                                        <input type="hidden" value="<%= item.title %>" name="actualName">
-                                                        <input type="hidden" value="<%= item.developer.id %>" name="actualDeveloper">
+                                                        <input type="hidden" value="<%= item.title %>" name="actualTitle">
+                                                        <input type="hidden" value="<%= item.developer.id %>" name="actualDeveloperId">
                                                         <input type="hidden" value="<%= item.status %>" name="actualStatus">
 
                                                     </div>
                         
                                                     <div class="modal-footer space-between">
+
                                                         <% if (user.email === 'admin') { %>
                                                         <button type="submit" name="button" value="remove" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                                                         <% } %>  
                                                         <button type="submit" name="button" value="update" class="btn btn-primary">Salvar</button>
+                                                    
                                                     </div>
                         
                                                 </div>

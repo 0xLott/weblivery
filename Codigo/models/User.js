@@ -6,13 +6,12 @@ const passportLocalMongoose = require('passport-local-mongoose')
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    nickname: String,
     name: String,
     role: String,
     notifications: [notificationSchema]
 })
 
-userSchema.plugin(passportLocalMongoose, {usernameField: 'email'})
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 
 const User = mongoose.model("User", userSchema)
 
@@ -20,12 +19,12 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-User.register({email: 'admin', name: 'Guilherme Gentili', nickname: 'Ademiro', role: 'Administrador'}, 'admin', (err, newUser) => {
+User.register({ email: 'admin', name: 'Guilherme Gentili', role: 'Administrador' }, 'admin', (err, newUser) => {
     if (err) {
         console.log('Admin user already exists');
         return
     }
-       
+
     console.log('Admin user created');
 })
 

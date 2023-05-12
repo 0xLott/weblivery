@@ -2,139 +2,144 @@
 
 <section id="metrics">
 
-    <h1>Relatório do Projeto</h1>
+    <main>
+        <h1>Relatório do Projeto</h1>
 
-    <button onclick="window.print()">Imprimir</button>
+        <button onclick="window.print()">Imprimir</button>
 
-    <h2>Cliente</h2>
-        <p><b>Nome do cliente:</b> <%= project.clientName %></p>
-        <p><b>E-mail:</b> <%= project.clientEmail %></p>
-        <p><b>Telefone:</b> <%= project.clientPhone%></p>
+        <h2>Cliente</h2>
+            <p><b>Nome do cliente:</b> <%= project.clientName %></p>
+            <p><b>E-mail:</b> <%= project.clientEmail %></p>
+            <p><b>Telefone:</b> <%= project.clientPhone%></p>
 
-    <h2>Projeto</h2>
-        <p><b>Nome do projeto:</b> <%= project.projectName %></p>
-        <p><b>Descrição:</b> <%= project.projectDescription %></p>
-        <p><b>Product Owner:</b> <%= project.projectOwner %></p>
-        <p><b>Desenvolvedores responsáveis:</b><% project.developers.forEach((developer) => { %>
-                                                    <%= developer.name %>, 
-                                                <% }) %><p>
-        <p><b>Data limite:</b> <%= project.projectDeadline %></p>
-        <p><b>Status:</b> <% switch (project.projectStatus) {
+        <h2>Projeto</h2>
+            <p><b>Nome do projeto:</b> <%= project.projectName %></p>
+            <p><b>Descrição:</b> <%= project.description %></p>
+            <p><b>Product Owner:</b> <%= project.owner %></p>
+            <p><b>Desenvolvedores responsáveis:</b>
+                <% project.developers.forEach((developer) => { %>
+                    <%= developer.name %>, 
+                <% }) %>
+            </p>
+            <p><b>Data limite:</b> <%= project.deadline %></p>
+            <p><b>Status:</b>
+            <% switch (project.status) {
+                case 1 : %>
+                    Em planejamento
+                <% break
+                case 2 : %>
+                    Em andamento
+                <% break
+                case 3 : %>
+                    Concluido
+                <% break
+            } %> 
+        </p>
+
+        <h2>Status</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Desenvolvedores trabalhando no projeto</th>
+                    <th scope="col">Itens na To-do List</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= project.developers.length %></td>
+                    <td><%= project.todolist.length %></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>Desenvolvedores</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Desenvolvedor</th>
+                    <th scope="col">Numero de Tarefas Atribuidas</th>
+                    <th scope="col">Numero de Tarefas Completas</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <% project.developers.forEach((developer) => { %>
+                    <tr>
+                        <td><%= developer.name %></td>
+
+                        <% let tarefasAtribuidas = 0 %>
+                        <% project.todolist.forEach((todolistitem) => { %>
+                            <% if (todolistitem.developer.email === developer.email) { %>
+                            <% tarefasAtribuidas++ %>
+                            <% } %>
+                        <% }) %>
+                        <td><%= tarefasAtribuidas %></td>
+
+                        <% let tarefasFinalizadas = 0 %>
+                        <% project.todolist.forEach((todolistitem) => { %>
+                            <% if (todolistitem.developer.email === developer.email) { %>
+                                <% if (todolistitem.status === 3) { %>
+                                    <% tarefasFinalizadas++ %>
+                                <% } %>
+                            <% } %>
+                        <% }) %>
+                        <td><%= tarefasFinalizadas %></td>
+
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+        <h2>Andamento do projeto</h2>
+
+        <% let tasks = project.todolist.length %>
+        <% let finishedTasks = 0 %>
+
+        <% project.todolist.forEach((todolistitem) => { %>
+            <% if (todolistitem.status === 3) { %>
+                <% finishedTasks++ %>
+            <% } %>
+        <% }) %>
+
+
+        <progress id="progress" value="<%= finishedTasks / tasks * 100%>" max= "100"> <%= finishedTasks / tasks * 100%> </progress>
+        <label for="progress"><%= finishedTasks %>/<%= tasks %> tarefas concluídas</label>
+
+        <h2>Tarefas</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">Desenvolvedor responsável</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+                
+            <tbody>
+                <% project.todolist.forEach((todolistitem) => { %>
+                    <tr>
+                        <td><%= todolistitem.title %></td>
+                        <td><%= todolistitem.developer.name %></td>
+                        <td><% switch (todolistitem.status) {
+                            case 0 : %>
+                                Backlog do produto
+                            <% break
                             case 1 : %>
-                                Em planejamento
+                                Backlog da sprint
                             <% break
                             case 2 : %>
-                                Em andamento
+                                Em desenvolvimento
                             <% break
                             case 3 : %>
-                                Concluido
+                                Finalizado
                             <% break
-                        } %> </p>
+                        } %></td>
+                    </tr>
 
-
-    <h2>Status</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Desenvolvedores trabalhando no projeto</th>
-                <th scope="col">Itens na To-do List</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><%= project.developers.length %></td>
-                <td><%= project.todolist.length %></td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <h2>Desenvolvedores</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Desenvolvedor</th>
-                <th scope="col">Numero de Tarefas Atribuidas</th>
-                <th scope="col">Numero de Tarefas Completas</th>
-            </tr>
-        </thead>
-        <tbody>
-                <% project.developers.forEach((developer) => { %>
-                <tr>
-                    <td><%= developer.name %></td>
-
-                    <% let tarefasAtribuidas = 0 %>
-                    <% project.todolist.forEach((todolistitem) => { %>
-                        <% if (todolistitem.developer.email === developer.email) { %>
-                           <% tarefasAtribuidas++ %>
-                        <% } %>
-                    <% }) %>
-                    <td><%= tarefasAtribuidas %></td>
-
-                    <% let tarefasFinalizadas = 0 %>
-                    <% project.todolist.forEach((todolistitem) => { %>
-                        <% if (todolistitem.developer.email === developer.email) { %>
-                            <% if (todolistitem.status === 3) { %>
-                                <% tarefasFinalizadas++ %>
-                            <% } %>
-                        <% } %>
-                    <% }) %>
-                    <td><%= tarefasFinalizadas %></td>
-
-                </tr>
-                <% }) %>
-        </tbody>
-    </table>
-
-    <h2>Andamento do projeto</h2>
-
-    <% let tasks = project.todolist.length %>
-    <% let finishedTasks = 0%>
-
-    <% project.todolist.forEach((todolistitem) => { %>
-        <% if (todolistitem.status === 3) { %>
-            <% finishedTasks++ %>
-        <% } %>
-    <% }) %>
-
-
-    <progress id="progress" value="<%= finishedTasks / tasks * 100%>" max= "100"> <%= finishedTasks / tasks * 100%> </progress>
-    <label for="progress"><%= finishedTasks %>/<%= tasks %> tarefas concluídas</label>
-
-    <h2>Tarefas</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Título</th>
-                <th scope="col">Desenvolvedor responsável</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-            
-        <tbody>
-            <% project.todolist.forEach((todolistitem) => { %>
-                <tr>
-                    <td><%= todolistitem.title %></td>
-                    <td><%= todolistitem.developer.name %></td>
-                    <td><% switch (todolistitem.status) {
-                        case 0 : %>
-                            Backlog do produto
-                        <% break
-                        case 1 : %>
-                            Backlog da sprint
-                        <% break
-                        case 2 : %>
-                            Em desenvolvimento
-                        <% break
-                        case 3 : %>
-                            Finalizado
-                        <% break
-                    } %></td>
-                </tr>
-
-            <% }) %>    
-        </tbody>
-    </table>
+                <% }) %>    
+            </tbody>
+        </table>
+    </main>
 
 </section>
 

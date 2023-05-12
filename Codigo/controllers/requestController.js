@@ -8,13 +8,16 @@ module.exports = {
     },
 
     async sendForm(req, res) {
+
+        const { requester, title, description, email, phone, whatsapp } = req.body
+
         const newServiceRequest = new ServiceRequest({
-            requesterFullname: req.body.fullname,
-            requestTitle: req.body.title,
-            requestDescription: req.body.description,
-            email: req.body.email,
-            phone: req.body.phone,
-            whatsapp: req.body.whatsapp
+            requester,
+            title,
+            description,
+            email,
+            whatsapp,
+            phone
         })
 
         newServiceRequest.save()
@@ -25,23 +28,25 @@ module.exports = {
             res.redirect('/user/login')
             return;
         }
-    
-        await ServiceRequest.findByIdAndRemove(req.body.id)
+
+        const { id, clientName, clientEmail, clientPhone, projectName, description, deadline, assignedDevelopers } = req.body
+        const { name } = req.user
+
+        await ServiceRequest.findByIdAndRemove(id)
     
         const newProject = new Project({
-            clientName: req.body.clientName,
-            clientEmail: req.body.clientEmail,
-            clientPhone: req.body.clientPhone,
-            projectName: req.body.projectName,
-            projectDescription: req.body.projectDescription,
-            projectOwner: req.user.name,
-            projectDeadline: req.body.projectDeadline,
-            projectStatus: 0,
+            clientName,
+            clientEmail,
+            clientPhone,
+            projectName,
+            description,
+            deadline,
+            owner: name,
+            status: 0
         })
     
-        const assignedDevelopers = req.body.assignedDevelopers
-    
         Promise.all(assignedDevelopers.map(async (developerId) => {
+
             let foundDeveloper = await User.findById(developerId)
     
             newProject.developers.push(foundDeveloper)
@@ -52,9 +57,9 @@ module.exports = {
     },
 
     async declineRequest(req, res) {
-        const requestId = req.body.decline
+        const { id } = req.body
 
-        await ServiceRequest.findByIdAndRemove(requestId)
+        await ServiceRequest.findByIdAndRemove(id)
     
         res.redirect('/request/view')
     },
@@ -67,11 +72,11 @@ module.exports = {
     
         if (req.user.email === 'admin') {
         
-            const allServiceRequests = await ServiceRequest.find()
+            const requests = await ServiceRequest.find()
     
-            const allDevelopers = await User.find()
+            const developers = await User.find()
     
-            res.render('service-viewer', {requests: allServiceRequests, developers: allDevelopers})
+            res.render('service-viewer', {requests, developers})
         }
     }
 }

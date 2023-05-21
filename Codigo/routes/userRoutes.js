@@ -12,6 +12,8 @@ router.get('/dashboard', controller.renderDashboard)
 
 router.get('/register', controller.renderRegisterForm)
 
+router.get('/notification', controller.renderNotifications)
+
 // Posts
 
 router.post('/login', controller.auth)
@@ -19,6 +21,8 @@ router.post('/login', controller.auth)
 router.post('/quit', controller.logout)
 
 router.post('/register', controller.sendRegisterForm)
+
+router.post('/notification', controller.dismissNotification)
 
 // Router
 

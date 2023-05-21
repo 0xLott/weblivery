@@ -1,6 +1,7 @@
 const ServiceRequest = require('../models/ServiceRequest')
 const { User } = require('../models/User')
 const Project = require('../models/Project')
+const { Notification } = require('../models/Notification')
 
 module.exports = {
     async renderForm(req, res) {
@@ -50,6 +51,15 @@ module.exports = {
             let foundDeveloper = await User.findById(developerId)
     
             newProject.developers.push(foundDeveloper)
+
+            const newNotification = new Notification({
+                title: `Novo Projeto`,
+                message: `Você foi adicionado à um novo projeto: ${projectName}`
+             })
+
+             foundDeveloper.notifications.push(newNotification)
+
+             foundDeveloper.save()
 
         })).then(() => { newProject.save() })
     

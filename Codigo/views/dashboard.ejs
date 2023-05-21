@@ -24,7 +24,7 @@
 
             <% } %>
 
-            <form class="btn-dash" action="/user/notifications" method="post">
+            <form class="btn-dash" action="/user/notification" method="get">
                 <button class="btn " type="submit">Notificações</button>
             </form>
 
@@ -40,7 +40,7 @@
 
         <h1>Projetos</h1>
 
-        <% projects.forEach((project)=> { %>
+        <% projects.slice().reverse().forEach((project)=> { %>
 
             <% let projectStatus = "Em planejamento" %>
                                         

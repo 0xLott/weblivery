@@ -65,6 +65,34 @@ module.exports = {
             res.redirect('/user/dashboard')
         }
     },
+
+    // OK
+    async renderNotifications(req, res) {
+        if (!req.isAuthenticated()) {
+            res.redirect('/user/login')
+            return;
+        }
+
+        res.render('notification-viewer', {notifications: req.user.notifications})
+    },
+
+    // OK
+    async dismissNotification(req, res) {
+        if (!req.isAuthenticated()) {
+            res.redirect('/user/login')
+            return;
+        }
+
+        const { notificationId } = req.body
+
+        await User.updateOne({_id: req.user.id}, {$pull:
+            {
+                notifications: {_id: notificationId}
+            }
+        })
+
+        res.redirect('/user/notification')
+    },
     
     // OK
     async auth(req, res) {

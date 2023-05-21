@@ -12,7 +12,7 @@
 
         <% } else { %>
 
-            <% requests.forEach((request) => { %>
+            <% requests.slice().reverse().forEach((request) => { %>
                     <hr>
                     <div class="request-box">
                         <p><b>Solicitante</b>: <%= request.requester %></p>

@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<section id="notification">
+
+    <div class="container-fluid">
+
+        <h1>Notificações</h1>
+
+        <% if (notifications.length == 0) { %>
+
+            <p><em>Não há novas notificações</em></p>
+
+        <% } else { %>
+
+            <% notifications.slice().reverse().forEach(notification => { %>
+                
+                <form action="/user/notification" method="post">
+
+                    <hr>
+                    
+                    <h6><%= notification.title %></h6>
+
+                    <p><%= notification.message %></p>
+
+                    <input type="checkbox" name="notificationId" value="<%= notification._id %>" onChange="this.form.submit()">
+
+                </form>
+
+            <% }) %>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+<%- include('partials/footer') %>

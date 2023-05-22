@@ -139,7 +139,7 @@ header > h1 {
   color: #77ffc0;
 }
 
-.menus > .btn-dash > .btn{
+.menus > .btn-dash > .btn {
   width: 100%;
   border: none;
   border-radius: 8px;
@@ -153,33 +153,27 @@ header > h1 {
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
 
-
 @media only screen and (max-width: 950px) {
   .card-login {
     width: 85%;
   }
 }
-
-@media (max-width: 799px) {  
+@media (max-width: 799px) {
   .right-login {
     width: 80vw;
   }
 }
-
 @media (max-width: 810px) {
   .main-login {
     flex-direction: column;
   }
-
   .left-login > h1 {
     font-size: 8vw;
   }
-
   .left-login-image {
     width: 60vw;
   }
 }
-
 input, label, button {
   display: block;
 }
@@ -201,13 +195,16 @@ input, label, button {
   max-width: 110vh;
   margin: 0 auto 0 auto;
 }
+
 #project .project-header {
   margin-top: 1.6rem;
   text-align: center;
 }
+
 #project .project-body {
   margin-top: 3rem;
 }
+
 #progress {
   accent-color: grey;
   height: 40px;
@@ -265,6 +262,81 @@ input, label, button {
   border-color: #86b7fe !important;
   outline: 0 !important;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+
+.box_user_register {
+  width: 100vw;
+  height: 100vh;
+  background-color: #201b2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_user_register {
+  padding: 20px;
+  border-radius: 50px;
+  background: #2f2841;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form_user_register > h1 {
+  color: #77ffc0;
+}
+
+.form_user_register > label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  text-align: center;
+}
+
+.form_user_register > input {
+  width: 60%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.btn_user_register {
+  width: 40%;
+  padding: 16px 0px;
+  margin: 25px 0px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #2b134b;
+  background-color: #00ff88;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+}
+
+.input_user_register {
+  display: flex;
+  justify-content: center;
+}
+
+.form_user_register > div > input {
+  width: 60%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
 }
 
 /*# sourceMappingURL=style.css.map */

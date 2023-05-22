@@ -1,125 +1,321 @@
-// @import '../.././node_modules/bootstrap/scss/bootstrap.scss';
-// @import '../.././node_modules/bootstrap-icons/font/bootstrap-icons.scss';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-@mixin borderRadius($radius: 100px) {
-    border-radius: $radius;
-}
-body{
-    font-family: 'Noto Sans', sans-serif;
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+body {
+  font-family: "Noto Sans", sans-serif;
 }
 
-.form {
-    input {
-        @include borderRadius($radius: 50px);
-    }
+/*Estilo página login*/
+.form input {
+  border-radius: 50px;
 }
 
-.main-login{
-    width: 100vw;
-    height: 100vh;
-    background-color: #201b2c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-login {
+  width: 100vw;
+  height: 100vh;
+  background-color: #201b2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.left-login{
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.left-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.left-login > h1{
-    color:#77ffc0;
+.left-login > h1 {
+  color: #77ffc0;
 }
 
-.right-login{
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.right-login {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-login{
-    width:60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 30px 35px;
-    background-color: #2f2841;
-    border-radius: 20px;
-    box-shadow: 0px 10px 40px #00000056;
+.card-login {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background-color: #2f2841;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
 }
 
 .card-login > h1 {
-    color:#77ffc0;
-    font-weight: 800;
-    margin: 0;
+  color: #77ffc0;
+  font-weight: 800;
+  margin: 0;
 }
 
-.textfield{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 10px 0px;
+.textfield {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
 }
 
-.textfield > input{
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #514869;
-    color: #f0ffffde;
-    font-size: 12pt;
-    box-shadow: 0px 10px 40px #00000056;
-    outline: none;
-    box-sizing: border-box;
+.textfield > input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
 }
 
-.textfield > form > input{
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #514869;
-    color: #f0ffffde;
-    font-size: 12pt;
-    box-shadow: 0px 10px 40px #00000056;
-    outline: none;
-    box-sizing: border-box;
+.textfield > form > input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
 }
 
-.left-login > h1{
-    font-size: 3vw;
-
+.left-login > h1 {
+  font-size: 3vw;
 }
 
-.left-login-image{
-    width: 35vw;
+.left-login-image {
+  width: 35vw;
 }
 
-.textfield > label{
-    color: #f0ffffde;
-    margin-bottom: 10px;
+.textfield > label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  margin-bottom: 10px;
 }
 
 .textfield > form > label {
-    color: #f0ffffde;
-    margin-bottom: 10px;
+  color: rgba(240, 255, 255, 0.8705882353);
+  margin-bottom: 10px;
 }
 
-.btn-login{
-    width: 100%;
+.btn-login {
+  width: 100%;
+  padding: 16px 0px;
+  margin: 25px 0px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #2b134b;
+  background-color: #00ff88;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+}
+
+/*Estilo Dashboard*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 10%;
+  background-color: #201b2c;
+}
+
+header > h1 {
+  color: #77ffc0;
+}
+
+.menus > .btn-dash > .btn{
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #2b134b;
+  background-color: #00ff88;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+}
+
+
+@media only screen and (max-width: 950px) {
+  .card-login {
+    width: 85%;
+  }
+}
+
+@media (max-width: 799px) {  
+  .right-login {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 810px) {
+  .main-login {
+    flex-direction: column;
+  }
+
+  .left-login > h1 {
+    font-size: 8vw;
+  }
+
+  .left-login-image {
+    width: 60vw;
+  }
+}
+
+input, label, button {
+  display: block;
+}
+
+.request-btn {
+  display: inline;
+}
+
+.project-box {
+  border-radius: 15px;
+  background: #e0e0e0;
+  box-shadow: 31px 31px 62px #bebebe, -31px -31px 62px #ffffff;
+  padding: 1%;
+  margin-bottom: 35px;
+}
+
+#project {
+  background-color: #ECECEC;
+  max-width: 110vh;
+  margin: 0 auto 0 auto;
+}
+#project .project-header {
+  margin-top: 1.6rem;
+  text-align: center;
+}
+#project .project-body {
+  margin-top: 3rem;
+}
+#progress {
+  accent-color: grey;
+  height: 40px;
+  width: 500px;
+}
+
+.btn-dash {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.menus {
+  margin: 1.6rem auto;
+}
+
+.todolist-head {
+  text-align: right;
+}
+
+.product-backlog {
+  background-color: rgb(192, 162, 221);
+}
+
+.sprint-backlog {
+  background-color: rgb(233, 95, 102);
+}
+
+.in-development {
+  background-color: rgb(95, 132, 231);
+}
+
+.finished {
+  background-color: green;
+}
+
+.status-row {
+  background-color: #d4d4d4;
+}
+
+/* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
+.form-check-input.is-valid, .was-validated .form-check-input:valid {
+  border-color: #dee2e6 !important;
+}
+
+.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+  color: #212529 !important;
+}
+
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+  background-color: rgb(2, 80, 196) !important;
+  border-color: rgb(1, 71, 174) !important;
+}
+
+.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
+  border-color: #86b7fe !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/*# sourceMappingURL=style.css.map */
+
+
+.box_user_register{
+    width: 100vw;
+  height: 100vh;
+  background-color: #201b2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_user_register{
+    padding: 20px;
+    border-radius: 50px;
+    background: #2f2841;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.form_user_register > h1{
+    color: #77ffc0;
+}
+
+.form_user_register > label{
+    color: rgba(240, 255, 255, 0.8705882353);
+    text-align: center;
+}
+
+
+
+.form_user_register > input{
+    width: 60%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #514869;
+    color: rgba(240, 255, 255, 0.8705882353);
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.btn_user_register{
+    width: 40%;
     padding: 16px 0px;
-    margin: 25px;
+    margin: 25px 0px;
     border: none;
     border-radius: 8px;
     outline: none;
@@ -129,107 +325,25 @@ body{
     color: #2b134b;
     background-color: #00ff88;
     cursor: pointer;
-    box-shadow: 0px 10px 40px -12px #00ff8052;
+    box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+    
 }
 
-@media only screen and (max-width:950px){
-    .card-login{
-        width: 85%;
-    }
+.input_user_register{
+    display: flex;
+    justify-content: center;
+    
 }
 
-input, label, button {
-    display: block;
-}
-
-.request-btn {
-    display: inline;
-}
-
-.project-box{
-    border-radius: 15px;
-    background: #791818;
-    box-shadow:  31px 31px 62px #bebebe,
-             -31px -31px 62px #ffffff;
-    padding: 1%;
-
-    margin-bottom: 35px;
-}
-
-#project {
-    background-color: #ECECEC;
-    max-width: 110vh;
-    margin: 0 auto 0 auto;
-
-    .project-header {
-        margin-top: 1.6rem;
-        text-align: center;
-    }
-
-    .project-body {
-        margin-top: 3rem;
-    }
-
-    .project-footer {
-    }
-}
-
-#progress {
-    accent-color: grey;
-    height: 40px;
-    width: 500px;
-}
-
-.btn-dash {
-    display: inline-block;
-    margin-right: 0.5rem;
-}
-
-.menus {
-    margin: 1.6rem auto;
-}
-
-.todolist-head {
-    text-align: right;
-}
-
-.product-backlog {
-    background-color: rgb(192, 162, 221);
-}
-
-.sprint-backlog {
-    background-color: rgb(233, 95, 102);
-}
-
-.in-development {
-    background-color: rgb(95, 132, 231);
-}
-
-.finished {
-    background-color: green;
-}
-
-.status-row {
-    background-color: #d4d4d4;
-}
-
-/* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
-
-.form-check-input.is-valid, .was-validated .form-check-input:valid {
-    border-color: #dee2e6 !important;
-}
-
-.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
-    color: #212529 !important;
-}
-
-.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
-    background-color: rgb(2, 80, 196) !important;
-    border-color: rgb(1, 71, 174) !important;
-}
-
-.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
-    border-color: #86b7fe !important;
-    outline: 0 !important;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25) !important;
+.form_user_register > div > input{
+    width: 60%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #514869;
+    color: rgba(240, 255, 255, 0.8705882353);
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+    outline: none;
+    box-sizing: border-box;
 }

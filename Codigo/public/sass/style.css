@@ -126,7 +126,7 @@ body {
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
 
-/*Estilo Dashboard*/
+/*Estilo Dashboard
 header {
   display: flex;
   justify-content: space-between;
@@ -135,11 +135,11 @@ header {
   background-color: #201b2c;
 }
 
-header > h1 {
+.navegacao > h1 {
   color: #77ffc0;
 }
 
-.menus > .btn-dash > .btn {
+.navegacao > .btn-dash > .btn {
   width: 100%;
   border: none;
   border-radius: 8px;
@@ -151,6 +151,16 @@ header > h1 {
   background-color: #00ff88;
   cursor: pointer;
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+}
+*/
+
+.container ul{
+  list-style-type: none;
+  background-color: #2b134b;
+  color:#00ff88;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 @media only screen and (max-width: 950px) {

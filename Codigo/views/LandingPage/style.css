@@ -3,7 +3,7 @@ body {
 }
 
 header {
-    background: #BBBBBB;
+    background: #4F4557;
     padding: 20px 0;
 }
 
@@ -80,7 +80,7 @@ nav a:hover {
 
 footer {
     text-align: center;
-    background: black;
+    background: #4F4557;
     padding: 40px 0;
 }
 
@@ -181,7 +181,7 @@ td, th {
 
 .descricao {
     padding: 15em 0 0 0;
-    background: linear-gradient(#FEFEFE, #999999)
+    background: linear-gradient(#FEFEFE, #8B77BF)
 }
 
 .descricao p {

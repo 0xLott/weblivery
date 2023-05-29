@@ -386,3 +386,58 @@ input, label, button {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* Estilos para o elemento <section id="notification"> */
+#notification {
+  background-color: #201b2c;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Estilos para a box de conteúdo */
+.container-fluid {
+  max-width: 600px;
+  text-align: center;
+  background-color: #2f2841;
+  height: 60vh;
+  width: 50vh;
+  border-radius: 15px;
+}
+
+/* Estilos para o título <h1> */
+#notification h1 {
+  font-size: 24px;
+  color: #00ff88;
+}
+
+/* Estilos para a mensagem de ausência de notificações <p><em>Não há novas notificações</em></p> */
+#notification p em {
+  font-style: italic;
+  color: #f2f2f2;
+}
+
+/* Estilos para as notificações individuais */
+#notification form {
+  margin-bottom: 10px;
+}
+
+/* Estilos para o título da notificação <h6> */
+#notification h6 {
+  font-size: 18px;
+  color: #f2f2f2;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+/* Estilos para o conteúdo da notificação <p> */
+#notification p {
+  color: #f2f2f2;
+}
+
+/* Estilos para o checkbox */
+#notification input[type="checkbox"] {
+  margin-top: 5px;
+}

@@ -441,3 +441,19 @@ input, label, button {
 #notification input[type="checkbox"] {
   margin-top: 5px;
 }
+
+.titulo-servico{
+  color: #00ff88;
+}
+
+.request-box p {
+  color: rgba(240, 255, 255, 0.8705882353);
+}
+
+.background-service-viewer{
+  background-color: #201b2c;
+}
+
+.dashboard{
+  background-color: #201b2c;
+}

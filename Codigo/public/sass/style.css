@@ -401,6 +401,21 @@ input, label, button {
 }
 
 @media(max-width: 575px) {
+  .right-login {
+    width: 80vw;
+  }
+
+  .main-login {
+    flex-direction: column;
+  }
+
+  .left-login > h1 {
+    font-size: 8vw;
+  }
+
+  .left-login-image {
+    width: 60vw;
+  }
 
 }
 
@@ -409,26 +424,14 @@ input, label, button {
 }
 
 @media(min-width: 768px) and (max-width: 991px) {
-  
+
 }
 
-@media(max-width: 600px) {
-  .right-login {
-    width: 80vw;
-  }
-
-  .main-login {
-    flex-direction: column;
-  }
-  .left-login > h1 {
-    font-size: 8vw;
-  }
-  .left-login-image {
-    width: 60vw;
-  }
+@media(min-width: 992px) and (max-width: 1200px) {
+ 
 }
 
-@media (max-width: 1165px) {
+@media(max-width: 1165px) {
   .nav {
     flex-direction: column;
   }

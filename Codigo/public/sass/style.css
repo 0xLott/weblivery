@@ -1,15 +1,43 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+/*
+colors
+
+#2b134b - dark purple 1
+#2f2841 - dark purple 2
+#201b2c - really dark purple
+#514869 - light purple
+#77ffc0 - aqua green
+#00ff88 - lime green#
+
+*/
 body {
   font-family: "Noto Sans", sans-serif;
 }
 
-/*Estilo página login*/
-.form input {
-  border-radius: 50px;
+input,
+label,
+button {
+  display: block;
 }
 
-.main-login {
+.container-fluid {
+  max-width: 600px;
+  text-align: center;
+  background-color: #2f2841;
+  height: 60vh;
+  width: 50vh;
+  border-radius: 15px;
+}
+
+.btn-dash {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+#login .form input {
+  border-radius: 50px;
+}
+#login .main-login {
   width: 100vw;
   height: 100vh;
   background-color: #201b2c;
@@ -17,8 +45,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-.left-login {
+#login .left-login {
   width: 50vw;
   height: 100vh;
   display: flex;
@@ -26,20 +53,21 @@ body {
   align-items: center;
   flex-direction: column;
 }
-
-.left-login > h1 {
+#login .left-login > h1 {
   color: #77ffc0;
+  font-size: 3vw;
 }
-
-.right-login {
+#login .left-login-image {
+  width: 35vw;
+}
+#login .right-login {
   width: 50vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.card-login {
+#login .card-login {
   width: 60%;
   display: flex;
   justify-content: center;
@@ -50,14 +78,12 @@ body {
   border-radius: 20px;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
 }
-
-.card-login > h1 {
+#login .card-login > h1 {
   color: #77ffc0;
   font-weight: 800;
   margin: 0;
 }
-
-.textfield {
+#login .textfield {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -65,8 +91,7 @@ body {
   justify-content: center;
   margin: 10px 0px;
 }
-
-.textfield > input {
+#login .textfield > input {
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -78,8 +103,15 @@ body {
   outline: none;
   box-sizing: border-box;
 }
-
-.textfield > form > input {
+#login .textfield > label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  margin-bottom: 10px;
+}
+#login .textfield > form > label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  margin-bottom: 10px;
+}
+#login .textfield > form > input {
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -91,26 +123,7 @@ body {
   outline: none;
   box-sizing: border-box;
 }
-
-.left-login > h1 {
-  font-size: 3vw;
-}
-
-.left-login-image {
-  width: 35vw;
-}
-
-.textfield > label {
-  color: rgba(240, 255, 255, 0.8705882353);
-  margin-bottom: 10px;
-}
-
-.textfield > form > label {
-  color: rgba(240, 255, 255, 0.8705882353);
-  margin-bottom: 10px;
-}
-
-.btn-login {
+#login .btn-login {
   width: 100%;
   padding: 16px 0px;
   margin: 25px 0px;
@@ -126,51 +139,38 @@ body {
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
 
-.nav {
+#dashboard .nav {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   width: 100%;
   background-color: #2b134b;
-  color:#00ff88;
+  color: #00ff88;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-
-.nav ul{
+#dashboard .nav ul {
   list-style-type: none;
   display: flex;
   align-items: center;
 }
-
-.nav li{
+#dashboard .nav li {
   padding: 1rem;
 }
-
-.btn-nav{
+#dashboard .btn-nav {
   background-color: #00ff88;
   border: none;
-  border-radius: 1.0rem;
+  border-radius: 1rem;
   color: #2b134b;
   cursor: pointer;
   padding: 0.8rem;
 }
-
-.btn-nav:hover{
+#dashboard .btn-nav :hover {
   font-weight: bold;
 }
-
-input, label, button {
-  display: block;
-}
-
-.request-btn {
-  display: inline;
-}
-
-.project-box {
+#dashboard .project-box {
   border-radius: 15px;
   background: #e0e0e0;
   box-shadow: 31px 31px 62px #bebebe, -31px -31px 62px #ffffff;
@@ -178,82 +178,125 @@ input, label, button {
   margin-bottom: 35px;
 }
 
-#project {
+#project-viewer {
   background-color: #ECECEC;
   max-width: 110vh;
   margin: 0 auto 0 auto;
 }
-
-#project .project-header {
+#project-viewer .project-header {
   margin-top: 1.6rem;
   text-align: center;
 }
-
-#project .project-body {
+#project-viewer .project-body {
   margin-top: 3rem;
 }
+#project-viewer .project-footer .product-backlog {
+  background-color: rgb(192, 162, 221);
+}
+#project-viewer .project-footer .sprint-backlog {
+  background-color: rgb(233, 95, 102);
+}
+#project-viewer .project-footer .in-development {
+  background-color: rgb(95, 132, 231);
+}
+#project-viewer .project-footer .finished {
+  background-color: green;
+}
+#project-viewer .project-footer .status-row {
+  background-color: #d4d4d4;
+}
 
-#progress {
+#metrics .progress {
   accent-color: grey;
   height: 40px;
   width: 500px;
 }
 
-.btn-dash {
-  display: inline-block;
-  margin-right: 0.5rem;
+#notification-viewer {
+  background-color: #201b2c;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#notification-viewer h1 {
+  font-size: 24px;
+  color: #00ff88;
+}
+#notification-viewer form {
+  margin-bottom: 10px;
+}
+#notification-viewer h6 {
+  font-size: 18px;
+  color: #f2f2f2;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+#notification-viewer p {
+  color: #f2f2f2;
+}
+#notification-viewer p em {
+  font-style: italic;
+  color: #f2f2f2;
+}
+#notification-viewer input[type=checkbox] {
+  margin-top: 5px;
 }
 
-.menus {
-  margin: 1.6rem auto;
-}
-
-.todolist-head {
-  text-align: right;
-}
-
-.product-backlog {
-  background-color: rgb(192, 162, 221);
-}
-
-.sprint-backlog {
-  background-color: rgb(233, 95, 102);
-}
-
-.in-development {
-  background-color: rgb(95, 132, 231);
-}
-
-.finished {
-  background-color: green;
-}
-
-.status-row {
-  background-color: #d4d4d4;
-}
-
-/* Checkbox Formulario Bootstrap Fix (Da pra ver q é gambiarra, favor não mexer) */
-.form-check-input.is-valid, .was-validated .form-check-input:valid {
+#service-form .form-check-input.is-valid,
+#service-form .was-validated .form-check-input:valid {
   border-color: #dee2e6 !important;
 }
-
-.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+#service-form .form-check-input.is-valid ~ .form-check-label,
+#service-form .was-validated .form-check-input:valid ~ .form-check-label {
   color: #212529 !important;
 }
-
-.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+#service-form .form-check-input.is-valid:checked,
+#service-form .was-validated .form-check-input:valid:checked {
   background-color: rgb(2, 80, 196) !important;
   border-color: rgb(1, 71, 174) !important;
 }
-
-.form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
+#service-form .form-check-input.is-valid:focus,
+#service-form .was-validated .form-check-input:valid:focus {
   border-color: #86b7fe !important;
   outline: 0 !important;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
 }
 
+#service-viewer {
+  background-color: #201b2c;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#service-viewer h1 {
+  font-size: 24px;
+  color: #00ff88;
+}
+#service-viewer form {
+  margin-bottom: 10px;
+}
+#service-viewer h6 {
+  font-size: 18px;
+  color: #f2f2f2;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+#service-viewer p {
+  color: #f2f2f2;
+}
+#service-viewer p em {
+  font-style: italic;
+  color: #f2f2f2;
+}
+#service-viewer .request-btn {
+  display: inline;
+}
 
-.box_user_register {
+#user-register .box_user_register {
   width: 100vw;
   height: 100vh;
   background-color: #201b2c;
@@ -261,26 +304,15 @@ input, label, button {
   justify-content: center;
   align-items: center;
 }
-
-.form_user_register {
+#user-register .form_user_register {
   padding: 20px;
   border-radius: 50px;
-  background: #2f2841;
+  background: #2F2841;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.form_user_register > h1 {
-  color: #77ffc0;
-}
-
-.form_user_register > label {
-  color: rgba(240, 255, 255, 0.8705882353);
-  text-align: center;
-}
-
-.form_user_register > input {
+#user-register .form_user_register > div > input {
   width: 60%;
   border: none;
   border-radius: 10px;
@@ -292,8 +324,23 @@ input, label, button {
   outline: none;
   box-sizing: border-box;
 }
-
-.btn_user_register {
+#user-register .form_user_register > label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  text-align: center;
+}
+#user-register .form_user_register > input {
+  width: 60%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
+}
+#user-register .btn_user_register {
   width: 40%;
   padding: 16px 0px;
   margin: 25px 0px;
@@ -308,140 +355,39 @@ input, label, button {
   cursor: pointer;
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
-
-.input_user_register {
+#user-register .form_user_register > h1 {
+  color: #77ffc0;
+}
+#user-register .input_user_register {
   display: flex;
   justify-content: center;
 }
 
-.form_user_register > div > input {
-  width: 60%;
-  border: none;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #514869;
-  color: rgba(240, 255, 255, 0.8705882353);
-  font-size: 12pt;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
-  outline: none;
-  box-sizing: border-box;
-}
-
-/*# sourceMappingURL=style.css.map */
-
-/* Estilos para o elemento <section id="notification"> */
-#notification {
-  background-color: #201b2c;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Estilos para a box de conteúdo */
-.container-fluid {
-  max-width: 600px;
-  text-align: center;
-  background-color: #2f2841;
-  height: 60vh;
-  width: 50vh;
-  border-radius: 15px;
-}
-
-/* Estilos para o título <h1> */
-#notification h1 {
-  font-size: 24px;
-  color: #00ff88;
-}
-
-/* Estilos para a mensagem de ausência de notificações <p><em>Não há novas notificações</em></p> */
-#notification p em {
-  font-style: italic;
-  color: #f2f2f2;
-}
-
-/* Estilos para as notificações individuais */
-#notification form {
-  margin-bottom: 10px;
-}
-
-/* Estilos para o título da notificação <h6> */
-#notification h6 {
-  font-size: 18px;
-  color: #f2f2f2;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-/* Estilos para o conteúdo da notificação <p> */
-#notification p {
-  color: #f2f2f2;
-}
-
-/* Estilos para o checkbox */
-#notification input[type="checkbox"] {
-  margin-top: 5px;
-}
-
-.titulo-servico{
-  color: #00ff88;
-}
-
-.request-box p {
-  color: rgba(240, 255, 255, 0.8705882353);
-}
-
-.background-service-viewer{
-  background-color: #201b2c;
-}
-
-.dashboard{
-  background-color: #201b2c;
-}
-
-@media(max-width: 575px) {
+@media (max-width: 575px) {
   .right-login {
     width: 80vw;
   }
-
   .main-login {
     flex-direction: column;
   }
-
   .left-login > h1 {
     font-size: 8vw;
   }
-
   .left-login-image {
     width: 60vw;
   }
-
 }
-
-@media(min-width: 576px) and (max-width: 767px) {
-
-}
-
-@media(min-width: 768px) and (max-width: 991px) {
-
-}
-
-@media(min-width: 992px) and (max-width: 1200px) {
- 
-}
-
-@media(max-width: 1165px) {
+@media (max-width: 1165px) {
   .nav {
     flex-direction: column;
   }
-
   .nav ul {
     flex-wrap: wrap;
   }
-
   .option-nav {
     width: 100%;
     text-align: center;
   }
 }
+
+/*# sourceMappingURL=style.css.map */

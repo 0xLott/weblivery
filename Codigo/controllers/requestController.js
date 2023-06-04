@@ -5,7 +5,7 @@ const { Notification } = require('../models/Notification')
 
 module.exports = {
     async renderForm(req, res) {
-        res.render('service-form')
+        res.render('service-form', {sent: false})
     },
 
     async sendForm(req, res) {
@@ -22,6 +22,8 @@ module.exports = {
         })
 
         newServiceRequest.save()
+
+        res.render('service-form', {sent: true})
     },
 
     async acceptRequest(req, res) {

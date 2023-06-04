@@ -8,6 +8,12 @@
 
             <h1>Solicitação de Serviço</h1>
 
+            <% if (sent) { %>
+                <div class="success-card">
+                    Formulario enviado!
+                </div>
+            <% } %>
+
                 <form class="needs-validation" action="/request/" method="post" novalidate>
 
                     <label class="mt-3 form-label" for="fullnameInput">Nome Completo</label>

@@ -2,9 +2,13 @@
 
 <section id="user-register">
 
-    <div class="box_user_register">
+    <%- include('partials/navbar') %>
 
-        <form class="form_user_register" action="/user/register" method="post">
+    <div class="page">
+
+        <div class="box">
+
+        <form action="/user/register" method="post">
 
             <h1>Cadastro de Desenvolvedor</h1>
 
@@ -17,12 +21,14 @@
             <label for="emailInput">Email</label>
             <input type="text" name="email" id="emailInput">
 
-            
             <label for="passwordInput">Senha</label>
             <input type="password" name="password" id="passwordInput">
-            <button class="btn_user_register" type="submit">Cadastrar</button>
+
+            <button class="submit-btn" type="submit">Cadastrar</button>
 
         </form>
+
+    </div>
 
     </div>
 

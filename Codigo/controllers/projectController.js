@@ -2,6 +2,7 @@ const Project = require('../models/Project')
 const { User } = require('../models/User')
 const { ToDoItem } = require('../models/ToDoItem')
 const { Notification } = require('../models/Notification')
+const ServiceRequest = require('../models/ServiceRequest')
 
 module.exports = {
 
@@ -17,8 +18,10 @@ module.exports = {
         const project = await Project.findById(projectId)
 
         const developers = await User.find()
+
+        const serviceRequests = await ServiceRequest.find()
     
-        res.render('project-viewer', {user: req.user, project, developers})
+        res.render('project-viewer', {user: req.user, project, developers, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
     },
 
     // OK
@@ -32,7 +35,9 @@ module.exports = {
 
         const project = await Project.findById(projectId)
 
-        res.render('metrics', {project})
+        const serviceRequests = await ServiceRequest.find()
+
+        res.render('metrics', {project, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
     },
 
     //OK

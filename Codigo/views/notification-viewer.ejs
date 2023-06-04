@@ -2,7 +2,11 @@
 
 <section id="notification-viewer">
 
-    <div class="container-fluid">
+    <%- include('partials/navbar') %>
+
+    <div class="page">
+        
+        <div class="box">
 
         <h1>Notificações</h1>
 
@@ -13,22 +17,23 @@
         <% } else { %>
 
             <% notifications.slice().reverse().forEach(notification => { %>
-                
+                <hr>
                 <form action="/user/notification" method="post">
 
-                    <hr>
-                    
-                    <h6><%= notification.title %></h6>
+                    <div class="spacer">
+                        <h6><%= notification.title %></h6>
+                        <input class="form-check-input" type="checkbox" name="notificationId" value="<%= notification._id %>" onChange="this.form.submit()">
+                    </div>
 
                     <p><%= notification.message %></p>
-
-                    <input type="checkbox" name="notificationId" value="<%= notification._id %>" onChange="this.form.submit()">
 
                 </form>
 
             <% }) %>
 
         <% } %>
+
+        </div>
 
     </div>
 

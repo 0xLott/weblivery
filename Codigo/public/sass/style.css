@@ -12,6 +12,11 @@ colors
 */
 body {
   font-family: "Noto Sans", sans-serif;
+  background-color: #201b2c;
+}
+
+body:has(> section#dashboard) {
+  background-color: white;
 }
 
 input,
@@ -20,20 +25,122 @@ button {
   display: block;
 }
 
-.container-fluid {
-  max-width: 600px;
+.centralize {
   text-align: center;
-  background-color: #2f2841;
-  height: 60vh;
-  width: 50vh;
-  border-radius: 15px;
 }
 
-.btn-dash {
-  display: inline-block;
-  margin-right: 0.5rem;
+.submit-btn {
+  width: 40%;
+  padding: 16px 0px;
+  margin: 25px 0px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #2B134B;
+  background-color: #00ff88;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+  transition: all 0.2s;
 }
 
+.submit-btn:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+#navbar .nav {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #2F2841;
+  color: #00ff88;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+}
+#navbar .nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+#navbar .nav li {
+  padding: 1rem;
+}
+#navbar .option-nav {
+  margin: 0;
+}
+#navbar .submit-btn {
+  border-radius: 40px;
+  width: 100%;
+  padding: 0.7rem 1.5rem;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  margin-top: 3rem;
+  background-color: #2F2841;
+  padding: 60px;
+  border-radius: 50px;
+  width: 30%;
+}
+.box h1 {
+  text-align: center;
+  color: #00ff88;
+}
+.box h6 {
+  color: #00ff88;
+}
+.box p {
+  text-align: center;
+  color: white;
+}
+.box > hr {
+  color: white;
+}
+.box > form label {
+  color: rgba(240, 255, 255, 0.8705882353);
+  margin-bottom: 3%;
+  margin-top: 5%;
+}
+.box > form input:not([type=checkbox]),
+.box > form textarea {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #514869;
+  color: rgba(240, 255, 255, 0.8705882353);
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+  outline: none;
+  box-sizing: border-box;
+}
+
+#login .fail-card {
+  margin-top: 2rem;
+  border-radius: 50px;
+  padding: 0 1.6rem;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.596);
+}
 #login .form input {
   border-radius: 50px;
 }
@@ -139,228 +246,100 @@ button {
   box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
 
-#dashboard .nav {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  background-color: #2b134b;
-  color: #00ff88;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+#dashboard {
+  padding-top: 3rem;
 }
-#dashboard .nav ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-}
-#dashboard .nav li {
-  padding: 1rem;
-}
-#dashboard .btn-nav {
-  background-color: #00ff88;
-  border: none;
-  border-radius: 1rem;
-  color: #2b134b;
-  cursor: pointer;
-  padding: 0.8rem;
-}
-#dashboard .btn-nav :hover {
-  font-weight: bold;
+#dashboard img {
+  position: absolute;
+  max-width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.3;
 }
 #dashboard .project-box {
+  margin: auto 2rem;
   border-radius: 15px;
   background: #e0e0e0;
-  box-shadow: 31px 31px 62px #bebebe, -31px -31px 62px #ffffff;
+  box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
   padding: 1%;
   margin-bottom: 35px;
+  display: inline-block;
 }
 
-#project-viewer {
+#project-viewer .project {
   background-color: #ECECEC;
-  max-width: 110vh;
+  max-width: 70%;
   margin: 0 auto 0 auto;
 }
-#project-viewer .project-header {
+#project-viewer .project .project-header {
   margin-top: 1.6rem;
   text-align: center;
 }
-#project-viewer .project-body {
+#project-viewer .project .project-body {
   margin-top: 3rem;
 }
-#project-viewer .project-footer .product-backlog {
+#project-viewer .project .project-footer .product-backlog {
   background-color: rgb(192, 162, 221);
 }
-#project-viewer .project-footer .sprint-backlog {
+#project-viewer .project .project-footer .sprint-backlog {
   background-color: rgb(233, 95, 102);
 }
-#project-viewer .project-footer .in-development {
+#project-viewer .project .project-footer .in-development {
   background-color: rgb(95, 132, 231);
 }
-#project-viewer .project-footer .finished {
+#project-viewer .project .project-footer .finished {
   background-color: green;
 }
-#project-viewer .project-footer .status-row {
+#project-viewer .project .project-footer .status-row {
   background-color: #d4d4d4;
 }
 
-#metrics .progress {
-  accent-color: grey;
-  height: 40px;
-  width: 500px;
+.spacer {
+  display: flex;
+  justify-content: space-between;
 }
 
-#notification-viewer {
-  background-color: #201b2c;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-#notification-viewer h1 {
-  font-size: 24px;
+#metrics .details p b {
   color: #00ff88;
 }
-#notification-viewer form {
-  margin-bottom: 10px;
+#metrics .print-btn {
+  margin: 0;
+  width: 20%;
 }
-#notification-viewer h6 {
-  font-size: 18px;
-  color: #f2f2f2;
-  margin-top: 10px;
-  margin-bottom: 5px;
+#metrics .progress {
+  height: 5%;
+  width: 100%;
+  margin: 0 auto 0 auto;
 }
-#notification-viewer p {
-  color: #f2f2f2;
+#metrics .progress-bar {
+  background-color: #018d4c;
 }
-#notification-viewer p em {
-  font-style: italic;
-  color: #f2f2f2;
+#metrics main {
+  color: white;
+  padding: 2rem 3rem;
 }
+#metrics table {
+  color: white;
+}
+
 #notification-viewer input[type=checkbox] {
   margin-top: 5px;
 }
-
-#service-form .form-check-input.is-valid,
-#service-form .was-validated .form-check-input:valid {
-  border-color: #dee2e6 !important;
-}
-#service-form .form-check-input.is-valid ~ .form-check-label,
-#service-form .was-validated .form-check-input:valid ~ .form-check-label {
-  color: #212529 !important;
-}
-#service-form .form-check-input.is-valid:checked,
-#service-form .was-validated .form-check-input:valid:checked {
-  background-color: rgb(2, 80, 196) !important;
-  border-color: rgb(1, 71, 174) !important;
-}
-#service-form .form-check-input.is-valid:focus,
-#service-form .was-validated .form-check-input:valid:focus {
-  border-color: #86b7fe !important;
-  outline: 0 !important;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+#notification-viewer .form-check-input:checked {
+  background-color: #018d4c !important;
+  border-color: #77ffc0 !important;
 }
 
-#service-viewer {
-  background-color: #201b2c;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+#service-form > button {
+  align-content: center;
 }
-#service-viewer h1 {
-  font-size: 24px;
-  color: #00ff88;
-}
-#service-viewer form {
-  margin-bottom: 10px;
-}
-#service-viewer h6 {
-  font-size: 18px;
-  color: #f2f2f2;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-#service-viewer p {
-  color: #f2f2f2;
-}
-#service-viewer p em {
-  font-style: italic;
-  color: #f2f2f2;
-}
-#service-viewer .request-btn {
+
+#service-viewer .decline-form {
   display: inline;
 }
-
-#user-register .box_user_register {
-  width: 100vw;
-  height: 100vh;
-  background-color: #201b2c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#user-register .form_user_register {
-  padding: 20px;
-  border-radius: 50px;
-  background: #2F2841;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#user-register .form_user_register > div > input {
-  width: 60%;
-  border: none;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #514869;
-  color: rgba(240, 255, 255, 0.8705882353);
-  font-size: 12pt;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
-  outline: none;
-  box-sizing: border-box;
-}
-#user-register .form_user_register > label {
-  color: rgba(240, 255, 255, 0.8705882353);
-  text-align: center;
-}
-#user-register .form_user_register > input {
-  width: 60%;
-  border: none;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #514869;
-  color: rgba(240, 255, 255, 0.8705882353);
-  font-size: 12pt;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
-  outline: none;
-  box-sizing: border-box;
-}
-#user-register .btn_user_register {
-  width: 40%;
-  padding: 16px 0px;
-  margin: 25px 0px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: #2b134b;
-  background-color: #00ff88;
-  cursor: pointer;
-  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
-}
-#user-register .form_user_register > h1 {
-  color: #77ffc0;
-}
-#user-register .input_user_register {
-  display: flex;
-  justify-content: center;
+#service-viewer .modal-title {
+  color: black;
 }
 
 @media (max-width: 575px) {

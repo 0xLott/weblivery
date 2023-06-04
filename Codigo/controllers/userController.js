@@ -11,7 +11,16 @@ module.exports = {
             return
         }    
         
-        res.render('login')
+        res.render('login', {fail: false})
+    },
+
+    async renderLoginFormError(req, res) {
+        if (req.isAuthenticated()) {
+            res.redirect('/user/dashboard')
+            return
+        }
+
+        res.render('login', {fail: true})
     },
 
     // OK
@@ -45,7 +54,9 @@ module.exports = {
         }
     
         if (req.user.email === 'admin') {
-            res.render('user-register')
+            const serviceRequests = await ServiceRequest.find()
+
+            res.render('user-register', {user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
         }
     },
 
@@ -72,8 +83,10 @@ module.exports = {
             res.redirect('/user/login')
             return;
         }
+        
+        const serviceRequests = await ServiceRequest.find()
 
-        res.render('notification-viewer', {notifications: req.user.notifications})
+        res.render('notification-viewer', {notifications: req.user.notifications, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
     },
 
     // OK
@@ -101,7 +114,7 @@ module.exports = {
 
         const user = new User({email, password})
 
-        passport.authenticate('local')(req, res, () => {
+        passport.authenticate('local', {failureRedirect: '/user/login/error'})(req, res, () => {
             req.login(user, (err) => {})
             res.redirect('/user/dashboard')
         })

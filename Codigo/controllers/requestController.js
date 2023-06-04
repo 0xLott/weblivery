@@ -86,7 +86,7 @@ module.exports = {
     
             const developers = await User.find()
     
-            res.render('service-viewer', {requests, developers})
+            res.render('service-viewer', {requests, developers, user: req.user, requestAlert: requests.length == 0 ? false : true})
         }
     }
 }

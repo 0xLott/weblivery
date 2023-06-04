@@ -22,6 +22,10 @@ app.use('/user', userRoutes)
 app.use('/request', requestRoutes)
 app.use('/project', projectRoutes)
 
+app.get('/', (req, res) => {
+    res.render('test-form')
+})
+
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@db-cluster.cjjdosp.mongodb.net/weblivery')
 
 app.listen(3000, () => { console.log("Server running") })

@@ -15,6 +15,12 @@
 
                 <h1>Login</h1>
 
+                <% if (fail == true) { %>
+                    <div class="fail-card">
+                        Email ou senha incorretos. Tente novamente
+                    </div>
+                <% } %>
+
                 <div class="textfield">
 
                     <form action="/user/login" method="post">  
@@ -28,8 +34,8 @@
                         <button type="submit" class="btn-login">Login</button> 
 
                     </form>
-
-                </div>                       
+                    
+                </div>                    
 
             </div>
 

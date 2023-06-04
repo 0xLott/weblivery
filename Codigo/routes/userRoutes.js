@@ -8,6 +8,8 @@ const controller = require('../controllers/userController')
 
 router.get('/login', controller.renderLoginForm)
 
+router.get('/login/error', controller.renderLoginFormError)
+
 router.get('/dashboard', controller.renderDashboard)
 
 router.get('/register', controller.renderRegisterForm)

@@ -15,7 +15,7 @@ $aqua-green: #77ffc0;
 }
 
 @mixin media-medium {
-    @media screen and (min-width: 768px) {
+    @media screen and (max-width: 768px) {
         @content;
     }
 }

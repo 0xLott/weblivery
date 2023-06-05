@@ -63,12 +63,10 @@ module.exports = {
             })
         })
 
-        console.log(devsNames);
-
         if (req.user.email === 'admin') {
             res.render('dashboard', {user: req.user, projectsData: JSON.stringify(projectsData), tasksData: JSON.stringify(tasksData), requestsData: JSON.stringify(requestsData), devsNames: JSON.stringify(devsNames), devsData: JSON.stringify(devsData), projects, requestAlert: serviceRequests.length == 0 ? false : true})
         } else {
-            res.render('dashboard', {user: req.user, projectsData, projects: restrictProjects})
+            res.render('dashboard', {user: req.user, projectsData: JSON.stringify(projectsData), tasksData: JSON.stringify(tasksData), requestsData: JSON.stringify(requestsData), devsNames: JSON.stringify(devsNames), devsData: JSON.stringify(devsData), projects: restrictProjects})
         }
     },
 
@@ -86,7 +84,7 @@ module.exports = {
         }
     },
 
-    // OK
+    // WARNING! (OK)
     async sendRegisterForm(req, res) {
         if (!req.isAuthenticated()) {
             res.redirect('/user/login')
@@ -97,6 +95,7 @@ module.exports = {
 
             const { email, name, role, password } = req.body
 
+            // Aqui tem uma exceção que não foi tratada! Toda vez que der um erro precisa ser exibido que não foi criado o usuario
             User.register({ email, name, role }, password, (err, newUser) => { if (err) { console.log(err) }})
             
             res.redirect('/user/dashboard')

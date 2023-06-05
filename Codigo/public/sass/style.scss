@@ -177,8 +177,6 @@ button {
   color: white;
 }
 
-$o: #ae59fd;
-
 .chart-container {
   text-align: center;
   background-color: $input-purple;
@@ -344,42 +342,71 @@ $o: #ae59fd;
   }
 }
 
+.inline {
+  display: inline;
+}
+
+.c-btn {
+  display: inline-block;
+  width: 15%;
+}
+
+.ac {
+  margin-left: 1%;
+}
+
 #project-viewer {
 
   .project {
-    background-color: #ECECEC;
+    color: white;
     max-width: 70%;
     margin: 0 auto 0 auto;
 
     .project-header {
       margin-top: 1.6rem;
-      text-align: center;
+      text-align: left;
     }
 
     .project-body {
       margin-top: 3rem;
+
+      p b {
+        color: $lime-green;
+      }
     }
 
     .project-footer {
 
       .product-backlog {
         background-color: rgb(192, 162, 221);
+        border-radius: 100px;
+        padding: 0 0.7rem;
       }
 
       .sprint-backlog {
         background-color: rgb(233, 95, 102);
+        border-radius: 100px;
+        padding: 0 0.7rem;
       }
 
       .in-development {
         background-color: rgb(95, 132, 231);
+        border-radius: 100px;
+        padding: 0 0.7rem;
       }
 
       .finished {
         background-color: green;
+        border-radius: 100px;
+        padding: 0 0.7rem;
       }
 
-      .status-row {
-        background-color: #d4d4d4;
+      .todolist-row {
+        text-align: center;
+        background-color: $input-purple;
+        border-radius: 100px;
+        padding-top: 0.5%;
+        box-shadow: 0 1rem 2rem rgba(90, 90, 90, 0.2);
       }
     }
 
@@ -392,6 +419,14 @@ $o: #ae59fd;
 .spacer {
   display: flex;
   justify-content: space-between;
+}
+
+.together {
+  display: flex;
+}
+
+.status-tag {
+  margin-left: 1rem;
 }
 
 #metrics {
@@ -457,9 +492,10 @@ $o: #ae59fd;
     display: inline;
   }
 
-  .modal-title {
-    color: black;
-  }
+}
+
+.modal-title {
+  color: #212529;
 }
 
 #user-register {}

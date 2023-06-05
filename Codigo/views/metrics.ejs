@@ -36,7 +36,7 @@
         <div class="progress">
 
             <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="<%= (tasks == 0) ? 0 : (finishedTasks * 100 / tasks) %>" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: <%= (tasks == 0) ? 0 : (finishedTasks * 100 / tasks) %>%"><%= (tasks == 0) ? 0 : (finishedTasks * 100 / tasks) %>% das Tarefas Concluidas</div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: <%= (tasks == 0) ? 0 : (finishedTasks * 100 / tasks) %>%"><%= (tasks == 0) ? 0 : Math.round((finishedTasks * 100 / tasks)) %>% das Tarefas Concluidas</div>
             </div>
             
         </div>

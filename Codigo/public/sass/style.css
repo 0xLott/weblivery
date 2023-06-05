@@ -285,37 +285,73 @@ button {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
+.c-btn {
+  display: inline-block;
+  width: 15%;
+}
+
+.ac {
+  margin-left: 1%;
+}
+
 #project-viewer .project {
-  background-color: #ECECEC;
+  color: white;
   max-width: 70%;
   margin: 0 auto 0 auto;
 }
 #project-viewer .project .project-header {
   margin-top: 1.6rem;
-  text-align: center;
+  text-align: left;
 }
 #project-viewer .project .project-body {
   margin-top: 3rem;
 }
+#project-viewer .project .project-body p b {
+  color: #00ff88;
+}
 #project-viewer .project .project-footer .product-backlog {
   background-color: rgb(192, 162, 221);
+  border-radius: 100px;
+  padding: 0 0.7rem;
 }
 #project-viewer .project .project-footer .sprint-backlog {
   background-color: rgb(233, 95, 102);
+  border-radius: 100px;
+  padding: 0 0.7rem;
 }
 #project-viewer .project .project-footer .in-development {
   background-color: rgb(95, 132, 231);
+  border-radius: 100px;
+  padding: 0 0.7rem;
 }
 #project-viewer .project .project-footer .finished {
   background-color: green;
+  border-radius: 100px;
+  padding: 0 0.7rem;
 }
-#project-viewer .project .project-footer .status-row {
-  background-color: #d4d4d4;
+#project-viewer .project .project-footer .todolist-row {
+  text-align: center;
+  background-color: #514869;
+  border-radius: 100px;
+  padding-top: 0.5%;
+  box-shadow: 0 1rem 2rem rgba(90, 90, 90, 0.2);
 }
 
 .spacer {
   display: flex;
   justify-content: space-between;
+}
+
+.together {
+  display: flex;
+}
+
+.status-tag {
+  margin-left: 1rem;
 }
 
 #metrics .details p b {
@@ -364,8 +400,9 @@ button {
 #service-viewer .decline-form {
   display: inline;
 }
-#service-viewer .modal-title {
-  color: black;
+
+.modal-title {
+  color: #212529;
 }
 
 @media (max-width: 575px) {

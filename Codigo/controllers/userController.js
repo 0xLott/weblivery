@@ -32,17 +32,43 @@ module.exports = {
     
         const projects = await Project.find()
         const serviceRequests = await ServiceRequest.find()
-    
+        const admin = await User.findOne({email: 'admin'})
+
+        var projectsData = []
+        var tasksData = []
+        var requestsData = [admin.declined, admin.accepted]
+        var devsObjs = await User.find()
+        var devsData = []
+        var devsNames = devsObjs.map((dev) => {return dev.name})
+
+        for (let i = 0; i < devsObjs.length; i++) {
+            devsData[i] = projects.reduce((acc, project) => {
+                return project.todolist.length != [] ? acc + project.todolist.filter((item) => { return item.status === 3 && item.developer.email === devsObjs[i].email}).length : acc
+            }, 0)
+        }
+
+        for (let i = 0; i < 3; i++) {
+            projectsData[i] = projects.filter((project) => project.status === i).length
+        }
+
+        for (let i = 0; i < 4; i++) {
+            tasksData[i] = projects.reduce((acc, project) => {
+                return project.todolist.length != [] ? acc + project.todolist.filter((item) => { return item.status == i }).length : acc
+            }, 0)
+        }
+
         const restrictProjects = projects.filter(project => {
             return project.developers.some((dev) => {
                 return dev.email === req.user.email
             })
         })
-    
+
+        console.log(devsNames);
+
         if (req.user.email === 'admin') {
-            res.render('dashboard', {user: req.user, projects, requestAlert: serviceRequests.length == 0 ? false : true})
+            res.render('dashboard', {user: req.user, projectsData: JSON.stringify(projectsData), tasksData: JSON.stringify(tasksData), requestsData: JSON.stringify(requestsData), devsNames: JSON.stringify(devsNames), devsData: JSON.stringify(devsData), projects, requestAlert: serviceRequests.length == 0 ? false : true})
         } else {
-            res.render('dashboard', {user: req.user, projects: restrictProjects})
+            res.render('dashboard', {user: req.user, projectsData, projects: restrictProjects})
         }
     },
 

@@ -64,6 +64,8 @@ module.exports = {
              foundDeveloper.save()
 
         })).then(() => { newProject.save() })
+
+        await User.findOneAndUpdate({_id: req.user.id}, {$inc : {'accepted' : 1}})
     
         res.redirect('/user/dashboard')
     },
@@ -72,6 +74,8 @@ module.exports = {
         const { id } = req.body
 
         await ServiceRequest.findByIdAndRemove(id)
+
+        await User.findOneAndUpdate({_id: req.user.id}, {$inc : {'declined' : 1}})
     
         res.redirect('/request/view')
     },

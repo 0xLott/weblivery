@@ -6,6 +6,109 @@
 
     <main>
 
+        <div class="chart-container">
+
+            <div class="chart-box">
+                <b>Projetos</b>
+                <canvas id="donut"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <b>Tasks</b>
+                <canvas id="aria"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <b>Solicitações</b>
+                <canvas id="pie"></canvas>
+            </div>
+            
+            <div class="chart-box">
+                <b>Desenvolvedores</b>
+                <canvas id="radar"></canvas>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+        <script>
+            const ctx1 = document.getElementById('donut');
+            const ctx2 = document.getElementById('aria');
+            const ctx3 = document.getElementById('pie');
+            const ctx4 = document.getElementById('radar');
+
+            Chart.defaults.color = '#FFFFFF';
+
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Em Planejamento', 'Em Andamento', 'Concluido'],
+                    datasets: [{
+                    label: 'Projetos',
+                    data: <%- projectsData %>,
+                    borderWidth: 1,
+                    backgroundColor: ['#63b4ff', '#7852c5', '#22cf70']
+                    }]
+                },
+                options: {
+
+                }
+            });
+
+            new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: ['Product Backlog', 'Sprint Backlog', 'In Development', 'Finished'],
+                    datasets: [{
+                    label: 'Tarefas',
+                    data: <%- tasksData %>,
+                    borderWidth: 1,
+                    backgroundColor: ['#ae59fd', '#E95F66', '#5F84E7', '#008000']
+                    }]
+                },
+                options: {
+                }
+            });
+
+        new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: ['Atendidas', 'Recusadas'],
+                datasets: [{
+                label: '# of Votes',
+                data: <%- requestsData %>,
+                borderWidth: 1
+                }]
+            },
+            options: {
+            }
+        });
+
+        new Chart(ctx4, {
+            type: 'radar',
+
+            data: {
+                labels: <%- devsNames %>,
+                datasets: [{
+                label: 'Tasks Concluidas',
+                data: <%- devsData %>,
+                borderWidth: 1
+                }]
+            },
+
+            options: {
+                scales: {
+                    r: {
+                        ticks: {
+                            display: false // Hides the labels in the middel (numbers)
+                        }
+                    }
+                }
+            }
+        });
+
+        </script>
+
         <img src="/img/dots-grid.png" alt="He">
 
         <% projects.slice().reverse().forEach((project)=> { %>
@@ -31,8 +134,9 @@
                 </form>
                 
             </div>
+            
         <% }) %>
-        
+
     </main>
 
 </section>

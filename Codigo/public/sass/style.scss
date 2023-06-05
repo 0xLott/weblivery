@@ -170,6 +170,26 @@ button {
 
 // Views
 
+.chart-box {
+  width: 15%;
+  display: inline-block;
+  margin: 0 2rem;
+  color: white;
+}
+
+$o: #ae59fd;
+
+.chart-container {
+  text-align: center;
+  background-color: $input-purple;
+  border-radius: 300px;
+  margin: 0 5%;
+  margin-bottom: 3%;
+  padding: 3rem;
+  box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
+  
+}
+
 #login {
   .fail-card {
     margin-top: 2rem;
@@ -230,7 +250,7 @@ button {
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
 
     >h1 {
-      color: #77ffc0;
+      color: $lime-green;
       font-weight: 800;
       margin: 0;
     }

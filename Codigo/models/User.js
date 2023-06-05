@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     name: String,
     role: String,
     notifications: [notificationSchema]
-})
+}, {strict: false})
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 
@@ -19,7 +19,7 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-User.register({ email: 'admin', name: 'Guilherme Gentili', role: 'Administrador' }, 'admin', (err, newUser) => {
+User.register({ email: 'admin', name: 'Guilherme Gentili', role: 'Administrador', declined: 0, accepted: 0 }, 'admin', (err, newUser) => {
     if (err) {
         console.log('Admin user already exists');
         return

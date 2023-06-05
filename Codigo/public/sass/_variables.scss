@@ -7,3 +7,16 @@ $input-purple: #514869;
 $dark-lime-green: #018d4c;
 $lime-green: #00ff88;
 $aqua-green: #77ffc0;
+
+@mixin media-short {
+    @media screen and (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin media-medium {
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+

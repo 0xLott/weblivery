@@ -1,0 +1,44 @@
+@import 'variables';
+
+
+.chart-box {
+    width: 15%;
+    display: inline-block;
+    margin: 0 2rem;
+    color: white;
+  }
+  
+  .chart-container {
+    text-align: center;
+    background-color: $input-purple;
+    border-radius: 300px;
+    margin: 0 5%;
+    margin-bottom: 3%;
+    padding: 3rem;
+    box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
+    
+  }
+  
+
+#dashboard {
+    padding-top: 3rem;
+  
+    img {
+      position: absolute;
+      max-width: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.3;
+    }
+  
+    .project-box {
+      margin: auto 2rem;
+      border-radius: 15px;
+      background: #e0e0e0;
+      box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
+      padding: 1%;
+      margin-bottom: 35px;
+      display: inline-block;
+    }
+  }

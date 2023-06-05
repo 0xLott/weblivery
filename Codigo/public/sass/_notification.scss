@@ -1,0 +1,15 @@
+#notification-viewer {
+    input[type="checkbox"] {
+      margin-top: 5px;
+    }
+  
+    .form-check-input:checked {
+      background-color: $dark-lime-green !important;
+      border-color: $aqua-green !important;
+    }
+}
+
+.spacer {
+  display: flex;
+  justify-content: space-between;
+}

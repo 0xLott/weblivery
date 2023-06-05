@@ -1,0 +1,36 @@
+#navbar {
+    .nav {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100%;
+      background-color: $light-purple;
+      color: $lime-green;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 1rem;
+  
+      ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
+  
+      li {
+        padding: 1rem;
+      }
+    }
+  
+    .option-nav {
+      margin: 0;
+    }
+  
+    .submit-btn {
+      border-radius: 40px;
+      width: 100%;
+      padding: 0.7rem 1.5rem;
+  
+    }
+  }

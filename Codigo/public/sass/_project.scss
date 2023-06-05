@@ -1,0 +1,85 @@
+#project-viewer {
+
+    .project {
+      color: white;
+      max-width: 70%;
+      margin: 0 auto 0 auto;
+  
+      .project-header {
+        margin-top: 1.6rem;
+        text-align: left;
+      }
+  
+      .project-body {
+        margin-top: 3rem;
+  
+        p b {
+          color: $lime-green;
+        }
+      }
+  
+      .project-footer {
+  
+        .product-backlog {
+          background-color: rgb(192, 162, 221);
+          border-radius: 100px;
+          padding: 0 0.7rem;
+        }
+  
+        .sprint-backlog {
+          background-color: rgb(233, 95, 102);
+          border-radius: 100px;
+          padding: 0 0.7rem;
+        }
+  
+        .in-development {
+          background-color: rgb(95, 132, 231);
+          border-radius: 100px;
+          padding: 0 0.7rem;
+        }
+  
+        .finished {
+          background-color: green;
+          border-radius: 100px;
+          padding: 0 0.7rem;
+        }
+  
+        .todolist-row {
+          text-align: center;
+          background-color: $input-purple;
+          border-radius: 100px;
+          padding-top: 0.5%;
+          box-shadow: 0 1rem 2rem rgba(90, 90, 90, 0.2);
+        }
+      }
+  
+      // .todolist-head {
+      //   text-align: right;
+      // }
+    }
+}
+
+.inline {
+  display: inline;
+}
+
+.c-btn {
+  display: inline-block;
+  width: 15%;
+}
+
+.ac {
+  margin-left: 1%;
+}
+
+.together {
+  display: flex;
+}
+
+.status-tag {
+  margin-left: 1rem;
+}
+
+.modal-title {
+  color: #212529;
+}

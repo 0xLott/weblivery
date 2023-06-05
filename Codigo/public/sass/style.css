@@ -288,6 +288,16 @@
   color: #212529;
 }
 
+@media screen and (max-width: 1155px) {
+  #navbar .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  #navbar .nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 #service-form > button {
   align-content: center;
 }
@@ -324,7 +334,8 @@ button {
 }
 
 .submit-btn {
-  width: 40%;
+  width: -moz-fit-content;
+  width: fit-content;
   padding: 16px 0px;
   margin: 25px 0px;
   border: none;
@@ -360,11 +371,12 @@ button {
 }
 
 .box {
-  margin-top: 3rem;
+  margin: 3rem;
   background-color: #2F2841;
-  padding: 60px;
+  padding: 3rem;
   border-radius: 50px;
-  width: 30%;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .box h1 {
   text-align: center;
@@ -397,19 +409,4 @@ button {
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
   outline: none;
   box-sizing: border-box;
-}
-
-@media (max-width: 575px) {
-  .right-login {
-    width: 80vw;
-  }
-  .main-login {
-    flex-direction: column;
-  }
-  .left-login > h1 {
-    font-size: 8vw;
-  }
-  .left-login-image {
-    width: 60vw;
-  }
 }/*# sourceMappingURL=style.css.map */

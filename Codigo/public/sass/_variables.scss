@@ -9,13 +9,19 @@ $lime-green: #00ff88;
 $aqua-green: #77ffc0;
 
 @mixin media-short {
-    @media screen and (min-width: 576px) {
+    @media screen and (max-width: 576px) {
         @content;
     }
 }
 
 @mixin media-medium {
     @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin media-large {
+    @media screen and (max-width: 1155px) {
         @content;
     }
 }

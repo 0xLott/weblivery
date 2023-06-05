@@ -36,7 +36,7 @@ button {
 }
 
 .submit-btn {
-  width: 40%;
+  width: fit-content;
   padding: 16px 0px;
   margin: 25px 0px;
   border: none;
@@ -63,8 +63,6 @@ button {
   transition: all 0.2s;
 }
 
-
-
 .page {
   width: 100%;
   height: 100%;
@@ -74,11 +72,11 @@ button {
 }
 
 .box {
-  margin-top: 3rem;
+  margin: 3rem;
   background-color: $light-purple;
-  padding: 60px;
+  padding: 3rem;
   border-radius: 50px;
-  width: 30%;
+  width: fit-content;
 
   h1 {
     text-align: center;
@@ -118,25 +116,5 @@ button {
       outline: none;
       box-sizing: border-box;
     }
-  }
-}
-
-// Media Querys
-
-@media(max-width: 575px) {
-  .right-login {
-    width: 80vw;
-  }
-
-  .main-login {
-    flex-direction: column;
-  }
-
-  .left-login>h1 {
-    font-size: 8vw;
-  }
-
-  .left-login-image {
-    width: 60vw;
   }
 }

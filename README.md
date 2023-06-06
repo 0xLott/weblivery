@@ -1,6 +1,6 @@
 # Weblivery
 
-Weblivery é uma plataforma cujo objetivo é apoiar os diversos processos de negócio de uma equipe desenvolvedora, garantindo o maior aproveitamento do potencial da equipe e a otimização de sua produtividade. Projetada para uma equipe inovadora que desejam elevar seus processos ao próximo nível, nossa aplicação oferece uma solução abrangente para acompanhar o andamento de projetos de forma eficiente. Com recursos poderosos, como gerenciamento de tarefas, atribuição de responsabilidades e relatórios visuais, o Weblivery elimina a necessidade de múltiplas ferramentas e fluxos de trabalho desorganizados. 
+Uma plataforma cujo objetivo é apoiar os diversos processos de negócio de uma equipe desenvolvedora, garantindo o maior aproveitamento de seu potencial e a otimização de sua produtividade. Projetada para uma equipe inovadora que deseja elevar seus processos ao próximo nível, o Weblivery oferece uma solução abrangente para acompanhar o andamento de projetos de forma eficiente. Com recursos poderosos, como gerenciamento de tarefas, atribuição de responsabilidades e relatórios visuais, nossa aplicação elimina a necessidade de múltiplas ferramentas e fluxos de trabalho desorganizados para que seus projetos estejam sempre impecáveis. 
 
 ## Alunos integrantes da equipe
 

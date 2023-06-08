@@ -17,4 +17,4 @@ Uma plataforma cujo objetivo é apoiar os diversos processos de negócio de uma 
 
 ## Instruções de utilização
 
-Para acessar a plataforma, clone este repositório e, no diretório raiz, execute no terminal o comando `cd Codigo`. Em seguida, basta executar `nodemon` para que o programa inicie em seu localhost.
+Para acessar a plataforma clone este repositório e no diretório raiz execute no terminal o comando `cd Codigo`. É necessário que o Node.js esteja instalado para esta proxima etapa: Em seguida, execute o comando `npm i` para instalar todas as dependências e crie um arquivo com o nome de `.env` na raiz da pasta `Codigo`. Dentro do arquivo `.env` são necessárias três variaveis de ambiente: `DB_USER`, `DB_PASS` e `SECRET`. Após finalizar a configuração inicial, ainda na pasta `Codigo` pela orientação do terminal, execute o comando `node app.js` para iniciar o projeto no endereço local `localhost:3000`.

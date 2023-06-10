@@ -1,6 +1,6 @@
 $dark-purple: #201b2c;
-$regular-purple: #2B134B;
-$light-purple: #2F2841;
+$regular-purple: #2b134b;
+$light-purple: #2f2841;
 
 $input-purple: #514869;
 
@@ -9,20 +9,19 @@ $lime-green: #00ff88;
 $aqua-green: #77ffc0;
 
 @mixin media-short {
-    @media screen and (max-width: 576px) {
-        @content;
-    }
+	@media screen and (max-width: 576px) {
+		@content;
+	}
 }
 
 @mixin media-medium {
-    @media screen and (max-width: 768px) {
-        @content;
-    }
+	@media screen and (max-width: 768px) {
+		@content;
+	}
 }
 
 @mixin media-large {
-    @media screen and (max-width: 1155px) {
-        @content;
-    }
+	@media screen and (max-width: 1155px) {
+		@content;
+	}
 }
-

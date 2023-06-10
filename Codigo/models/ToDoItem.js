@@ -1,14 +1,15 @@
-const mongoose = require('mongoose')
-const { userSchema } = require('./User')
+const mongoose = require("mongoose");
+const { userSchema } = require("./User");
 
 const todoItemSchema = new mongoose.Schema({
-    title: String,
-    status: Number,
-    developer: userSchema
-})
+	title    : String,
+	status   : Number,
+	developer: userSchema,
+});
 
-const ToDoItem = mongoose.model("ToDoItem", todoItemSchema)
+const ToDoItem = mongoose.model("ToDoItem", todoItemSchema);
 
 module.exports = {
-    todoItemSchema, ToDoItem
-}
+	todoItemSchema,
+	ToDoItem,
+};

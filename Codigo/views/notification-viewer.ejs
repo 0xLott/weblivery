@@ -2,40 +2,40 @@
 
 <section id="notification-viewer">
 
-    <%- include('partials/navbar') %>
+	<%- include('partials/navbar') %>
 
-    <div class="page">
-        
-        <div class="box">
+	<div class="page">
 
-        <h1>Notificações</h1>
+		<div class="box">
 
-        <% if (notifications.length == 0) { %>
+			<h1>Notificações</h1>
 
-            <p><em>Não há novas notificações</em></p>
+			<% if (notifications.length == 0) { %>
 
-        <% } else { %>
+			<p><em>Não há novas notificações</em></p>
 
-            <% notifications.slice().reverse().forEach(notification => { %>
-                <hr>
-                <form action="/user/notification" method="post">
+			<% } else { %>
 
-                    <div class="spacer">
-                        <h6><%= notification.title %></h6>
-                        <input class="form-check-input" type="checkbox" name="notificationId" value="<%= notification._id %>" onChange="this.form.submit()">
-                    </div>
+			<% notifications.slice().reverse().forEach(notification => { %>
+			<hr>
+			<form action="/user/notification" method="post">
 
-                    <p><%= notification.message %></p>
+				<div class="spacer">
+					<h6><%= notification.title %></h6>
+					<input class="form-check-input" type="checkbox" name="notificationId" value="<%= notification._id %>" onChange="this.form.submit()">
+				</div>
 
-                </form>
+				<p><%= notification.message %></p>
 
-            <% }) %>
+			</form>
 
-        <% } %>
+			<% }) %>
 
-        </div>
+			<% } %>
 
-    </div>
+		</div>
+
+	</div>
 
 </section>
 

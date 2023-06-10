@@ -1,98 +1,98 @@
-const ServiceRequest = require('../models/ServiceRequest')
-const { User } = require('../models/User')
-const Project = require('../models/Project')
-const { Notification } = require('../models/Notification')
+const ServiceRequest   = require("../models/ServiceRequest");
+const { User }         = require("../models/User");
+const Project          = require("../models/Project");
+const { Notification } = require("../models/Notification");
 
 module.exports = {
-    async renderForm(req, res) {
-        res.render('service-form', {sent: false})
-    },
+	async renderForm(req, res) {
+		res.render("service-form", { sent: false });
+	},
 
-    async sendForm(req, res) {
+	async sendForm(req, res) {
+		const { requester, title, description, email, phone, whatsapp } = req.body;
 
-        const { requester, title, description, email, phone, whatsapp } = req.body
+		const newServiceRequest = new ServiceRequest({
+			requester,
+			title,
+			description,
+			email,
+			whatsapp,
+			phone,
+		});
 
-        const newServiceRequest = new ServiceRequest({
-            requester,
-            title,
-            description,
-            email,
-            whatsapp,
-            phone
-        })
+		newServiceRequest.save();
 
-        newServiceRequest.save()
+		res.render("service-form", { sent: true });
+	},
 
-        res.render('service-form', {sent: true})
-    },
+	async acceptRequest(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-    async acceptRequest(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
+		const { id, clientName, clientEmail, clientPhone, projectName, description, deadline, assignedDevelopers } = req.body;
+		const { name } = req.user;
 
-        const { id, clientName, clientEmail, clientPhone, projectName, description, deadline, assignedDevelopers } = req.body
-        const { name } = req.user
+		await ServiceRequest.findByIdAndRemove(id);
 
-        await ServiceRequest.findByIdAndRemove(id)
-    
-        const newProject = new Project({
-            clientName,
-            clientEmail,
-            clientPhone,
-            projectName,
-            description,
-            deadline,
-            owner: name,
-            status: 0
-        })
-    
-        Promise.all(assignedDevelopers.map(async (developerId) => {
+		const newProject = new Project({
+			clientName,
+			clientEmail,
+			clientPhone,
+			projectName,
+			description,
+			deadline,
+			owner: name,
+			status: 0,
+		});
 
-            let foundDeveloper = await User.findById(developerId)
-    
-            newProject.developers.push(foundDeveloper)
+		Promise.all(
+			assignedDevelopers.map(async (developerId) => {
+				let foundDeveloper = await User.findById(developerId);
 
-            const newNotification = new Notification({
-                title: `Novo Projeto`,
-                message: `Você foi adicionado à um novo projeto: ${projectName}`
-             })
+				newProject.developers.push(foundDeveloper);
 
-             foundDeveloper.notifications.push(newNotification)
+				const newNotification = new Notification({
+					title: `Novo Projeto`,
+					message: `Você foi adicionado à um novo projeto: ${projectName}`,
+				});
 
-             foundDeveloper.save()
+				foundDeveloper.notifications.push(newNotification);
 
-        })).then(() => { newProject.save() })
+				foundDeveloper.save();
+			})
+		).then(() => {
+			newProject.save();
+		});
 
-        await User.findOneAndUpdate({_id: req.user.id}, {$inc : {'accepted' : 1}})
-    
-        res.redirect('/user/dashboard')
-    },
+		await User.findOneAndUpdate({ _id: req.user.id }, { $inc: { accepted: 1 } });
 
-    async declineRequest(req, res) {
-        const { id } = req.body
+		res.redirect("/user/dashboard");
+	},
 
-        await ServiceRequest.findByIdAndRemove(id)
+	async declineRequest(req, res) {
+		const { id } = req.body;
 
-        await User.findOneAndUpdate({_id: req.user.id}, {$inc : {'declined' : 1}})
-    
-        res.redirect('/request/view')
-    },
+		await ServiceRequest.findByIdAndRemove(id);
 
-    async viewForms(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-    
-        if (req.user.email === 'admin') {
-        
-            const requests = await ServiceRequest.find()
-    
-            const developers = await User.find()
-    
-            res.render('service-viewer', {requests, developers, user: req.user, requestAlert: requests.length == 0 ? false : true})
-        }
-    }
-}
+		await User.findOneAndUpdate({ _id: req.user.id }, { $inc: { declined: 1 } });
+
+		res.redirect("/request/view");
+	},
+
+	async viewForms(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
+
+		if (req.user.email === "admin") {
+			const requests = await ServiceRequest.find();
+
+			const developers = await User.find();
+
+			res.render("service-viewer", { requests, developers, user: req.user, requestAlert: requests.length == 0 ? false : true });
+		}
+	},
+};

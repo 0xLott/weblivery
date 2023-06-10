@@ -1,156 +1,190 @@
-const { User } = require('../models/User')
-const ServiceRequest = require('../models/ServiceRequest')
-const Project = require('../models/Project')
-const passport = require('passport')
+const { User }       = require("../models/User");
+const ServiceRequest = require("../models/ServiceRequest");
+const Project        = require("../models/Project");
+const passport       = require("passport");
 
 module.exports = {
-    // OK
-    async renderLoginForm(req, res) {
-        if (req.isAuthenticated()) {
-            res.redirect('/user/dashboard')
-            return
-        }    
-        
-        res.render('login', {fail: false})
-    },
+	// OK
+	async renderLoginForm(req, res) {
+		if (req.isAuthenticated()) {
+			res.redirect("/user/dashboard");
+			return;
+		}
 
-    async renderLoginFormError(req, res) {
-        if (req.isAuthenticated()) {
-            res.redirect('/user/dashboard')
-            return
-        }
+		res.render("login", { fail: false });
+	},
 
-        res.render('login', {fail: true})
-    },
+	async renderLoginFormError(req, res) {
+		if (req.isAuthenticated()) {
+			res.redirect("/user/dashboard");
+			return;
+		}
 
-    // OK
-    async renderDashboard(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-    
-        const projects = await Project.find()
-        const serviceRequests = await ServiceRequest.find()
-        const admin = await User.findOne({email: 'admin'})
+		res.render("login", { fail: true });
+	},
 
-        var projectsData = []
-        var tasksData = []
-        var requestsData = [admin.declined, admin.accepted]
-        var devsObjs = await User.find()
-        var devsData = []
-        var devsNames = devsObjs.map((dev) => {return dev.name})
+	// OK
+	async renderDashboard(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        for (let i = 0; i < devsObjs.length; i++) {
-            devsData[i] = projects.reduce((acc, project) => {
-                return project.todolist.length != [] ? acc + project.todolist.filter((item) => { return item.status === 3 && item.developer.email === devsObjs[i].email}).length : acc
-            }, 0)
-        }
+		const projects = await Project.find();
+		const serviceRequests = await ServiceRequest.find();
+		const admin = await User.findOne({ email: "admin" });
 
-        for (let i = 0; i < 3; i++) {
-            projectsData[i] = projects.filter((project) => project.status === i).length
-        }
+		var projectsData = [];
+		var tasksData = [];
+		var requestsData = [admin.declined, admin.accepted];
+		var devsObjs = await User.find();
+		var devsData = [];
+		var devsNames = devsObjs.map((dev) => {
+			return dev.name;
+		});
 
-        for (let i = 0; i < 4; i++) {
-            tasksData[i] = projects.reduce((acc, project) => {
-                return project.todolist.length != [] ? acc + project.todolist.filter((item) => { return item.status == i }).length : acc
-            }, 0)
-        }
+		for (let i = 0; i < devsObjs.length; i++) {
+			devsData[i] = projects.reduce((acc, project) => {
+				return project.todolist.length != []
+					? acc +
+							project.todolist.filter((item) => {
+								return item.status === 3 && item.developer.email === devsObjs[i].email;
+							}).length
+					: acc;
+			}, 0);
+		}
 
-        const restrictProjects = projects.filter(project => {
-            return project.developers.some((dev) => {
-                return dev.email === req.user.email
-            })
-        })
+		for (let i = 0; i < 3; i++) {
+			projectsData[i] = projects.filter((project) => project.status === i).length;
+		}
 
-        if (req.user.email === 'admin') {
-            res.render('dashboard', {user: req.user, projectsData: JSON.stringify(projectsData), tasksData: JSON.stringify(tasksData), requestsData: JSON.stringify(requestsData), devsNames: JSON.stringify(devsNames), devsData: JSON.stringify(devsData), projects, requestAlert: serviceRequests.length == 0 ? false : true})
-        } else {
-            res.render('dashboard', {user: req.user, projectsData: JSON.stringify(projectsData), tasksData: JSON.stringify(tasksData), requestsData: JSON.stringify(requestsData), devsNames: JSON.stringify(devsNames), devsData: JSON.stringify(devsData), projects: restrictProjects})
-        }
-    },
+		for (let i = 0; i < 4; i++) {
+			tasksData[i] = projects.reduce((acc, project) => {
+				return project.todolist.length != []
+					? acc +
+							project.todolist.filter((item) => {
+								return item.status == i;
+							}).length
+					: acc;
+			}, 0);
+		}
 
-    // OK
-    async renderRegisterForm(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-    
-        if (req.user.email === 'admin') {
-            const serviceRequests = await ServiceRequest.find()
+		const restrictProjects = projects.filter((project) => {
+			return project.developers.some((dev) => {
+				return dev.email === req.user.email;
+			});
+		});
 
-            res.render('user-register', {user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
-        }
-    },
+		if (req.user.email === "admin") {
+			res.render("dashboard", {
+				user: req.user,
+				projectsData: JSON.stringify(projectsData),
+				tasksData: JSON.stringify(tasksData),
+				requestsData: JSON.stringify(requestsData),
+				devsNames: JSON.stringify(devsNames),
+				devsData: JSON.stringify(devsData),
+				projects,
+				requestAlert: serviceRequests.length == 0 ? false : true,
+			});
+		} else {
+			res.render("dashboard", {
+				user: req.user,
+				projectsData: JSON.stringify(projectsData),
+				tasksData: JSON.stringify(tasksData),
+				requestsData: JSON.stringify(requestsData),
+				devsNames: JSON.stringify(devsNames),
+				devsData: JSON.stringify(devsData),
+				projects: restrictProjects,
+			});
+		}
+	},
 
-    // WARNING! (OK)
-    async sendRegisterForm(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-    
-        if (req.user.email === 'admin') {
+	// OK
+	async renderRegisterForm(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-            const { email, name, role, password } = req.body
+		if (req.user.email === "admin") {
+			const serviceRequests = await ServiceRequest.find();
 
-            // Aqui tem uma exceção que não foi tratada! Toda vez que der um erro precisa ser exibido que não foi criado o usuario
-            User.register({ email, name, role }, password, (err, newUser) => { if (err) { console.log(err) }})
-            
-            res.redirect('/user/dashboard')
-        }
-    },
+			res.render("user-register", { user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+		}
+	},
 
-    // OK
-    async renderNotifications(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-        
-        const serviceRequests = await ServiceRequest.find()
+	// WARNING! (OK)
+	async sendRegisterForm(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        res.render('notification-viewer', {notifications: req.user.notifications, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
-    },
+		if (req.user.email === "admin") {
+			const { email, name, role, password } = req.body;
 
-    // OK
-    async dismissNotification(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
+			// Aqui tem uma exceção que não foi tratada! Toda vez que der um erro precisa ser exibido que não foi criado o usuario
+			User.register({ email, name, role }, password, (err, newUser) => {
+				if (err) {
+					console.log(err);
+				}
+			});
 
-        const { notificationId } = req.body
+			res.redirect("/user/dashboard");
+		}
+	},
 
-        await User.updateOne({_id: req.user.id}, {$pull:
-            {
-                notifications: {_id: notificationId}
-            }
-        })
+	// OK
+	async renderNotifications(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        res.redirect('/user/notification')
-    },
-    
-    // OK
-    async auth(req, res) {
+		const serviceRequests = await ServiceRequest.find();
 
-        const { email, password } = req.body
+		res.render("notification-viewer", { notifications: req.user.notifications, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+	},
 
-        const user = new User({email, password})
+	// OK
+	async dismissNotification(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        passport.authenticate('local', {failureRedirect: '/user/login/error'})(req, res, () => {
-            req.login(user, (err) => {})
-            res.redirect('/user/dashboard')
-        })
-    },
+		const { notificationId } = req.body;
 
-    // OK
-    async logout(req, res) {
-        if (req.isAuthenticated()) {
-            req.logout((err) => {})
-        }
-        
-        res.redirect('/user/login')
-    }
-}
+		await User.updateOne(
+			{ _id: req.user.id },
+			{
+				$pull: {
+					notifications: { _id: notificationId },
+				},
+			}
+		);
+
+		res.redirect("/user/notification");
+	},
+
+	// OK
+	async auth(req, res) {
+		const { email, password } = req.body;
+
+		const user = new User({ email, password });
+
+		passport.authenticate("local", { failureRedirect: "/user/login/error" })(req, res, () => {
+			req.login(user, (err) => {});
+			res.redirect("/user/dashboard");
+		});
+	},
+
+	// OK
+	async logout(req, res) {
+		if (req.isAuthenticated()) {
+			req.logout((err) => {});
+		}
+
+		res.redirect("/user/login");
+	},
+};

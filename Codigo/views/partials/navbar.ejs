@@ -1,49 +1,48 @@
-
 <section id="navbar">
-    <nav class="nav">
-        <div class="ml-5">
-            <h1 class="ml-5">Olá, <%= user.name %></h1>
-        </div>
-        <ul>
-            <li class="option-nav">
-                <form action="/user/dashboard" method="get">
-                    <button class="submit-btn" type="submit">Dashboard</button>
-                </form>
-            </li>
+	<nav class="nav">
+		<div class="ml-5">
+			<h1 class="ml-5">Olá, <%= user.name %></h1>
+		</div>
+		<ul>
+			<li class="option-nav">
+				<form action="/user/dashboard" method="get">
+					<button class="submit-btn" type="submit">Dashboard</button>
+				</form>
+			</li>
 
-            <% if (user.email === 'admin') { %>
-                <li class="option-nav">
-                    <form action="/user/register" method="get">
-                        <button class="submit-btn" type="submit">Gerenciar Desenvolvedores</button>
-                    </form>
-                </li>
-                
-                <li class="option-nav">
-                    <form action="/request/view" method="get">
-                        <% if (requestAlert) { %>
-                        <button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
-                        <% } else { %>
-                            <button class="submit-btn" type="submit">Solicitações</button>
-                        <% } %>
-                    </form>
-                </li>
-            <% } %>
+			<% if (user.email === 'admin') { %>
+			<li class="option-nav">
+				<form action="/user/register" method="get">
+					<button class="submit-btn" type="submit">Gerenciar Desenvolvedores</button>
+				</form>
+			</li>
 
-                <li class="option-nav">
-                    <form action="/user/notification" method="get">
-                        <% if (user.notifications.length == 0) { %>
-                        <button class="submit-btn" type="submit">Notificações</button>
-                        <% } else { %>
-                            <button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Notificações</button>
-                        <% } %>
-                    </form>
-                </li>
+			<li class="option-nav">
+				<form action="/request/view" method="get">
+					<% if (requestAlert) { %>
+					<button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
+					<% } else { %>
+					<button class="submit-btn" type="submit">Solicitações</button>
+					<% } %>
+				</form>
+			</li>
+			<% } %>
 
-                <li class="option-nav">
-                    <form action="/user/quit" method="post">
-                        <button class="submit-btn " type="submit">Logout</button>
-                    </form>
-                </li>
-        </ul>
-    </nav>
+			<li class="option-nav">
+				<form action="/user/notification" method="get">
+					<% if (user.notifications.length == 0) { %>
+					<button class="submit-btn" type="submit">Notificações</button>
+					<% } else { %>
+					<button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Notificações</button>
+					<% } %>
+				</form>
+			</li>
+
+			<li class="option-nav">
+				<form action="/user/quit" method="post">
+					<button class="submit-btn " type="submit">Logout</button>
+				</form>
+			</li>
+		</ul>
+	</nav>
 </section>

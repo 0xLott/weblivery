@@ -2,43 +2,41 @@
 
 <section id="login">
 
-    <div class="main-login">
+	<div class="main-login">
 
-        <div class="right-login">
+		<div class="right-login">
 
-            <h1>Weblivery</h1>
+			<h1>Weblivery</h1>
 
-            <div class="card-login">
+			<div class="card-login">
 
-                <h1>Login</h1>
+				<h1>Login</h1>
 
-                <% if (fail) { %>
-                    <div class="fail-card">
-                        Email ou senha incorretos. Tente novamente
-                    </div>
-                <% } %>
+				<% if (fail) { %>
+				<div class="fail-card">
+					Email ou senha incorretos. Tente novamente
+				</div>
+				<% } %>
 
-                <div class="textfield">
+				<div class="textfield">
 
-                    <form action="/user/login" method="post">  
+					<form action="/user/login" method="post">
 
-                        <label class="mt-3" for="emailInput" class="label-login">Email</label>
-                        <input type="text" name="email" id="emailInput">
+						<label class="mt-3" for="emailInput" class="label-login">Email</label>
+						<input type="text" name="email" id="emailInput">
 
-                        <label class="mt-3" for="passwordInput">Senha</label>
-                        <input type="password" name="password" id="passwordInput"> 
-                        
-                        <button type="submit" class="btn-login">Login</button> 
+						<label class="mt-3" for="passwordInput">Senha</label>
+						<input type="password" name="password" id="passwordInput">
 
-                    </form>
-                    
-                </div>                    
+						<button type="submit" class="btn-login">Login</button>
 
-            </div>
+					</form>
 
-        </div>
+				</div>
 
-    </main>
+			</div>
+
+		</div>
 
 </section>
 

@@ -1,36 +1,36 @@
 #metrics {
-    .details {
-      p b {
-        color: $lime-green;
-      }
-    }
-  
-    .print-btn {
-      margin: 0;
-      width: 20%;
-    }
-  
-    .progress {
-      height: 5%;
-      width: 100%;
-      margin: 0 auto 0 auto;
-    }
-  
-    .progress-bar {
-      background-color: $dark-lime-green;
-    }
-  
-    main {
-      color: white;
-      padding: 2rem 3rem;
-    }
-  
-    table {
-      color: white;
-    }
+	.details {
+		p b {
+			color: $lime-green;
+		}
+	}
+
+	.print-btn {
+		margin: 0;
+		width: 20%;
+	}
+
+	.progress {
+		height: 5%;
+		width: 100%;
+		margin: 0 auto 0 auto;
+	}
+
+	.progress-bar {
+		background-color: $dark-lime-green;
+	}
+
+	main {
+		color: white;
+		padding: 2rem 3rem;
+	}
+
+	table {
+		color: white;
+	}
 }
 
 .spacer {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }

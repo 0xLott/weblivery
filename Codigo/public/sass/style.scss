@@ -1,120 +1,118 @@
 @charset "UTF-8";
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
-@import 'dashboard';
-@import 'login';
-@import 'metrics';
-@import 'navbar';
-@import 'notification';
-@import 'project';
-@import 'responsive';
-@import 'service-form';
-@import 'service-viewer';
-@import 'user';
-@import 'variables';
-
+@import "dashboard";
+@import "login";
+@import "metrics";
+@import "navbar";
+@import "notification";
+@import "project";
+@import "responsive";
+@import "service-form";
+@import "service-viewer";
+@import "user";
+@import "variables";
 
 // Seletores Gerais
 body {
-  font-family: "Noto Sans", sans-serif;
-  background-color: $dark-purple;
-
+	font-family: "Noto Sans", sans-serif;
+	background-color: $dark-purple;
 }
 
 body:has(> section#dashboard) {
-  background-color: white;
+	background-color: white;
 }
 
 input,
 label,
 button {
-  display: block;
+	display: block;
 }
 
 .centralize {
-  text-align: center;
+	text-align: center;
 }
 
 .submit-btn {
-  width: fit-content;
-  padding: 16px 10px;
-  margin: 25px 0px;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 3px;
-  color: $regular-purple;
-  background-color: $lime-green;
-  cursor: pointer;
-  box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
+	width: fit-content;
+	padding: 16px 10px;
+	margin: 25px 0px;
+	border: none;
+	border-radius: 8px;
+	outline: none;
+	text-transform: uppercase;
+	font-weight: 800;
+	letter-spacing: 3px;
+	color: $regular-purple;
+	background-color: $lime-green;
+	cursor: pointer;
+	box-shadow: 0px 10px 40px -12px rgba(0, 255, 128, 0.3215686275);
 }
 
 .submit-btn:hover {
-  transform: translateY(-0.3rem);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  transition: all 0.2s;
+	transform: translateY(-0.3rem);
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+	transition: all 0.2s;
 }
 
 .submit-btn:active {
-  transform: translateY(-0.1rem);
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-  transition: all 0.2s;
+	transform: translateY(-0.1rem);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	transition: all 0.2s;
 }
 
 .page {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .box {
-  margin: 3rem;
-  background-color: $light-purple;
-  padding: 3rem;
-  border-radius: 50px;
-  width: fit-content;
+	margin: 3rem;
+	background-color: $light-purple;
+	padding: 3rem;
+	border-radius: 50px;
+	width: fit-content;
 
-  h1 {
-    text-align: center;
-    color: $lime-green;
-  }
+	h1 {
+		text-align: center;
+		color: $lime-green;
+	}
 
-  h6 {
-    color: $lime-green;
-  }
+	h6 {
+		color: $lime-green;
+	}
 
-  p {
-    text-align: center;
-    color: white;
-  }
+	p {
+		text-align: center;
+		color: white;
+	}
 
-  >hr {
-    color: white;
-  }
+	> hr {
+		color: white;
+	}
 
-  >form {
-    label {
-      color: rgba(240, 255, 255, 0.8705882353);
-      margin-bottom: 3%;
-      margin-top: 5%;
-    }
+	> form {
+		label {
+			color: rgba(240, 255, 255, 0.8705882353);
+			margin-bottom: 3%;
+			margin-top: 5%;
+		}
 
-    input:not([type="checkbox"]),
-    textarea {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      padding: 15px;
-      background-color: $input-purple;
-      color: rgba(240, 255, 255, 0.8705882353);
-      font-size: 12pt;
-      box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
-      outline: none;
-      box-sizing: border-box;
-    }
-  }
+		input:not([type="checkbox"]),
+		textarea {
+			width: 100%;
+			border: none;
+			border-radius: 10px;
+			padding: 15px;
+			background-color: $input-purple;
+			color: rgba(240, 255, 255, 0.8705882353);
+			font-size: 12pt;
+			box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
+			outline: none;
+			box-sizing: border-box;
+		}
+	}
 }

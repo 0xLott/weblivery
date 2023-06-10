@@ -2,134 +2,134 @@
 
 <section id="service-viewer">
 
-    <%- include('partials/navbar') %>
+	<%- include('partials/navbar') %>
 
-    <div class="page">
+	<div class="page">
 
-        <div class="box">
+		<div class="box">
 
-            <h1>Solicitações de Serviço</h1>
+			<h1>Solicitações de Serviço</h1>
 
-            <% if (requests.length == 0) { %>
-                
-                <p><em>Não há novas solicitações</em></p>
+			<% if (requests.length == 0) { %>
 
-            <% } else { %>
+			<p><em>Não há novas solicitações</em></p>
 
-                <% requests.slice().reverse().forEach((request) => { %>
-                        <hr>
-                        <div class="request-box">
-                            <p><b>Solicitante</b>: <%= request.requester %></p>
-                            <p><b>Titulo</b>: <%= request.title %></p>
-                            <p><b>Descrição</b>: <%= request.description %></p>
-                            <p><b>Email</b>: <%= request.email %></p>
-                            <p><b>Telefone</b>: <%= request.phone %></p>
-                            <p><b>Whatsapp</b>: 
-                                <% if (request.whatsapp == null) { %>
-                                    Não
-                                <% } else { %>
-                                    Sim
-                                <% } %>
-                            </p>
-                        </div>
+			<% } else { %>
 
-                        <div class="centralize">
+			<% requests.slice().reverse().forEach((request) => { %>
+			<hr>
+			<div class="request-box">
+				<p><b>Solicitante</b>: <%= request.requester %></p>
+				<p><b>Titulo</b>: <%= request.title %></p>
+				<p><b>Descrição</b>: <%= request.description %></p>
+				<p><b>Email</b>: <%= request.email %></p>
+				<p><b>Telefone</b>: <%= request.phone %></p>
+				<p><b>Whatsapp</b>:
+					<% if (request.whatsapp == null) { %>
+					Não
+					<% } else { %>
+					Sim
+					<% } %>
+				</p>
+			</div>
 
-                            <form class="decline-form" action="/request/decline" method="post">
-                                <button class="btn btn-danger submit-btn" type="submit" name="id" value="<%= request._id %>">Recusar</button>
-                            </form>
+			<div class="centralize">
 
-                            <button class="btn btn-success submit-btn" type="button" data-bs-toggle="modal" data-bs-target="#a<%= request._id %>">Aceitar</button>
-                            
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="a<%= request._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            
-                            <div class="modal-dialog">
+				<form class="decline-form" action="/request/decline" method="post">
+					<button class="btn btn-danger submit-btn" type="submit" name="id" value="<%= request._id %>">Recusar</button>
+				</form>
 
-                                <form class="needs-validation" action="/request/accept" method="post">
+				<button class="btn btn-success submit-btn" type="button" data-bs-toggle="modal" data-bs-target="#a<%= request._id %>">Aceitar</button>
 
-                                    <div class="modal-content">
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="a<%= request._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastro do Projeto</h1>
-                                        </div>
+				<div class="modal-dialog">
 
-                                        <div class="modal-body">
+					<form class="needs-validation" action="/request/accept" method="post">
 
-                                            <div class="mb-3">
-                                                <label for="project-name" class="form-label col-form-label">Título:</label>
-                                                <input type="text" class="form-control" id="project-name" name="projectName" value="<%= request.title %>" required>
-                                            </div>
+						<div class="modal-content">
 
-                                            <div class="mb-3">
-                                                <label for="project-desc" class="col-form-label">Descrição:</label>
-                                                <textarea class="form-control" id="project-desc" name="description" required><%= request.description %></textarea>
-                                            </div>
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastro do Projeto</h1>
+							</div>
 
-                                            <!-- Mudar esse input posteriormente para bootstrap date-picker, datas não podem ser menores que a atual -->
+							<div class="modal-body">
 
-                                            <div class="mb-3">
-                                                <label for="project-deadline" class="col-form-label">Data Limite:</label>
-                                                <input type="date" placeholder="dd-mm-yyyy" class="form-control" id="project-deadline" name="deadline" required>
-                                            </div>
+								<div class="mb-3">
+									<label for="project-name" class="form-label col-form-label">Título:</label>
+									<input type="text" class="form-control" id="project-name" name="projectName" value="<%= request.title %>" required>
+								</div>
 
-                                            <!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->
-                                            <div class="mb-3">
-                                                <label for="project-team">Selecionar Desenvolvedores:</label>
-                                                
-                                                <select class="mt-1 selectpicker" title="Nenhum selecionado" data-live-search="true" name="assignedDevelopers[]" multiple required>
-                                                    <% developers.forEach((developer) => { %>
-                                                        <option value="<%= developer.id %>"><%= developer.name %></option>
-                                                    <% }) %>
-                                                </select>
-                                            </div>
+								<div class="mb-3">
+									<label for="project-desc" class="col-form-label">Descrição:</label>
+									<textarea class="form-control" id="project-desc" name="description" required><%= request.description %></textarea>
+								</div>
 
-                                            <!-- Dados do Cliente -->
+								<!-- Mudar esse input posteriormente para bootstrap date-picker, datas não podem ser menores que a atual -->
 
-                                            <div class="mb-3">
-                                                <label for="client-name" class="col-form-label">Cliente:</label>
-                                                <input type="text" class="form-control" id="client-name" name="clientName" value="<%= request.requester %>" required>
-                                            </div>
+								<div class="mb-3">
+									<label for="project-deadline" class="col-form-label">Data Limite:</label>
+									<input type="date" placeholder="dd-mm-yyyy" class="form-control" id="project-deadline" name="deadline" required>
+								</div>
 
-                                            <div class="mb-3">
-                                                <label for="client-email" class="col-form-label">E-mail:</label>
-                                                <input type="text" class="form-control" id="client-email" name="clientEmail" value="<%= request.email %>" required>
-                                            </div>
+								<!-- TODO Ler desenvolvedores cadastrados no banco de dados e inserir como options do select -->
+								<div class="mb-3">
+									<label for="project-team">Selecionar Desenvolvedores:</label>
 
-                                            <div class="mb-3">
-                                                <label for="client-phone" class="col-form-label">Telefone de contato:</label>
-                                                <input type="text" class="form-control" id="client-phone" name="clientPhone" value="<%= request.phone %>" required>
-                                            </div>
-                                        </div>
+									<select class="mt-1 selectpicker" title="Nenhum selecionado" data-live-search="true" name="assignedDevelopers[]" multiple required>
+										<% developers.forEach((developer) => { %>
+										<option value="<%= developer.id %>"><%= developer.name %></option>
+										<% }) %>
+									</select>
+								</div>
 
-                                        <div class="modal-footer">
+								<!-- Dados do Cliente -->
 
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+								<div class="mb-3">
+									<label for="client-name" class="col-form-label">Cliente:</label>
+									<input type="text" class="form-control" id="client-name" name="clientName" value="<%= request.requester %>" required>
+								</div>
 
-                                            <button class="btn btn-light" type="submit">Registrar</button>
-                                            
-                                        </div>
+								<div class="mb-3">
+									<label for="client-email" class="col-form-label">E-mail:</label>
+									<input type="text" class="form-control" id="client-email" name="clientEmail" value="<%= request.email %>" required>
+								</div>
 
-                                    </div>
+								<div class="mb-3">
+									<label for="client-phone" class="col-form-label">Telefone de contato:</label>
+									<input type="text" class="form-control" id="client-phone" name="clientPhone" value="<%= request.phone %>" required>
+								</div>
+							</div>
 
-                                    <input type="hidden" name="id" value="<%= request._id %>">
+							<div class="modal-footer">
 
-                                </form>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-                            </div>
+								<button class="btn btn-light" type="submit">Registrar</button>
 
-                        </div>
+							</div>
 
-                <% }) %>
+						</div>
 
-            <% } %>
+						<input type="hidden" name="id" value="<%= request._id %>">
 
-            </div>
+					</form>
 
-        </div>
+				</div>
 
-    </div>
+			</div>
+
+			<% }) %>
+
+			<% } %>
+
+		</div>
+
+	</div>
+
+	</div>
 
 </section>
 

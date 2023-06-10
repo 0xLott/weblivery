@@ -1,12 +1,13 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema({
-    title: String,
-    message: String,
-})
+	title  : String,
+	message: String,
+});
 
-const Notification = mongoose.model("Notification", notificationSchema)
+const Notification = mongoose.model("Notification", notificationSchema);
 
 module.exports = {
-    notificationSchema, Notification
-}
+	notificationSchema,
+	Notification,
+};

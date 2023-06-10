@@ -1,263 +1,262 @@
-const Project = require('../models/Project')
-const { User } = require('../models/User')
-const { ToDoItem } = require('../models/ToDoItem')
-const { Notification } = require('../models/Notification')
-const ServiceRequest = require('../models/ServiceRequest')
+const Project          = require("../models/Project");
+const { User }         = require("../models/User");
+const { ToDoItem }     = require("../models/ToDoItem");
+const { Notification } = require("../models/Notification");
+const ServiceRequest   = require("../models/ServiceRequest");
 
 module.exports = {
+	// OK
+	async renderProject(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-    // OK
-    async renderProject(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
+		const { projectId } = req.params;
 
-        const { projectId } = req.params
-        
-        const project = await Project.findById(projectId)
+		const project         = await Project.findById(projectId);
 
-        const developers = await User.find()
+		const developers      = await User.find();
 
-        const serviceRequests = await ServiceRequest.find()
-    
-        res.render('project-viewer', {user: req.user, project, developers, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
-    },
+		const serviceRequests = await ServiceRequest.find();
 
-    // OK
-    async renderMetrics(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return
-        }
+		res.render("project-viewer", { user: req.user, project, developers, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+	},
 
-        const { projectId } = req.params
+	// OK
+	async renderMetrics(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        const project = await Project.findById(projectId)
+		const { projectId } = req.params;
 
-        const serviceRequests = await ServiceRequest.find()
+		const project         = await Project.findById(projectId);
 
-        res.render('metrics', {project, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true})
-    },
+		const serviceRequests = await ServiceRequest.find();
 
-    //OK
-    async createTodolistItem(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
-    
-        const { projectId } = req.params
-        const { assignedDeveloper, title } = req.body
-    
-        const project = await Project.findById(projectId)
-        const developer = await User.findById(assignedDeveloper)
-    
-        const newTodoItem = new ToDoItem({
-            title,
-            developer,
-            status: 0
-        })
+		res.render("metrics", { project, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+	},
 
-        const newNotification = new Notification({
-            title: `Nova Atribuição`,
-            message: `Você foi atribuido uma nova atividade "${title}" no projeto: ${project.projectName}`
-        })
-    
-        project.todolist.push(newTodoItem)
+	//OK
+	async createTodolistItem(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-        developer.notifications.push(newNotification)
-    
-        project.save()
+		const { projectId } = req.params;
+		const { assignedDeveloper, title } = req.body;
 
-        developer.save()
-    
-        res.redirect('/project/' + projectId)
-    },
+		const project   = await Project.findById(projectId);
+		const developer = await User.findById(assignedDeveloper);
 
-    // OK
-    async editProjectDetails(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return
-        }
+		const newTodoItem = new ToDoItem({
+			title,
+			developer,
+			status: 0,
+		});
 
-        const { projectId } = req.params
-        const { projectName, deadline, assignedDevelopers, clientName, actualStatus, button } = req.body
-        var   { status } = req.body
+		const newNotification = new Notification({
+			title  : `Nova Atribuição`,
+			message: `Você foi atribuido uma nova atividade "${title}" no projeto: ${project.projectName}`,
+		});
 
-        const project = await Project.findById(projectId)
-        var oldDevelopers = []
+		project.todolist.push(newTodoItem);
 
-        project.developers.forEach((oldDev) => {
-            oldDevelopers.push(oldDev)
-        })
+		developer.notifications.push(newNotification);
 
-        if (button == 'update') {
+		project.save();
 
-            if (status == null || status == "") {
-                status = actualStatus
-            }
+		developer.save();
 
-            var projectDevelopers = []
+		res.redirect("/project/" + projectId);
+	},
 
-            Promise.all(assignedDevelopers.map(async (developerId) => {
+	// OK
+	async editProjectDetails(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-                let developer = await User.findById(developerId)
-                projectDevelopers.push(developer)
+		const { projectId } = req.params;
+		const { projectName, deadline, assignedDevelopers, clientName, actualStatus, button } = req.body;
+		var { status } = req.body;
 
-            })).then(() => {
+		const project = await Project.findById(projectId);
+		var oldDevelopers = [];
 
-                project.projectName = projectName
-                project.clientName = clientName
-                project.developers = projectDevelopers
-                project.status = status
-                project.deadline = deadline
+		project.developers.forEach((oldDev) => {
+			oldDevelopers.push(oldDev);
+		});
 
-                project.save()
+		if (button == "update") {
+			if (status == null || status == "") {
+				status = actualStatus;
+			}
 
-                var diff = []
+			var projectDevelopers = [];
 
-                // notify removed devs
-                oldDevelopers.forEach(async (dev) => {
-                    let found = projectDevelopers.some((devs) => {
-                        if (devs.id === dev.id) {
-                            return true;
-                        }
+			Promise.all(
+				assignedDevelopers.map(async (developerId) => {
+					let developer = await User.findById(developerId);
+					projectDevelopers.push(developer);
+				})
+			).then(() => {
+				project.projectName = projectName;
+				project.clientName  = clientName;
+				project.developers  = projectDevelopers;
+				project.status      = status;
+				project.deadline    = deadline;
 
-                        return false;
-                    })
+				project.save();
 
-                    if (found == false) {
-                        // console.log(dev.id);
-                        // diff.push(dev.id)
+				var diff = [];
 
-                        const newNotification = new Notification({
-                            title: `Removido`,
-                            message: `Você foi removido do projeto: ${project.projectName}`
-                        })
+				// notify removed devs
+				oldDevelopers.forEach(async (dev) => {
+					let found = projectDevelopers.some((devs) => {
+						if (devs.id === dev.id) {
+							return true;
+						}
 
-                        let removedDev = await User.findById(dev.id)
+						return false;
+					});
 
-                        removedDev.notifications.push(newNotification)
-                    
-                        removedDev.save()
-                    }
-                })
+					if (found == false) {
+						// console.log(dev.id);
+						// diff.push(dev.id)
 
-                //notify new devs
-                projectDevelopers.forEach(async (dev) => {
-                    let found = oldDevelopers.some((devs) => {
-                        if (devs.id === dev.id) {
-                            return true
-                        }
+						const newNotification = new Notification({
+							title  : `Removido`,
+							message: `Você foi removido do projeto: ${project.projectName}`,
+						});
 
-                        return false
-                    })
+						let removedDev = await User.findById(dev.id);
 
-                    if (found == false) {
-                        const newNotification = new Notification({
-                            title: `Adicionado`,
-                            message: `Você foi adicionado ao projeto: ${project.projectName}`
-                        })
+						removedDev.notifications.push(newNotification);
 
-                        let addedDev = await User.findById(dev.id)
+						removedDev.save();
+					}
+				});
 
-                        addedDev.notifications.push(newNotification)
-                    
-                        addedDev.save()
-                    }
-                })
+				//notify new devs
+				projectDevelopers.forEach(async (dev) => {
+					let found = oldDevelopers.some((devs) => {
+						if (devs.id === dev.id) {
+							return true;
+						}
 
-                res.redirect('/project/' + projectId)
-            })
+						return false;
+					});
 
-        } else {
-            oldDevelopers.forEach(async (dev) => {
-                const newNotification = new Notification({
-                    title: `Apagado`,
-                    message: `O projeto "${project.projectName}" em que você estava foi apagado`
-                })
+					if (found == false) {
+						const newNotification = new Notification({
+							title  : `Adicionado`,
+							message: `Você foi adicionado ao projeto: ${project.projectName}`,
+						});
 
-                let workingDev = await User.findById(dev.id)
+						let addedDev = await User.findById(dev.id);
 
-                workingDev.notifications.push(newNotification)
-            
-                workingDev.save()
-            })
+						addedDev.notifications.push(newNotification);
 
-            await Project.findByIdAndRemove(projectId)
+						addedDev.save();
+					}
+				});
 
-            res.redirect('/user/dashboard')
-        }
-    },
+				res.redirect("/project/" + projectId);
+			});
+		} else {
+			oldDevelopers.forEach(async (dev) => {
+				const newNotification = new Notification({
+					title  : `Apagado`,
+					message: `O projeto "${project.projectName}" em que você estava foi apagado`,
+				});
 
-    // OK
-    async editTodolistItem(req, res) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/user/login')
-            return;
-        }
+				let workingDev = await User.findById(dev.id);
 
-        const { projectId, taskId } = req.params
-        const { title, status, developerId, button, actualStatus, actualTitle, actualDeveloperId } = req.body
-    
-        var developer = await User.findById(actualDeveloperId)
+				workingDev.notifications.push(newNotification);
 
-        var project = await Project.findById(projectId)
-    
-        if (button == 'update') {
+				workingDev.save();
+			});
 
-            // Se o desenvolvedor for atualizado tambem
-            if (developerId != "" && developerId != null) {
+			await Project.findByIdAndRemove(projectId);
 
-                const removeNotification = new Notification({
-                    title: `Tarefa Removida`,
-                    message: `Você foi desatribuido da tarefa "${actualTitle}" no projeto "${project.projectName}"`
-                 })
-    
-                developer.notifications.push(removeNotification)
-    
-                developer.save()
+			res.redirect("/user/dashboard");
+		}
+	},
 
-                developer = await User.findById(developerId)
+	// OK
+	async editTodolistItem(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
 
-                const newNotification = new Notification({
-                    title: `Nova Atribuição`,
-                    message: `Você foi atribuido uma nova atividade no projeto "${project.projectName}"`
-                 })
-    
-                developer.notifications.push(newNotification)
-    
-                developer.save()
-            }
+		const { projectId, taskId } = req.params;
+		const { title, status, developerId, button, actualStatus, actualTitle, actualDeveloperId } = req.body;
 
-            await Project.findOneAndUpdate({'todolist._id': taskId}, {$set:
-                {
-                    'todolist.$.title': title == null ? actualTitle : title,
-                    'todolist.$.status': status == "" ? actualStatus : status,
-                    'todolist.$.developer': developer
-                }
-            })
-    
-        } else if (button == 'remove') {
+		var developer = await User.findById(actualDeveloperId);
 
-            await Project.updateOne({_id: projectId}, {$pull:
-                {
-                    todolist: {_id: taskId}
-                }
-            }, {safe: true})
+		var project   = await Project.findById(projectId);
 
-            const deleteNotification = new Notification({
-                title: `Tarefa Apagada`,
-                message: `Sua tarefa "${actualTitle}" no projeto "${project.projectName}" foi apagada`
-             })
+		if (button == "update") {
+			// Se o desenvolvedor for atualizado tambem
+			if (developerId != "" && developerId != null) {
+				const removeNotification = new Notification({
+					title: `Tarefa Removida`,
+					message: `Você foi desatribuido da tarefa "${actualTitle}" no projeto "${project.projectName}"`,
+				});
 
-            developer.notifications.push(deleteNotification)
+				developer.notifications.push(removeNotification);
 
-            developer.save()
-        }
-    
-        res.redirect('/project/' + projectId)
-    }
-}
+				developer.save();
+
+				developer = await User.findById(developerId);
+
+				const newNotification = new Notification({
+					title: `Nova Atribuição`,
+					message: `Você foi atribuido uma nova atividade no projeto "${project.projectName}"`,
+				});
+
+				developer.notifications.push(newNotification);
+
+				developer.save();
+			}
+
+			await Project.findOneAndUpdate(
+				{ "todolist._id": taskId },
+				{
+					$set: {
+						"todolist.$.title"    : title  == null ? actualTitle: title,
+						"todolist.$.status"   : status == "" ? actualStatus : status,
+						"todolist.$.developer": developer,
+					},
+				}
+			);
+		} else if (button == "remove") {
+			await Project.updateOne(
+				{ _id: projectId },
+				{
+					$pull: {
+						todolist: { _id: taskId },
+					},
+				},
+				{ safe: true }
+			);
+
+			const deleteNotification = new Notification({
+				title  : `Tarefa Apagada`,
+				message: `Sua tarefa "${actualTitle}" no projeto "${project.projectName}" foi apagada`,
+			});
+
+			developer.notifications.push(deleteNotification);
+
+			developer.save();
+		}
+
+		res.redirect("/project/" + projectId);
+	},
+};

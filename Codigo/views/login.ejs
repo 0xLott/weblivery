@@ -11,13 +11,7 @@
 			<div class="card-login">
 
 				<h1>Login</h1>
-
-				<% if (fail) { %>
-				<div class="fail-card">
-					Email ou senha incorretos. Tente novamente
-				</div>
-				<% } %>
-
+				
 				<div class="textfield">
 
 					<form action="/user/login" method="post">
@@ -31,6 +25,30 @@
 						<button type="submit" class="btn-login">Login</button>
 
 					</form>
+
+					<% if (fail) { %>
+						<div class="toast-container position-fixed bottom-0 end-0 p-3">
+							<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<strong class="me-auto"><i class="fa-solid fa-circle-xmark"></i> Erro</strong>
+									<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+								</div>
+								<div class="toast-body">
+									Credenciais inválidas, tente novamente.
+								</div>
+							</div>
+						</div>
+
+						<script>
+							const toastTrigger = document.getElementById('liveToastBtn')
+							const toastLiveExample = document.getElementById('liveToast')
+
+							window.onload = (ev) => {
+									const toastBootstrap = new bootstrap.Toast(toastLiveExample)
+									toastBootstrap.show()
+							}
+						</script>
+					<% } %>
 
 				</div>
 

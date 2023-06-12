@@ -13,14 +13,19 @@
 			<% if (user.email === 'admin') { %>
 			<li class="option-nav">
 				<form action="/user/register" method="get">
-					<button class="submit-btn" type="submit">Gerenciar Usuários</button>
+					<button class="submit-btn" type="submit">Gerenciar Desenvolvedores</button>
 				</form>
 			</li>
 
 			<li class="option-nav">
 				<form action="/request/view" method="get">
-					<% if (requestAlert) { %>
-					<button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Solicitações</button>
+					<% if (serviceRequests > 0) { %>
+					<button class="position-relative submit-btn" type="submit">
+						Solicitações
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-badge">
+							<%= serviceRequests %>
+						</span>
+					</button>
 					<% } else { %>
 					<button class="submit-btn" type="submit">Solicitações</button>
 					<% } %>
@@ -33,7 +38,12 @@
 					<% if (user.notifications.length == 0) { %>
 					<button class="submit-btn" type="submit">Notificações</button>
 					<% } else { %>
-					<button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i> Notificações</button>
+					<button class="submit-btn position-relative" type="submit">
+						Notificações
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+							<%= user.notifications.length %>
+						</span>
+					</button>
 					<% } %>
 				</form>
 			</li>

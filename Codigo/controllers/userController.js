@@ -84,7 +84,7 @@ module.exports = {
 				devsNames: JSON.stringify(devsNames),
 				devsData: JSON.stringify(devsData),
 				projects,
-				requestAlert: serviceRequests.length == 0 ? false : true,
+				serviceRequests: serviceRequests.length,
 			});
 		} else {
 			res.render("dashboard", {
@@ -99,7 +99,7 @@ module.exports = {
 		}
 	},
 
-	// Doing
+	// OK
 	async renderRegisterViewer(req, res) {
 		if (!req.isAuthenticated()) {
 			res.redirect("/user/login");
@@ -111,8 +111,20 @@ module.exports = {
 
 			const users = await User.find();
 
-			res.render("user-viewer", { user: req.user, users, requestAlert: serviceRequests.length == 0 ? false : true });
+			res.render("user-viewer", { user: req.user, users, serviceRequests: serviceRequests.length});
 		}
+	},
+
+	// OK
+	async renderNotifications(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login");
+			return;
+		}
+
+		const serviceRequests = await ServiceRequest.find();
+
+		res.render("notification-viewer", { notifications: req.user.notifications, user: req.user, serviceRequests: serviceRequests.length});
 	},
 
 	async sendRegisterUpdateForm(req, res) {
@@ -201,18 +213,6 @@ module.exports = {
 
 			res.redirect("/user/register");
 		}
-	},
-
-	// OK
-	async renderNotifications(req, res) {
-		if (!req.isAuthenticated()) {
-			res.redirect("/user/login");
-			return;
-		}
-
-		const serviceRequests = await ServiceRequest.find();
-
-		res.render("notification-viewer", { notifications: req.user.notifications, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
 	},
 
 	// OK

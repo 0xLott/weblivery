@@ -20,7 +20,7 @@ module.exports = {
 
 		const serviceRequests = await ServiceRequest.find();
 
-		res.render("project-viewer", { user: req.user, project, developers, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+		res.render("project-viewer", { user: req.user, project, developers, user: req.user, serviceRequests: serviceRequests.length});
 	},
 
 	// OK
@@ -36,7 +36,7 @@ module.exports = {
 
 		const serviceRequests = await ServiceRequest.find();
 
-		res.render("metrics", { project, user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+		res.render("metrics", { project, user: req.user, serviceRequests: serviceRequests.length});
 	},
 
 	//OK

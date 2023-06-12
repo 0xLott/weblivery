@@ -216,34 +216,28 @@
 
 					<div class="todolist-item">
 
-						<div class="together">
+						<p><b><%= item.title %></b></p>
 
-							<p><b><%= item.title %></b></p>
+						<div class="inline">
+						<% let itemStatus = "Product Backlog" %>
 
-							<div class="status-tag">
-
-								<% let itemStatus = "Product Backlog" %>
-
-								<% switch (item.status) {
-                                                case 0 : %>
-								<p class="product-backlog">Product Backlog</p>
-								<% break
-                                                case 1 : %>
-								<p class="sprint-backlog">Sprint Backlog</p>
-								<% itemStatus = "Sprint Backlog" %>
-								<% break
-                                                case 2 : %>
-								<p class="in-development">In Development</p>
-								<% itemStatus = "In Development" %>
-								<% break
-                                                case 3 : %>
-								<p class="finished">Finished</p>
-								<% itemStatus = "Finished" %>
-								<% break
-                                            } %>
-
-							</div>
-
+						<% switch (item.status) {
+										case 0 : %>
+						<span class="badge rounded-pill text-bg-primary mb-3">Product Backlog</span>
+						<% break
+										case 1 : %>
+						<span class="badge rounded-pill text-bg-danger mb-3">Sprint Backlog</span>
+						<% itemStatus = "Sprint Backlog" %>
+						<% break
+										case 2 : %>
+						<span class="badge rounded-pill text-bg-purple mb-3">In Development</span>
+						<% itemStatus = "In Development" %>
+						<% break
+										case 3 : %>
+						<span class="badge rounded-pill text-bg-success mb-3">Finished</span>
+						<% itemStatus = "Finished" %>
+						<% break
+									} %>
 						</div>
 
 						<p><b>Dev:</b> <%= item.developer.name %></p>

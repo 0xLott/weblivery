@@ -18,28 +18,10 @@
 		}
 
 		.project-footer {
-			.product-backlog {
-				background-color: rgb(192, 162, 221);
-				border-radius: 100px;
-				padding: 0 0.7rem;
-			}
 
-			.sprint-backlog {
-				background-color: rgb(233, 95, 102);
-				border-radius: 100px;
-				padding: 0 0.7rem;
-			}
-
-			.in-development {
-				background-color: rgb(95, 132, 231);
-				border-radius: 100px;
-				padding: 0 0.7rem;
-			}
-
-			.finished {
-				background-color: green;
-				border-radius: 100px;
-				padding: 0 0.7rem;
+			.text-bg-purple {
+				color: white;
+				background-color: #fc7f03;
 			}
 
 			.todolist-row {

@@ -88,11 +88,11 @@ module.exports = {
 		}
 
 		if (req.user.email === "admin") {
-			const requests = await ServiceRequest.find();
+			const serviceRequests = await ServiceRequest.find();
 
 			const developers = await User.find();
 
-			res.render("service-viewer", { requests, developers, user: req.user, requestAlert: requests.length == 0 ? false : true });
+			res.render("service-viewer", { requests: serviceRequests, serviceRequests: serviceRequests.length, developers, user: req.user});
 		}
 	},
 };

@@ -99,8 +99,8 @@ module.exports = {
 		}
 	},
 
-	// OK
-	async renderRegisterForm(req, res) {
+	// Doing
+	async renderRegisterViewer(req, res) {
 		if (!req.isAuthenticated()) {
 			res.redirect("/user/login");
 			return;
@@ -109,7 +109,76 @@ module.exports = {
 		if (req.user.email === "admin") {
 			const serviceRequests = await ServiceRequest.find();
 
-			res.render("user-register", { user: req.user, requestAlert: serviceRequests.length == 0 ? false : true });
+			const users = await User.find();
+
+			res.render("user-viewer", { user: req.user, users, requestAlert: serviceRequests.length == 0 ? false : true });
+		}
+	},
+
+	async sendRegisterUpdateForm(req, res) {
+		if (!req.isAuthenticated()) {
+			res.redirect("/user/login")
+			return
+		}
+
+		const { button, name, role, email, password, checkbox, id } = req.body
+
+		if (req.user.email === 'admin') {
+
+			if (button === 'update') {
+
+				var updatedUser = await User.findByIdAndUpdate({_id: id}, {
+					name: name,
+					role: role,
+					email: email
+				}, {new: true})
+
+				// Atualiza em todos os projetos os dados do dev
+				await Project.updateMany({developers: {$elemMatch: {_id: id}}}, {
+					$set: {
+						'developers.$.name': updatedUser.name,
+						'developers.$.role': updatedUser.role,
+						'developers.$.email': updatedUser.email
+					}
+				})
+
+				// Atualiza todos os objetos das todolists de todos os projetos
+				await Project.updateMany({'todolist.developer._id': id}, {
+					$set: {
+						'todolist.$.developer.name': updatedUser.name,
+						'todolist.$.developer.role': updatedUser.role,
+						'todolist.$.developer.email': updatedUser.email
+					}
+				})
+
+				if (checkbox === 'on') {
+
+					updatedUser.setPassword(password, () => { updatedUser.save() })
+
+				}
+
+			} else {
+
+				if (req.user.id != id) {
+
+					// Remova de cada projeto o dev "tal"
+					await Project.updateMany({developers: {$elemMatch: {_id: id}}},
+						{$pull: {developers: {_id: id}}}
+					)
+
+					// Remova de cada projeto a task da todolist que tenha o dev "tal"
+					await Project.updateMany({'todolist.developer._id': id}, {
+						$pull: {
+							todolist: { 'developer._id': id }
+						}
+					})
+
+					await User.findByIdAndRemove({_id: id})
+
+				}
+			}
+
+			res.redirect('/user/register')
 		}
 	},
 
@@ -130,7 +199,7 @@ module.exports = {
 				}
 			});
 
-			res.redirect("/user/dashboard");
+			res.redirect("/user/register");
 		}
 	},
 

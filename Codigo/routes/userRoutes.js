@@ -12,7 +12,7 @@ router.get('/login/error', controller.renderLoginFormError)
 
 router.get('/dashboard', controller.renderDashboard)
 
-router.get('/register', controller.renderRegisterForm)
+router.get('/register', controller.renderRegisterViewer)
 
 router.get('/notification', controller.renderNotifications)
 
@@ -23,6 +23,8 @@ router.post('/login', controller.auth)
 router.post('/quit', controller.logout)
 
 router.post('/register', controller.sendRegisterForm)
+
+router.post('/update', controller.sendRegisterUpdateForm)
 
 router.post('/notification', controller.dismissNotification)
 

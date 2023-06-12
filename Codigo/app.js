@@ -26,6 +26,10 @@ app.use('/user', userRoutes)
 app.use('/request', requestRoutes)
 app.use('/project', projectRoutes)
 
+app.get('/', (req,res) => {
+    res.render(__dirname + '/views/landingPage.ejs');
+})
+
 // Database
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@db-cluster.cjjdosp.mongodb.net/weblivery')
 

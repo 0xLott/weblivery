@@ -36,10 +36,10 @@
 			<li class="option-nav">
 				<form action="/user/notification" method="get">
 					<% if (user.notifications.length == 0) { %>
-					<button class="submit-btn" type="submit">Notificações</button>
+					<button class="submit-btn" type="submit"><i class="fa-solid fa-bell"></i></button>
 					<% } else { %>
 					<button class="submit-btn position-relative" type="submit">
-						Notificações
+						<i class="fa-solid fa-bell"></i>
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
 							<%= user.notifications.length %>
 						</span>

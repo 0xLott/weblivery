@@ -319,8 +319,24 @@
   transition: all 0.2s;
 }
 
+@font-face {
+  font-family: "Montserrat Black";
+  src: url("fonts/Montserrat-Black.ttf");
+}
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url("fonts/Montserrat-Bold.ttf");
+}
+@font-face {
+  font-family: "Montserrat Regular";
+  src: url("fonts/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: "Montserrat Light";
+  src: url("fonts/Montserrat-Light.ttf");
+}
 body {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Montserrat Light", sans-serif;
   background-color: #201b2c;
 }
 

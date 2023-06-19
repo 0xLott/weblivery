@@ -14,30 +14,10 @@
 @import "variables";
 
 // Seletores Gerais
-@font-face {
-	font-family: 'Montserrat Black';
-	src: url('/fonts/Montserrat-Black.ttf');
-}
-
-@font-face {
-	font-family: 'Montserrat Bold';
-	src: url('/fonts/Montserrat-Bold.ttf');
-}
-
-@font-face {
-	font-family: 'Montserrat Regular';
-	src: url('/fonts/Montserrat-Regular.ttf');
-}
-
-@font-face {
-	font-family: 'Montserrat Light';
-	src: url('/fonts/Montserrat-Light.ttf');
-}
-
-
 body {
 	font-family: "Montserrat Light", sans-serif;
 	background-color: $dark-purple;
+	font-size: 18pt;
 }
 
 body:has(> section#dashboard) {
@@ -102,6 +82,7 @@ button {
 	width: fit-content;
 
 	h1 {
+		font-family: 'Montserrat Bold', sans-serif;
 		text-align: center;
 		color: $lime-green;
 	}
@@ -111,7 +92,7 @@ button {
 	}
 
 	p {
-		text-align: center;
+		text-align: left;
 		color: white;
 	}
 
@@ -121,6 +102,7 @@ button {
 
 	> form {
 		label {
+			font-size: large;
 			color: rgba(240, 255, 255, 0.8705882353);
 			margin-bottom: 3%;
 			margin-top: 5%;

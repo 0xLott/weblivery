@@ -1,31 +1,29 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: Weblivery
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: Rodrigues de Freitas Faria
+    given-names: André
+  - family-names: Silva e Melo Oliveira
+    given-names: Carlos Emanuel
+  - family-names: Andrade Alves
+    given-names: Gustavo
+  - family-names: Teixeira Lott Carvalho
+    given-names: Letícia
+  - family-names: Rodrigues Nalon
+    given-names: Yan
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Alonso Veloso
+    given-names: Eveline
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Silva Tavares
+    given-names: Cleiton 
 keywords:
-  - 
-  - 
-repository-code: 
+  - Desenvolvimento web
+  - Organização
+repository-code: https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti3-6653100-weblivery
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2023-06-20

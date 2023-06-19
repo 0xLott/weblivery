@@ -28,6 +28,7 @@
                 font-size:100%;
                 vertical-align:baseline;
                 background:transparent;
+                color: #00FF89;
             }
             
             body {
@@ -123,32 +124,13 @@
                display: flex;
                justify-content: space-between;
                align-items: center;
+               margin: 0 2em 0 2em;
             }
 
             .caixa h1 {
                 font-size: 2.5em;
                 clear: left;
                 color: #86F8C5
-            }
-
-            nav {
-                position: absolute;
-                right: 0;
-                top: 0.6em;
-                margin: 0 15px;
-            }
-
-            nav a {
-                color: #86F8C5;
-                font-size: 18px;
-                font-weight: bold;
-                text-transform: uppercase;
-                text-decoration: none;
-            }
-
-            nav a:hover {
-                color: #02FC85;
-                text-decoration: underline;
             }
 
             .cards {
@@ -202,8 +184,6 @@
                 background: #514769;
             }
 
-
-
             .botao {
                 width: fit-content;
                 padding: 15px 25px;
@@ -211,11 +191,10 @@
                 border: none;
                 font-size: 18px;
                 font-weight: bold;
-                color: white;
+                color: purple;
                 border-radius: 5px;
                 transition: 1s all;
-                cursor: pointer;
-                
+                cursor: pointer;            
             }
 
             #botao {
@@ -252,7 +231,7 @@
             }
 
             .principal {
-                padding: 1.5em 0 0;
+                padding: 4em 0 0;
                 background: #514769;
                 width: 940px;
                 margin: 0 auto;
@@ -317,9 +296,9 @@
 
         <header>
             <div class="caixa">
-                <h1>Weblivery</h1>
+                <img src="img\logo_text.png" alt="Logo Weblivery" style="max-height: 50px; margin: 1%;">
                 <nav>
-                    <ul>
+                    <ul class="button-list">
                         <li>
                             <form class="form" action="/user/login" method="get">
                                 <button class="botao" type="submit">Login</button>
@@ -327,7 +306,7 @@
                         </li>
                         <li>
                             <form class="forma" action="/request/" method="get">
-                                <button class="botao" type="submit">Solicitar</button>
+                                <button class="botao" type="submit">Nova solicitação</button>
                             </form>
                         </li>
                     </ul>
@@ -343,26 +322,26 @@
 
                 <img class="banner" src="/img/banner.jpg" alt="Imagem ilustrativa">
 
-                <p>Weblivery, uma equipe inovadora que deseja elevar seus processos ao próximo nível</p>
+                <p>Weblivery, uma plataforma inovadora que deseja elevar seus processos ao próximo nível</p>
             
                 <form class="form" action="/request/" method="get">
-                    <button class="botao" type="submit">Comece Agora</button>
+                    <button class="botao" type="submit">Comece agora</button>
                 </form>
 
                 </section>
 
             <section class="descricao">
 
-                <h1 class="titulo-secundario">Crie seu website</h1>
+                <h1 class="titulo-secundario">Solicite a criação de seu website</h1>
                 <ul class="cards">
                     <li>
-                        <p class="produtos-descricao" id="card1">Clique no botão "Comece Agora"</p>
+                        <p class="produtos-descricao" id="card1">1. Clique no botão "Comece Agora"</p>
                     </li>
                     <li>
-                        <p class="produtos-descricao" id="card2">Preencha o formulário</p>
+                        <p class="produtos-descricao" id="card2">2. Preencha o formulário</p>
                     </li>
                     <li>
-                        <p class="produtos-descricao" id="card3">Entre em contato com os desenvolvedores</p>
+                        <p class="produtos-descricao" id="card3">3. Entre em contato com os desenvolvedores</p>
                     </li>
                 </ul>
             </section>

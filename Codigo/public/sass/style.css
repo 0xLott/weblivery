@@ -301,6 +301,7 @@
   color: #2b134b;
   border-radius: 200px;
   background-color: #00ff88;
+  width: -moz-fit-content;
   width: fit-content;
   border: none;
   padding: 2px 10px;
@@ -342,6 +343,7 @@ button {
 }
 
 .submit-btn {
+  width: -moz-fit-content;
   width: fit-content;
   padding: 16px 10px;
   margin: 25px 0px;
@@ -382,6 +384,7 @@ button {
   background-color: #2f2841;
   padding: 3rem;
   border-radius: 50px;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .box h1 {
@@ -415,6 +418,4 @@ button {
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.337254902);
   outline: none;
   box-sizing: border-box;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

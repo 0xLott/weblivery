@@ -10,8 +10,8 @@
 .chart-container {
 	text-align: center;
 	background-color: rgba(55, 23, 96, 0.703);
-	border-radius: 300px;
-	margin: 0 5%;
+	border-radius: 110px;
+	margin: 0 2%;
 	margin-bottom: 3%;
 	padding: 3rem;
 	box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
@@ -37,5 +37,9 @@
 		padding: 1%;
 		margin-bottom: 35px;
 		display: inline-block;
+	}
+
+	.projects-container {
+		margin: 0 2rem;
 	}
 }

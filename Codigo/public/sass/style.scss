@@ -15,7 +15,7 @@
 
 // Seletores Gerais
 body {
-	font-family: "Montserrat Light", sans-serif;
+	font-family: "Montserrat Regular", sans-serif;
 	background-color: $dark-purple;
 	font-size: 18pt;
 }
@@ -102,7 +102,6 @@ button {
 
 	> form {
 		label {
-			font-size: large;
 			color: rgba(240, 255, 255, 0.8705882353);
 			margin-bottom: 3%;
 			margin-top: 5%;

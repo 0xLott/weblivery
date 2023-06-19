@@ -51,7 +51,16 @@
 					}]
 				},
 				options: {
-
+					plugins: {
+						legend: {
+							labels: {
+								// This more specific font property overrides the global property
+								font: {
+									size: 18
+								}
+							}
+						}
+					},
 				}
 			});
 
@@ -66,7 +75,18 @@
 						backgroundColor: ['#7B36D6', '#FF404B', '#D6B540', '#00ff88']
 					}]
 				},
-				options: {}
+				options: {
+					plugins: {
+						legend: {
+							labels: {
+								// This more specific font property overrides the global property
+								font: {
+									size: 18
+								}
+							}
+						}
+					},
+				}
 			});
 
 			new Chart(ctx3, {
@@ -77,10 +97,21 @@
 						label: 'Solicitações',
 						data: <%- requestsData %>,
 						borderWidth: 1,
-						backgroundColor: ['#00ff88', '#7B36D6']
+						backgroundColor: ['#00ff88', '#7B36D6'],
 					}]
 				},
-				options: {}
+				options: {
+					plugins: {
+						legend: {
+							labels: {
+								// This more specific font property overrides the global property
+								font: {
+									size: 18
+								}
+							}
+						}
+					},
+				}
 			});
 
 			new Chart(ctx4, {
@@ -103,6 +134,16 @@
 								display: false // Hides the labels in the middel (numbers)
 							}
 						}
+					},
+					plugins: {
+						legend: {
+							labels: {
+								// This more specific font property overrides the global property
+								font: {
+									size: 18
+								}
+							}
+						}
 					}
 				}
 			});
@@ -110,31 +151,36 @@
 
 		<img src="/img/dots-grid.png" alt="Fundo pontilhado da dashboard">
 
-		<% projects.slice().reverse().forEach((project)=> { %>
+		<div class="projects-container">
+			<% projects.slice().reverse().forEach((project)=> { %>
 
-		<% let projectStatus = "Em planejamento" %>
-
-		<% switch (project.status) {
-                case 1 : %>
-		<% projectStatus = "Em andamento" %>
-		<% break
-                case 2 : %>
-		<% projectStatus = "Concluido" %>
-		<% break
-            } %>
-
-		<div class="project-box">
-			<p><b>Projeto:</b> <%= project.projectName %></p>
-			<p><b>Project Owner:</b> <%= project.owner %></p>
-			<p><b>Status:</b> <%= projectStatus %></p>
-
-			<form action="/project/<%= project.id %>" method="get">
-				<button class="btn btn-secondary" type="submit">Detalhes</button>
-			</form>
-
+				<% let projectStatus = "Em planejamento" %>
+		
+				<% switch (project.status) {
+						case 1 : %>
+				<% projectStatus = "Em andamento" %>
+				<% break
+						case 2 : %>
+				<% projectStatus = "Concluido" %>
+				<% break
+					} %>
+		
+				
+				<div class="project-box">
+					<p><b>Projeto:</b> <%= project.projectName %></p>
+					<p><b>Project Owner:</b> <%= project.owner %></p>
+					<p><b>Status:</b> <%= projectStatus %></p>
+		
+					<form action="/project/<%= project.id %>" method="get">
+						<button class="btn btn-secondary" type="submit">Detalhes</button>
+					</form>
+		
+				</div>
+		
+				<% }) %>
 		</div>
 
-		<% }) %>
+		
 
 	</main>
 

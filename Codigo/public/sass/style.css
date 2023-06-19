@@ -25,8 +25,8 @@
 .chart-container {
   text-align: center;
   background-color: rgba(55, 23, 96, 0.703);
-  border-radius: 300px;
-  margin: 0 5%;
+  border-radius: 110px;
+  margin: 0 2%;
   margin-bottom: 3%;
   padding: 3rem;
   box-shadow: 31px 31px 62px #bebebe, -10px -10px 62px #ffffff;
@@ -51,6 +51,9 @@
   padding: 1%;
   margin-bottom: 35px;
   display: inline-block;
+}
+#dashboard .projects-container {
+  margin: 0 2rem;
 }
 
 #login .fa-circle-xmark {
@@ -194,7 +197,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 #navbar .nav ul {
   list-style-type: none;
@@ -211,6 +215,11 @@
   border-radius: 40px;
   width: 100%;
   padding: 0.7rem 1.5rem;
+}
+#navbar h1 {
+  font-family: "Montserrat Bold", sans-serif;
+  text-align: center;
+  color: #00ff88;
 }
 
 #notification-viewer input[type=checkbox] {
@@ -353,7 +362,7 @@
   src: url("/fonts/Montserrat-Light.ttf");
 }
 body {
-  font-family: "Montserrat Light", sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   background-color: #201b2c;
   font-size: 18pt;
 }
@@ -437,7 +446,6 @@ button {
   color: white;
 }
 .box > form label {
-  font-size: large;
   color: rgba(240, 255, 255, 0.8705882353);
   margin-bottom: 3%;
   margin-top: 5%;

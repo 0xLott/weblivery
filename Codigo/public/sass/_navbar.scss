@@ -14,7 +14,8 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		padding-left: 1rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
 
 		ul {
 			list-style-type: none;
@@ -35,5 +36,11 @@
 		border-radius: 40px;
 		width: 100%;
 		padding: 0.7rem 1.5rem;
+	}
+
+	h1 {
+		font-family: 'Montserrat Bold', sans-serif;
+		text-align: center;
+		color: $lime-green;
 	}
 }

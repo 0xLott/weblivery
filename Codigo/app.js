@@ -33,4 +33,4 @@ app.get('/', (req,res) => {
 // Database
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@db-cluster.cjjdosp.mongodb.net/weblivery')
 
-app.listen(3000, () => { console.log("Server running") })
+app.listen(process.env.PORT, () => { console.log("Server running") })

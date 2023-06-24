@@ -1,7 +1,7 @@
 # Weblivery
 
 <p align="center">
-  <a href="url"><img src="./Codigo/public/img/logo_text.png" height="100" alt="Weblivery Logo"></a>
+  <a href="url"><img src="./Codigo/public/img/logo_text_black.png" height="100" alt="Weblivery Logo"></a>
 </p>
 
 
